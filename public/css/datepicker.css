@@ -1,0 +1,14 @@
+ input{
+display:block;
+margin:10px;
+width:200px;
+border-radius:15px 0 15px 0;
+border:none;
+padding:5px;
+border:solid 2px green;
+font-size:18px;
+color:green;
+}
+input#submit{
+background:gold;
+}

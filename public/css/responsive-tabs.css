@@ -1,0 +1,138 @@
+﻿/* Responsive Tabs - menucool.com/jquery-tabs */
+
+ul.rtabs
+{
+    text-align:left; /*set to left, center, or right to align the tabs as desired*/ 
+    font-size:0;
+    margin:0; 
+    padding:0;
+    padding-left:40px;
+    list-style-type:none;
+}
+        
+ul.rtabs li
+{
+    margin:0;
+    margin-right:-1px; /*gap between tabs. Set it to -1px for no gap.*/
+    padding:0;
+    display:inline;
+}
+        
+ul.rtabs li a
+{
+    padding:0 18px; /* It determines tab width */
+    display:inline-block;    
+    font-weight:normal;
+    font-size:12px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height:30px;/* height of tabs */
+    text-decoration: none;
+    color:#333;
+    background:#F6F6F9;
+    outline:none;
+    border:1px solid #999; /*This color can be different from color #2 */
+    border-bottom:none;
+    border-radius:5px 5px 0 0;
+    position:relative;
+    transition: background-color .3s linear;
+}
+        
+ul.rtabs li a:link, ul.rtabs li a:visited
+{
+    color:#333;
+}
+        
+ul.rtabs li a:hover
+{
+    border-color: #BBB; /*color #1*/
+    background: white;
+}
+  
+/*selected tab style */
+ul.rtabs li.selected a
+{
+    color:#000;
+    font-weight:normal;
+    border-color:#BBB; /*color #1*/
+    background:white; /*color #2*/
+    z-index:3;
+}   
+        
+/*selected tab style on hover */
+ul.rtabs li.selected a:hover
+{
+    text-decoration:none;
+}
+
+/* container of content panels */
+div.panel-container
+{
+    border:1px solid #BBB; /*color #1*/ 
+    border-radius:4px;
+    box-shadow:0 0 8px #CCC;
+    background-color:white; /*color #2*/
+    position:relative;    
+    padding:0px; margin:0px;
+    outline:none;
+    margin-top:-1px;
+}
+
+/* content panel */       
+div.panel-container > div
+{
+    padding:30px 26px;
+    
+    /* The two settings below should not be changed. */
+    display: block;
+    margin:0px;
+}
+div.panel-container div.inactive
+{
+    display: none;
+}    
+
+/* loading image before ajax content is retrieved. Only applicable when Ajax is used.*/
+div.ajaxLoading {background:transparent url(loading.gif) no-repeat center center; height:150px; width:20px; font-size:0;padding:0; margin:0 auto; }
+
+
+/* For mobiles */
+@media only screen and (max-width:560px){
+    ul.rtabs{
+        box-sizing:border-box;
+        border-left:1px solid #ccc;
+        border-top:1px solid #ccc;
+        min-width:260px;
+        padding-left:0;
+    }
+
+    ul.rtabs li{
+        display:inline-block;
+        box-sizing:border-box;
+        margin-right:0;
+        width:50%; /* set it to 100% for one column, 33.33% for three-column */
+    }
+
+    ul.rtabs li:last-child:nth-child(odd){
+        width:100%;
+    }
+
+    ul.rtabs li a {
+        border:none;
+        border-right:1px solid #ccc;
+        border-bottom:1px solid #ccc;
+        display:block;
+        padding:0;
+        text-align:center;
+        border-radius:0;
+    }
+
+    ul.rtabs li.selected a {
+        background-color:#fff;
+    }
+
+    div.panel-container {
+        border-radius:0;
+        min-width:260px;
+        box-sizing:border-box;
+    }
+}
