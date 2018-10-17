@@ -7,12 +7,12 @@
 <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-              <h3 class="page-title">@lang('Kategori Gallery')</h3>
+              <h3 class="page-title">@lang('Kategori artikel')</h3>
                        <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{Route('dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"> Kategori Gallery</li>
+                                    <li class="breadcrumb-item active" aria-current="page"> Kategori artikel</li>
                                 </ol>
                             </nav>
                         </div>
@@ -20,16 +20,16 @@
                 </div>
             </div>
             <br>
-        
-     <p>
-        <a href="{{ route('kategori_gallery.create') }}" class="btn btn-success">@lang('Tambah')</a>
+        <p>
+        <a href="{{ route('kategori_artikel.create') }}" class="btn btn-success">@lang('Tambah')</a>
         
     </p>
     
+     
     <div class="panel panel-default">
         
         <div class="panel-body table-responsive">
-            <table class="table table-bordered  {{ count($tb_m_kategori_gallery) > 0 ? 'datatable' : '' }} ">
+            <table class="table table-bordered  {{ count($tb_m_kategori_artikel) > 0 ? 'datatable' : '' }} ">
                 <thead>
                     <tr>
                         <th>@lang('No')</th>
@@ -39,16 +39,16 @@
                 </thead>
                 
                 <tbody>
-                    @if (count($tb_m_kategori_gallery) > 0)
+                    @if (count($tb_m_kategori_artikel) > 0)
                         @php $no=1; @endphp
-                        @foreach ($tb_m_kategori_gallery as $data)
+                        @foreach ($tb_m_kategori_artikel as $data)
                             <tr data-entry-id="{{ $data->id }}">
                                 <td>{{ $no ++ }}</td>
                                 <td>{{ $data->kategori or '' }}</td>
                                   <td>
-                                    <a class="btn btn-warning" href="{{ route('kategori_gallery.edit',$data->id) }}"><i class="mdi mdi-pencil"></i> Edit</a>
+                                    <a class="btn btn-warning" href="{{ route('kategori_artikel.edit',$data->id) }}"><i class="mdi mdi-pencil"></i> Edit</a>
                     
-                                    <button onclick="deleteKategoriGallery('{{$data->id}}')" class="btn btn-danger"><i class="mdi mdi-delete"></i>Delete</button>
+                                    <button onclick="deleteKategoriartikel('{{$data->id}}')" class="btn btn-danger"><i class="mdi mdi-delete"></i>Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -68,7 +68,7 @@
 
 
 <script type="text/javascript">
-function deleteKategoriGallery(id){
+function deleteKategoriartikel(id){
   swal({
   title: 'Pastikan untuk melakukan tindakan ini?',
   text: 'Tindakan ini tidak bisa dibatalkan',
@@ -84,14 +84,14 @@ function(isConfirm) {
     if (isConfirm) {
        $.ajax({
                type:'get',
-               url:'<?php echo url("delete-kategori-gallery"); ?>/'+id,
+               url:'<?php echo url("delete-kategori-artikel"); ?>/'+id,
                success:function(data){
                   location.reload();
                                       }
             });
        
     }else {
-        swal("Cancel", "kategori gallery ini tidak jadi di hapus.", "error");
+        swal("Cancel", "kategori artikel ini tidak jadi di hapus.", "error");
     }
 });
 }

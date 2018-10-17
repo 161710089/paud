@@ -19,8 +19,10 @@
         <div class="auto-container">
             <div class="outer-box clearfix">
                 <div class="title-column">
-                    <h3>Welcome to Arans Kinder Garten School</h3>
-                    <h2>Best For Education</h2>
+                    @foreach($sekolahs as $data)
+                    <h3>Selamat Datang di {{ $data->nama_sekolah }}</h3>
+                    @endforeach
+                    <h2>Terbaik untuk Pendidikan</h2>
                 </div>
 
                 <div class="btn-column">
@@ -47,9 +49,11 @@
             <div class="row clearfix">
                 <div class="content-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
+                        @foreach($sekolahs as $data)
                         <div class="sec-title">
-                            <h2><span>About</span> Our Arans</h2>
+                            <h2><span>About</span> {{ $data->nama_sekolah }}</h2>
                         </div>
+                        @endforeach
                         <div class="text">
                             <p><strong>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically</strong></p>
                             <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</p>

@@ -108,6 +108,7 @@ Date::setLocale('id');
                 </div>
 
                 <!--  -->
+
                 <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
                     <aside class="sidebar event-sidebar">
 
@@ -124,8 +125,13 @@ Date::setLocale('id');
                         <!-- Buy Tickets -->
                         
                                         @foreach($tb_m_ticket as $data)
+                        @if(count($tb_m_ticket)<1)
+                        <div class="sidebar-widget buy-ticket wow fadeInRight">
+                            <div class="title">Tiket Belum Tersedia</div>
+                        </div>
                         
-                        @if(Carbon\Carbon::now() <= $data->tersedia_tanggal )
+
+                        @elseif(Carbon\Carbon::now() <= $data->tersedia_tanggal )
                         <div class="sidebar-widget buy-ticket wow fadeInRight">
                             <div class="title">Tiket Belum Tersedia</div>
                         </div>
@@ -165,9 +171,14 @@ Date::setLocale('id');
                         @endif
 
                                         @endforeach
+
                     </aside>
                 </div>
+            
             </div>
         </div>
     </div>
+
+
+                    
 @endsection

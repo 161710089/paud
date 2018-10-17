@@ -20,64 +20,69 @@
                 </div>
             </div>
             <br>
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-          <a class="btn btn-secondary" href="{{ route('event.create') }}"><i class="mdi mdi-plus"></i></a>
-          
-              <div class="panel-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                   <tr>
-<td colspan="5"  class=" text-center" >No</td>
-<td colspan="5"  class=" text-center" >Judul</td>
-<td colspan="5"  class=" text-center" >Nama Pengajar</td>
-<td colspan="5"  class=" text-center" >Alamat</td>
-<td colspan="5"  class=" text-center" >Ruang</td>
-<td colspan="5"  class=" text-center" >Waktu</td>
-<td colspan="5"  class=" text-center" >Waktu Selesai</td>
-<td colspan="5"  class=" text-center" >Deskripsi</td>
-<td colspan="5"  class=" text-center" >Foto</td>
-<td colspan="5"  class=" text-center" >Action</td>
+
+<p>
+        <a href="{{ route('event.create') }}" class="btn btn-success">@lang('Tambah')</a>
+        
+    </p>
+<div class="panel panel-default">
+        
+        <div class="panel-body table-responsive">
+            <table class="table table-bordered  {{ count($tb_m_event) > 0 ? 'datatable' : '' }} ">
+                <thead>
+                    <tr>
+                        <th>@lang('No')</th>
+                        <th>@lang('Judul')</th>
+                        <th>@lang('Pengajar')</th>
+                        <th>@lang('Alamat')</th>
+                        <th>@lang('Ruangan')</th>
+                        <th>@lang('Waktu')</th>
+                        <th>@lang('Waktu selesai')</th>
+                        <th>@lang('Deskripsi')</th>
+                        <th>@lang('Foto')</th>
+                        <th>@lang('Action')</th>
+                        
                     </tr>
-                    </thead>
-                    <tbody>
-                        @php $no = 1; @endphp
-                        @foreach($tb_m_event as $data)
-
-
-                      <tr>
-                        <td colspan="5" class="text-center ">{{ $no++ }}</td>
-                        <td colspan="5" class="text-center ">{{ $data->judul }}</td>
-                        <td colspan="5" class="text-center ">{{ $data->tb_m_pengajar->nama }}</td>
-                        <td colspan="5" class="text-center ">{{ $data->alamat }}</td>
-                        <td colspan="5" class="text-center ">{{ $data->ruangan }}</td>
-                        <td colspan="5" class="text-center ">{{ $data->waktu }}</td>
-                        <td colspan="5" class="text-center ">{{ $data->waktu_selesai }}</td>
-                        <td colspan="5" class="text-center ">{!! str_limit($data->deskripsi,50) !!}</td>
-                       
-                        <td colspan="5" class="text-center" ><img src="{{ asset('img/Fotoevent/'.$data->foto) }}" style="max-height:100px; max-width: 100px; margin-top:7px;"></td>
-                        <td>
-                            <a class="btn btn-primary" href="{{ route('event.show',$data->id) }}"><i class="mdi mdi-eye"></i>Show</a>
-                        </td>   
-                        <td>
-                            <a class="btn btn-warning" href="{{ route('event.edit',$data->id) }}"><i class="mdi mdi-pencil"></i>Edit</a>
-                        </td>
-                        <td>
+                </thead>
+                
+                <tbody>
+                    @if (count($tb_m_event) > 0)
+                        @php $no=1; @endphp
+                        @foreach ($tb_m_event as $data)
+                            <tr data-entry-id="{{ $data->id }}">
+                                
+                                <td>{{ $no ++ }}</td>
+                                <td>{{ $data->judul or '' }}</td>
+                                <td>{{ $data->tb_m_pengajar->nama }}</td>
+                                <td>{{ $data->alamat }}</td>
+                                <td>{{ $data->ruangan }}</td>
+                                <td>{{ $data->waktu }}</td>
+                              <td>{{ $data->waktu_selesai }}</td>
+                        <td>{!! str_limit($data->deskripsi,50) !!}</td>
+                       <td  class="text-center" ><img src="{{ asset('img/Fotoevent/'.$data->foto) }}" style="max-height:100px; max-width: 100px; margin-top:7px;"></td>
+                          
+                                <td>
+                            <a class="btn btn-primary form-control" href="{{ route('event.show',$data->id) }}"><i class="mdi mdi-eye"></i>Show</a>
+                            <center>-</center>
+                            <a class="btn btn-warning form-control" href="{{ route('event.edit',$data->id) }}"><i class="mdi mdi-pencil"></i>Edit</a>
+                            <center>-</center>
                             <button onclick="deleteEvent('{{$data->id}}')" class="btn btn-danger"><i class="mdi mdi-delete"></i>delete</button>
-                        </td>
-                      </tr>
-                      @endforeach   
-                    </tbody>
-                  </table>
-                  
-                </div>
-              </div>
-            </div>  
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="10">@lang('No Entries in Table')</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
         </div>
     </div>
+  </div>
 </div>
-
+        
 
 
 <script type="text/javascript">

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h3 class="page-title">@lang('Ticket')</h3>
+    <h3 class="page-title">@lang('Pembeli Ticket')</h3>
     
     <div class="panel panel-default">
         

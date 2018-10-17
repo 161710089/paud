@@ -17,6 +17,10 @@ use App\tb_m_ticket;
 use App\tb_m_buy_ticket;
 use App\tb_s_contact_us;
 use App\tb_s_sosmed;
+use App\tb_m_kategori_artikel;
+use Jenssegers\Date\Date;
+Date::setLocale('id');
+
 use Mail;
 use Auth;
 use Carbon;
@@ -52,7 +56,7 @@ class FrontendController extends Controller
     //     $tb_m_gallery=tb_m_gallery::all();
     //     $tb_m_gallery=tb_m_gallery::all();
         
-    //     return view('frontend.index' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','kategori1','kategori2','tb_m_katgall'));
+    //     return view('frontend.index' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_katgall'));
     // }
 
 
@@ -60,7 +64,7 @@ class FrontendController extends Controller
 
 public function MoreArtikel(Request $request)
     {
-         $tb_m_mata_pelajaran=tb_m_mata_pelajaran::all();
+        $tb_m_mata_pelajaran=tb_m_mata_pelajaran::all();
         $tb_m_siswa=tb_m_siswa::all();
         $tb_s_sekolah=tb_s_sekolah::all();
         $tb_m_pengajar=tb_m_pengajar::all();
@@ -73,18 +77,13 @@ public function MoreArtikel(Request $request)
         $tb_m_gallery=tb_m_gallery::all();
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
+        $tb_m_artikel_single=null;
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
+        foreach ($tb_m_artikel as $data) {
+        $a=Date::parse($data->created_at)->format('M Y');
+        }
        
-        $kategori1=tb_m_gallery::whereHas('tb_m_kategori_gallery',function($query) use ($request){
-                        $query->where('kategori','edukasi');
-                    })
-                    ->paginate(3);
-        $kategori2=tb_m_gallery::whereHas('tb_m_kategori_gallery',function($query) use ($request){
-                        $query->where('kategori','menggambar');
-                    })
-                    ->paginate(3);
-        $tb_m_gallery=tb_m_gallery::orderBy('created_at','desc')->get();
-        
-        return view('frontend.MoreArtikel' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','kategori1','kategori2'));
+        return view('frontend.MoreArtikel' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','recentpost_artikel','tb_m_kategori_gallery','widgetgallery','tb_m_artikel_single','a'));
     }
 
 public function moreEvent(Request $request)
@@ -99,18 +98,11 @@ public function moreEvent(Request $request)
         $tb_m_gallery=tb_m_gallery::all();
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
-       
-        $kategori1=tb_m_gallery::whereHas('tb_m_kategori_gallery',function($query) use ($request){
-                        $query->where('kategori','edukasi');
-                    })
-                    ->paginate(3);
-        $kategori2=tb_m_gallery::whereHas('tb_m_kategori_gallery',function($query) use ($request){
-                        $query->where('kategori','menggambar');
-                    })
-                    ->paginate(3);
+       $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
+        
         $tb_m_gallery=tb_m_gallery::orderBy('created_at','desc')->get();
         
-        return view('frontend.moreEvent' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','kategori1','kategori2'));
+        return view('frontend.moreEvent' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','recentpost_artikel'));
     }
 
     public function moreGallery(Request $request)
@@ -125,8 +117,9 @@ public function moreEvent(Request $request)
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
         $tb_m_gallery=tb_m_gallery::orderBy('created_at','desc')->get();
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
         
-        return view('frontend.moreGallery' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery'));
+        return view('frontend.moreGallery' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_artikel_single','recentpost_artikel'));
     }
 
     public function getArtikel(tb_m_artikel $tb_m_artikel)
@@ -149,9 +142,11 @@ public function moreEvent(Request $request)
         $tb_m_gallery=tb_m_gallery::all();
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
-       
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
         
-        return view('frontend.singleArtikel' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','kategori1','kategori2','tb_m_artikel_single'));
+        
+        return view('frontend.singleArtikel' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_artikel_single'
+            ,'recentpost_artikel'));
     }
 
 public function singleEvent(tb_m_event $tb_m_event)
@@ -168,11 +163,14 @@ public function singleEvent(tb_m_event $tb_m_event)
         $tb_m_event =tb_m_event::orderBy('waktu','desc')->get();
         $tb_m_gallery=tb_m_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
-        foreach ($tb_m_ticket as $data ) {
-        $bookingticket=tb_m_buy_ticket::where('id_ticket',$data->id)->get()->count();
-        $tb_m_buy_ticket=tb_m_buy_ticket::where('id_ticket',$data->id)->get();
+        foreach ($tb_m_event as $data) {
+        $bookingticket=tb_m_buy_ticket::where('id_event',$data->id)->get()->count();
+        $tb_m_buy_ticket=tb_m_buy_ticket::where('id_event',$data->id)->get();
         }
-        return view('frontend.singleEvent' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_event_single','tb_m_ticket','bookingticket','tb_m_buy_ticket'));
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
+        
+        
+        return view('frontend.singleEvent' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_event_single','tb_m_ticket','bookingticket','tb_m_buy_ticket','recentpost_artikel'));
     }
 
     public function contact(Request $request)
@@ -189,8 +187,10 @@ public function singleEvent(tb_m_event $tb_m_event)
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
         $tb_m_gallery=tb_m_gallery::all();
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
+        
 
-        return view('frontend.contact' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_s_map'));
+        return view('frontend.contact' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_s_map','recentpost_artikel'));
     }
     /**
      * Show the form for creating a new resource.
@@ -211,9 +211,12 @@ public function singleEvent(tb_m_event $tb_m_event)
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','desc')->paginate(4);
         $tb_m_service=tb_m_service::orderBy('created_at','desc')->get();
+        $sekolahs=tb_s_sekolah::all();
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
         
         
-        return view('frontend.about-us' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_service'));
+        
+        return view('frontend.about-us' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_service','sekolahs','recentpost_artikel'));
     }
    
     public function service(Request $request)
@@ -229,9 +232,12 @@ public function singleEvent(tb_m_event $tb_m_event)
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','desc')->paginate(4);
         $tb_m_service=tb_m_service::orderBy('created_at','desc')->get();
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
+        $nextEvent=tb_m_event::whereDate('waktu' ,'>=', carbon\carbon::now())->orderBy('waktu','asc')->paginate(1);
         
         
-        return view('frontend.service' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_service'));
+        
+        return view('frontend.service' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_service','recentpost_artikel','nextEvent'));
     }
 
     /**
@@ -266,7 +272,7 @@ public function singleEvent(tb_m_event $tb_m_event)
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
        
         
-        return view('frontend.singleArtikel' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','kategori1','kategori2','tb_m_artikel_single'));
+        return view('frontend.singleArtikel' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_artikel_single'));
     }
 
     /**
@@ -316,10 +322,12 @@ public function singleEvent(tb_m_event $tb_m_event)
         $widgetgallery=tb_m_gallery::orderBy('created_at','desc')->paginate(4);
         $tb_m_service=tb_m_service::orderBy('created_at','desc')->paginate(6);
         $countFacebook=tb_s_sosmed::where('Facebook')->count();
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
+        
         
         $nextEvent=tb_m_event::whereDate('waktu' ,'>=', carbon\carbon::now())->orderBy('waktu','asc')->paginate(1);
         $tb_s_sosmed=tb_s_sosmed::all();
-        return view('frontend.index' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_service','nextEvent','tb_m_ticket','bookingticket','tb_s_sosmed','countFacebook'));
+        return view('frontend.index' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_service','nextEvent','tb_m_ticket','bookingticket','tb_s_sosmed','countFacebook','recentpost_artikel'));
     }
 
 
@@ -335,19 +343,10 @@ public function singleEvent(tb_m_event $tb_m_event)
         $tb_m_gallery=tb_m_gallery::all();
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
-       
-        $kategori1=tb_m_gallery::whereHas('tb_m_kategori_gallery',function($query) use ($request){
-                        $query->where('kategori','edukasi');
-                    })
-                    ->paginate(3);
-        $kategori2=tb_m_gallery::whereHas('tb_m_kategori_gallery',function($query) use ($request){
-                        $query->where('kategori','menggambar');
-                    })
-                    ->paginate(3);
-        $tb_m_gallery=tb_m_gallery::all();
-        $tb_m_gallery=tb_m_gallery::all();
+       $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
         
-        return view('frontend.index' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','kategori1','kategori2'));   }
+        
+        return view('frontend.index' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','recentpost_artikel'));   }
  
    /**
     * Show the application dashboard.
@@ -379,10 +378,29 @@ public function singleEvent(tb_m_event $tb_m_event)
  
         
     
-    return back()->with('success', 'Terima Kasih Telah Menghubungi Kami!',compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','kategori1','kategori2')); 
+    return back()->with('success', 'Terima Kasih Telah Menghubungi Kami!',compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery')); 
 
 
     
    }
+
+   public function artikelKategori(tb_m_kategori_artikel $kategori)
+{
+    // $contact = Contact::all();
+    
+        $tb_m_mata_pelajaran=tb_m_mata_pelajaran::all();
+        $tb_m_siswa=tb_m_siswa::all();
+        $tb_s_sekolah=tb_s_sekolah::all();
+        $tb_m_pengajar=tb_m_pengajar::all();
+        $jumlahguru= tb_m_pengajar::all();
+        $tb_m_artikel=$kategori->tb_m_artikel()->latest()->paginate(5);
+        $tb_m_event =tb_m_event::orderBy('waktu','desc')->get();
+        $tb_m_gallery=tb_m_gallery::all();
+        $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
+        $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(3);
+         $tb_m_artikel_single=null;
+        $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
+        return view('frontend.MoreArtikel' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','tb_m_artikel_single','recentpost_artikel'));
+}
 
 }

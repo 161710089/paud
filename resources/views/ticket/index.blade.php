@@ -33,7 +33,7 @@
                                 <td>{{ $data->sampai_tanggal }}</td>
                                 <td>Rp.{{ $data->harga }}</td>
                                 <td>
-                                <a class="btn btn-warning" href="{{ route('ticket.edit',$data->id) }}">Edit</a>
+                                <a class="btn btn-warning" href="{{ route('ticket.edit',$data->id) }}"><i class="mdi mdi-pencil"></i> Edit</a>
                     
                                 <button onclick="deleteTicket('{{$data->id}}')" class="btn btn-danger">delete</button>
                                 </td>

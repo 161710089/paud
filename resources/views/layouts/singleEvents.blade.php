@@ -101,28 +101,17 @@
                             <ul class="navigation clearfix">
                                 <li><a href="/">Home</a></li>
 
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="{{ Route('about_us') }}">About Us</a></li>
                                 <li class="dropdown"><a href="#">Pages</a>
                                     <ul>
-                                        <li><a href="services.html">Services</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="course-single.html">Course Single</a></li>
-                                        <li><a href="event.html">Event</a></li>
-                                        <li><a href="event-single.html">Event Single</a></li>
+                                        <li><a href="service">Services</a></li>
+                                        <li><a href="moreEvent">Event</a></li>
+                                        <li><a href="/moreartikel">Artikel</a></li>
+
                                     </ul>
                                 </li> 
                                 <li><a href="moreGallery">Gallery</a></li>
-                                <li class="dropdown"><a href="#">Blogs</a>
-                                    <ul>
-                                        <li><a href="blog.html">Blog Standard</a></li>
-                                        <li><a href="blog-grid.html">Blog Grid</a></li>
-                                        <li><a href="blog-full-width.html">Blog Full Width</a></li>
-                                        <li><a href="blog-single-1.html">Blog Single 01</a></li>
-                                        <li><a href="blog-single-2.html">Blog Single 02</a></li>
-                                        <li><a href="error-page.html">404 Page</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ Route('contact') }}">Contact</a></li>
+                                 <li><a href="{{ Route('contact') }}">Contact</a></li>
 
                             </ul>
                         </div>

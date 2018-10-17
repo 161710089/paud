@@ -340,6 +340,8 @@ $(function() {
                         
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('absensi.index')  }}" aria-expanded="false"><i class="mdi mdi-pen"></i><span class="hide-menu">Data Absensi</span></a></li>
                         
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('kategori_artikel.index')  }}" aria-expanded="false"><i class="mdi mdi-library-books"></i><span class="hide-menu">Data Kategori Artikel</span></a></li>
+
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('artikel.index')  }}" aria-expanded="false"><i class="mdi mdi-library-books"></i><span class="hide-menu">Data Artikel</span></a></li>
                                                     
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('event.index')  }}" aria-expanded="false"><i class="mdi mdi-calendar-check"></i><span class="hide-menu">Data Event</span></a></li>

@@ -47,11 +47,11 @@ Date::setLocale('id');
                         </div>
 
                         <div class="room-column">
-                            <span>Hall No 01</span>
+                            <span>{{ $data->ruangan }}</span>
                         </div>
 
                         <div class="link-column">
-                            <a href="moreEvent/show-event/{{ $data->slug }}" class="theme-btn">Register</a>
+                            <a href="moreEvent/show-event/{{ $data->slug }}" class="theme-btn">Lihat</a>
                         </div>
                     </div>
                 </div>

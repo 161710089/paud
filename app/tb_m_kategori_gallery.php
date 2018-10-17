@@ -14,3 +14,4 @@ class tb_m_kategori_gallery extends Model
 		return $this->hasMany('App\tb_m_gallery', 'id_gallery');
 	}
 }
+//tambah

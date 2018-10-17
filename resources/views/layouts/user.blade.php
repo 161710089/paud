@@ -36,7 +36,7 @@
                     <div class="top-left">
                         <ul class="contact-list clearfix">
                             @foreach($tb_s_sekolah as $data) 
-                            <li><a href="kindergarden.com">info@kindergarden.com</a></li>
+                            <li><a href="\kindergarden.com">info@kindergarden.com</a></li>
                             <li>{{ $data->no_telepon }}</li>
                             @endforeach
                         </ul>
@@ -210,7 +210,7 @@
                                 <h2 class="widget-title">Recent Post</h2>
                                 <div class="widget-content">
                                     <!-- Recent Post -->
-                                   @foreach($tb_m_artikel as $data)
+                                   @foreach($recentpost_artikel as $data)
                                     <article class="post">
                                         <span class="date">{{Date::parse($data->create_at)->format('d M')}}</span>
                                         <h4><a href="moreartikel/show-artikel/{{ $data->slug }}">{{ $data->judul }}</a></h4>

@@ -108,12 +108,12 @@
                             <ul class="navigation clearfix">
                                 <li><a href="/">Home</a></li>
 
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="{{ Route('about_us') }}">About Us</a></li>
                                 <li class="dropdown"><a href="#">Pages</a>
                                     <ul>
                                         <li><a href="service">Services</a></li>
                                         <li><a href="moreEvent">Event</a></li>
-                                        <li><a href="moreartikel">Artikel</a></li>
+                                        <li><a href="/moreartikel">Artikel</a></li>
 
                                     </ul>
                                 </li> 
@@ -166,6 +166,9 @@
                         </div>
 
                         <!-- Categories -->
+                        @if($tb_m_artikel_single)
+                        
+                        @elseif(count($tb_m_artikel)>=2)
                         <div class="sidebar-widget search-box">
                             <div class="sidebar-title"><h2>Search</h2></div>
                             <form method="Get" action="{{ Route('MoreArtikel') }}">
@@ -175,15 +178,17 @@
                                 </div>
                             </form>
                         </div>
-
+                        
+                        
+                        @endif
                         <!-- Categories -->
                         <div class="sidebar-widget categories">
                             <div class="sidebar-title"><h2>Categories</h2></div>
                             <ul class="cat-list">
-                                <li><a href="#">Formats <span>(6)</span></a></li>
-                                <li><a href="#">Gallery <span>(6)</span></a></li>
-                                <li><a href="#">New <span>(3)</span></a></li>
-                                <li><a href="#">Two Columns <span>(6)</span></a></li>
+                                @foreach($kategori as $data)
+                                <li><a href="/moreartikel/kategori/{{ $data->slug }}">{{ $data->kategori }} <span>
+                                    ({{ $data->tb_m_artikel->count() }})</span></a></li>
+                                @endforeach
                             </ul>
                         </div>
 
@@ -191,12 +196,12 @@
                         <div class="sidebar-widget latest-news">
                             <div class="sidebar-title"><h2>Recent Post</h2></div>
                             <div class="widget-content">
-                                @foreach($tb_m_artikel as $data)
+                                @foreach($recentpost_artikel as $data)
                                 <article class="post">
-                                    <div class="post-thumb"><a href="moreartikel/show-artikel/{{ $data->slug }}">
+                                    <div class="post-thumb"><a href="/moreartikel/show-artikel/{{ $data->slug }}">
                                         <img src="{{ asset('img/Fotoartikel/'.$data->foto) }}" 
                                         style="max-height:90px; min-height:90px;  max-width: 95px; min-width: 95px; margin-top:7px;" alt=""></a></div>
-                                    <h3><a href="moreartikel/show-artikel/{{ $data->slug }}">{{ $data->judul }}.</a></h3>
+                                    <h3><a href="/moreartikel/show-artikel/{{ $data->slug }}">{{ $data->judul }}.</a></h3>
                                     <div class="date">{{Date::parse($data->waktu)->format('d M Y')}}</div>
                                 </article>
                                 @endforeach
@@ -213,24 +218,20 @@
                         <div class="sidebar-widget archives">
                             <div class="sidebar-title"><h2>Archives</h2></div>
                             <ul class="archive-list">
-                                <li><a href="#">January 2017 <span>(1)</span></a></li>
-                                <li><a href="#">February 2016 <span>(2)</span></a></li>
-                                <li><a href="#">August 2015 <span>(3)</span></a></li>
-                                <li><a href="#">September 2014 <span>(4)</span></a></li>
-                                <li><a href="#">December 2014 <span>(5)</span></a></li>
-                            </ul>
+                                @php $header= null @endphp
+                                <li><a href="#">
+                                @if ($header != $a)
+                                <b>{{ $a }}</b><span>
+                                    ({{ $a }})</span></a></li><br>
+                                <?php $header = $a ?>
+                                @endif
+                              </ul>
                         </div>
 
                         <!-- Categories -->
                         <div class="sidebar-widget popper-tags">
                             <div class="sidebar-title"><h2>Popular Tags</h2></div>
                             <ul class="tag-list">
-                                <li><a href="#">HTML</a></li>
-                                <li><a href="#">CSS</a></li>
-                                <li><a href="#">PHP</a></li>
-                                <li><a href="#">JAVA</a></li>
-                                <li><a href="#">WORDPRESS</a></li>
-                                <li><a href="#">SQL</a></li>
                                 <li><a href="#">Quary</a></li>
                             </ul>
                         </div>
@@ -244,7 +245,7 @@
                         @foreach($tb_m_gallery as $data)
                                 <figure class="image">
                                     <a href="{{ asset('img/Fotogallery/'.$data->foto) }}" class="lightbox-image" title="Image Title Here"><img src="{{ asset('img/Fotogallery/'.$data->foto) }}" 
-                                        style="max-height:120px; max-width: 120px; min-height:120px; min-width: 120px;" alt=""></a>
+                                        style="max-height:100px; max-width: 120px; min-height:100px; min-width: 120px;" alt=""></a>
                                 </figure>
                         @endforeach
                             </div>
@@ -253,23 +254,33 @@
                         <div class="sidebar-widget contact-widget">
                             <div class="sidebar-title"><h2>Contact Us</h2></div>
                             <div class="contact-widget-form">
-                                <form method="post" action="http://t.commonsupport.com/arans/index.html">
-                                    <div class="form-group">
-                                        <input type="text" name="username" placeholder="Name" required="">
-                                    </div>
+                                @if(Session::has('success'))
+            <div class="alert alert-success">
+            {{ Session::get('success') }}
+            </div>
+        @endif
+ 
+        {!! Form::open(['route'=>'daftar.store']) !!}
+        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+        <input type="text" name="name" placeholder="Name" required>
+        <span class="text-danger">{{ $errors->first('name') }}</span>
+        </div>
+ 
+        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+        <input type="text" name="email" placeholder="Email" required>
+       <span class="text-danger">{{ $errors->first('email') }}</span>
+        </div>
 
-                                    <div class="form-group">
-                                        <input type="email" name="email" placeholder="Email" required="">
-                                    </div>
+        <div class="form-group {{ $errors->has('message') ? 'has-error' : '' }}">
+        {!! Form::textarea('message', old('message'), ['placeholder'=>'Pesan']) !!}
+        <span class="text-danger">{{ $errors->first('message') }}</span>
+        </div>
 
-                                    <div class="form-group">
-                                        <textarea name="message" placeholder="Message"></textarea>
-                                    </div>
 
                                     <div class="form-group">
                                         <button class="theme-btn btn-style-five" type="submit" name="submit-form">Subscribe</button>
                                     </div>
-                                </form>
+        {!! Form::close() !!}
                             </div>
                         </div>
                     </aside>
@@ -339,10 +350,10 @@
                                 <h2 class="widget-title">Recent Post</h2>
                                 <div class="widget-content">
                                     <!-- Recent Post -->
-                                   @foreach($tb_m_artikel as $data)
+                                   @foreach($recentpost_artikel as $data)
                                     <article class="post">
                                         <span class="date">{{Date::parse($data->create_at)->format('d M')}}</span>
-                                        <h4><a href="moreartikel/show-artikel/{{ $data->slug }}">{{ $data->judul }}</a></h4>
+                                        <h4><a href="/moreartikel/show-artikel/{{ $data->slug }}">{{ $data->judul }}</a></h4>
                                     </article>
                                     @endforeach
                                 </div>

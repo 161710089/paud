@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tb_m_artikel;
 use App\tb_s_sekolah;
+use App\tb_m_kategori_artikel;
 use File;
 use Session;
 class tb_m_artikelController extends Controller
@@ -32,9 +33,11 @@ class tb_m_artikelController extends Controller
     public function create()
     {
           $tb_m_artikel =  tb_m_artikel::all();
-          $sekolahs =  tb_s_sekolah::all();
+          $sekolahs =  tb_s_sekolah::all(); 
+          $tb_m_kategori_artikel=tb_m_kategori_artikel::all();
        
-        return view('artikel.create',compact('tb_m_artikel','sekolahs'));
+       
+        return view('artikel.create',compact('tb_m_artikel','sekolahs','tb_m_kategori_artikel'));
     }
 
     /**
@@ -60,6 +63,8 @@ class tb_m_artikelController extends Controller
         $tb_m_artikel->deskripsi = $request->deskripsi;
         $tb_m_artikel->slug = str_slug($request->judul,'-');
         $tb_m_artikel->id_user = $request->id_user;
+        $tb_m_artikel->id_kategori_artikel = $request->id_kategori_artikel;
+        
 
         $tb_m_artikel->save();
         if ($request->hasFile('foto')) {
@@ -102,7 +107,9 @@ class tb_m_artikelController extends Controller
     {
         $sekolahs =  tb_s_sekolah::all();
         $tb_m_artikel = tb_m_artikel::findOrFail($id);
-        return view('artikel.edit',compact('tb_m_artikel','sekolahs'));  
+         $tb_m_kategori_artikel=tb_m_kategori_artikel::all();
+       
+        return view('artikel.edit',compact('tb_m_artikel','sekolahs','tb_m_kategori_artikel'));  
 
     }
 
@@ -130,6 +137,8 @@ class tb_m_artikelController extends Controller
         $tb_m_artikel->deskripsi = $request->deskripsi;
         $tb_m_artikel->slug = str_slug($request->judul);
         $tb_m_artikel->id_user = $request->id_user;
+        $tb_m_artikel->id_kategori_artikel = $request->id_kategori_artikel;
+        
 
        if ($request->hasFile('foto')) {
             // menambil foto yang diupload berikut ekstensinya

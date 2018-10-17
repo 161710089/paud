@@ -39,6 +39,7 @@ Route::get('moreartikel','FrontendController@MoreArtikel')->name('MoreArtikel');
 Route::get('moreGallery','FrontendController@moreGallery')->name('moreGallery');
 Route::get('singleArtikel/{tb_m_artikel}','FrontendController@singleArtikel')->name('singleArtikel');
 Route::get('moreartikel/show-artikel/{tb_m_artikel}','FrontendController@singleArtikel')->name('singleArtikel');
+Route::get('moreartikel/kategori/{kategori}','FrontendController@artikelKategori')->name('artikelKategori');
 Route::get('moreEvent','FrontendController@moreEvent')->name('moreEvent');
 Route::get('moreEvent/show-event/{tb_m_event}','FrontendController@singleEvent')->name('singleEvent');
 
@@ -56,6 +57,9 @@ Route::get('/event/{tb_m_event}/buy',
 });
 
 
+Route::get('/tesss', function () {
+    return view('tesss');
+});
 
 Auth::routes();
 // settings
@@ -72,6 +76,7 @@ Route::get('/delete-artikel/{id}', 'tb_m_artikelController@deleteArtikelRecord')
 Route::get('/delete-event/{id}', 'tb_m_eventController@deleteEventRecord');
 Route::get('/delete-gallery/{id}', 'tb_m_galleryController@deleteGalleryRecord');
 Route::get('/delete-kategori-gallery/{id}', 'tb_m_kategori_galleryController@deleteKategoriGalleryRecord');
+Route::get('/delete-kategori-artikel/{id}', 'tb_m_kategori_artikelController@deleteKategoriArtikelRecord');
 Route::get('/delete-mapel/{id}', 'tb_m_mata_pelajaranController@deleteMapelRecord');
 Route::get('/delete-pengajar/{id}', 'tb_m_pengajarController@deletePengajarRecord');
 Route::get('/delete-sekolah/{id}', 'tb_s_sekolahController@destroy');
@@ -92,6 +97,7 @@ Route::resource('ticket','tb_m_ticketController');
 // Route::get('search','searchController@index');
 
 // Backend
+Route::resource('kategori_artikel','tb_m_kategori_artikelController');
 Route::resource('kategori_gallery','tb_m_kategori_galleryController');
 Route::resource('gallery','tb_m_galleryController');
 Route::resource('Eventpengajar','tb_mix_EventpengajarController');

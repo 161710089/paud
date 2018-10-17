@@ -53,7 +53,7 @@
                             <p>Secara efisien melepaskan informasi lintas media tanpa nilai lintas media. Cepat memaksimalkan pengiriman tepat waktu untuk skema real-time. Secara dramatis mempertahankan solusi klik-dan-mortir tanpa solusi fungsional. Selaraskan sepenuhnya hubungan perpajakan sumber daya melalui ceruk pasar utama. Profesional membina layanan pelanggan satu-ke-satu dengan ide-ide yang kuat. Secara dinamis berinovasi layanan pelanggan level-sumber daya untuk layanan pelanggan yang canggih.</p>
                         </div>
                         <div class="btn-box">
-                            <a href="about.html" class="theme-btn btn-style-one">Read More</a>
+                            <a href="{{ Route('about_us') }}" class="theme-btn btn-style-one">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -504,7 +504,7 @@ Date::setLocale('id');
                 <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
                         <div class="image-box">
-                            @if(    Date::parse($data->created_at) < carbon\carbon::yesterday()->addWeeks(1))
+                            @if(    Date::parse($data->created_at) <= carbon\carbon::now()->addDay(1))
                             <span class="tag">News</span>
                             @endif
                             <div class="image"><a href="moreartikel/show-artikel/{{ $data->slug }}"><img src="{{ asset('img/Fotoartikel/'.$data->foto) }} " style="max-height:200px; min-height:200px; min-width:500px;  max-width: 500px; margin-top:7px;"  alt=""></a></div>
@@ -521,8 +521,12 @@ Date::setLocale('id');
 
                                 <h3><a href="moreartikel/show-artikel/{{ $data->slug }}">{{ $data->judul }}</a></h3>
                             </div>
-                            <div class="text" >{!! $data->deskripsi !!}.</div>
-                            
+                            <div class="text" >{!! $data->deskripsi !!}</div>
+                            <div class="text float-right">    
+                                    <ul class="info" >
+                                     <li>Modifed By {{ $data->pengedit }}</li>                                     
+                                </ul>
+                            </div>
                          </div>
                     </div>
                 </div>

@@ -70,7 +70,7 @@
                 <!-- Content Column -->
                 <div class="content-column col-lg-8 col-md-12 col-sm-12">
                     <div class="inner-column">
-                        <h2>Next <span>Event</span></h2>
+                        <h2>Event <span>Selanjutnya</span></h2>
                         <div class="text">Solutions.Completely synergize resource taxing .Dynamically target high-payoff intellectual capital for customized technologies. Objectively integrate emerging core competencies before process-centric communities. Dramatically evisculate holistic innovation rather than client-centric data.</div>
                         <ul class="list-style-one">
                             <li>Progressively maintain extensive</li>
@@ -80,9 +80,16 @@
                         </ul>
 
                         <!-- Countdown -->
+                        {{-- Waktu --}}
+                        @foreach($nextEvent as $data)
                         <div class="timer">
-                            <div class="cs-countdown" data-countdown="10/20/2018 05:06:59"></div>            
+                            @if($data->waktu > carbon\carbon::now())
+                            <div class="cs-countdown" data-countdown="{{ $data->waktu }}"></div>
+                            @endif
                         </div>
+                        @endforeach
+
+                        {{-- End Waktu --}}
                     </div>
                 </div>
 
@@ -90,29 +97,45 @@
                 <div class="form-column col-lg-4 col-md-12 col-sm-12 wow fadeInRight">
                     <div class="inner-column">
                         <div class="register-form">
-                            <h3>Register Now</h3>
-                             <form method="post" action="http://t.commonsupport.com/arans/index.html">
-                                <div class="form-group">
-                                    <input type="text" name="username" placeholder="Your Name" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" name="email" placeholder="Your Email" required="">
-                                </div>
+                            <h3>Daftar Sekarang</h3>
+        @if(Session::has('success'))
+            <div class="alert alert-success">
+            {{ Session::get('success') }}
+            </div>
+        @endif
+ 
+        {!! Form::open(['route'=>'daftar.store']) !!}
+        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+        <input type="text" name="name" placeholder="Name" required>
+        <span class="text-danger">{{ $errors->first('name') }}</span>
+        </div>
+ 
+        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+        <input type="text" name="email" placeholder="Email" required>
+       <span class="text-danger">{{ $errors->first('email') }}</span>
+        </div>
 
-                                <div class="form-group">
-                                    <textarea name="message" placeholder="Massage"></textarea>
-                                </div>
-                                <div class="form-group text-center">
-                                    <button class="theme-btn btn-style-one" type="submit" name="submit-form">Send Now</button>
-                                </div>
-                            </form>
+        <div class="form-group {{ $errors->has('message') ? 'has-error' : '' }}">
+        {!! Form::textarea('message', old('message'), ['placeholder'=>'Pesan']) !!}
+        <span class="text-danger">{{ $errors->first('message') }}</span>
+        </div>
+
+    <div class="form-group text-center">
+        <button class="theme-btn btn-style-one" type="submit" name="submit-form">Kirim</button>
+    </div>
+        {!! Form::close() !!}
+
+
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </section>
-
+    
 
 
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>

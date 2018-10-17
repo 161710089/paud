@@ -1,3 +1,5 @@
+
+
 @extends('layouts.admin')
 @section('content')
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -12,6 +14,8 @@
 <!-- Bootstrap Date-Picker Plugin -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 
 
 <style type="text/css">
@@ -393,7 +397,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_mulai') ? 'has-error' : ''}}">
                 <label >Jam Masuk</label>
-        <input class="form-control" type="time" name="jam_mulai" value="{{ carbon\carbon::now()->format('H:i') }}"  id="timeOfCall" required />
+        <input class="form-control timepicker" type="time" name="jam_mulai" value="{{ carbon\carbon::now()->format('H:i:s') }}"  id="timeOfCall" required />
                   @if ($errors->has('jam_mulai'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_mulai')}}</strong>
@@ -408,7 +412,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_akhir') ? 'has-error' : ''}}">
                 <label >Jam Keluar</label>
-        <input class="form-control" type="time" value="{{ carbon\carbon::now()->format('H:i') }}" id="timeOfResponse"  name="jam_akhir" />
+        <input class="form-control timepicker" type="time" value="{{ carbon\carbon::now()->format('H:i:s') }}" id="timeOfResponse"  name="jam_akhir" />
                   @if ($errors->has('jam_akhir'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_akhir')}}</strong>
@@ -420,7 +424,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('selisih_jam') ? 'has-error' : ''}}">
                 <label >Selisih Jam</label>
-        <input class="form-control" type="text" id="delay" name="selisih_jam" readonly />
+        <input class="form-control timepicker" type="text" id="delay" name="selisih_jam" readonly />
                   @if ($errors->has('selisih_jam'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('selisih_jam')}}</strong>
@@ -642,28 +646,20 @@ $(function() {
 </script> --}}
 
 
-        <script type="text/javascript">
-            $('#timepicker1').timepicker();
-        </script>
-<script type="text/javascript">
-
-    $('.timepicker').datetimepicker({
-
-        format: 'HH:mm:ss'
-
-    }); 
+        
 
 </script>  
 
 <script>
-    $('.timeOfCall').datetimepicker({
+    $('.timepicker').datetimepicker({
       
-        format: 'HH:mm:ss'
+        format: 'HH:mm'
+
     });
    
-    $('.timeOfResponse').datetimepicker({
+    $('.timepicker').datetimepicker({
       
-        format: 'HH:mm:ss'
+        format: 'HH:mm'
     });
 
 </script>
@@ -716,20 +712,29 @@ $(function() {
 
     });
 </script>
-
+{{-- bootstrap-datetimepicker-widget dropdown-menu usetwentyfour bottom --}}
 <script>
 $(document).ready(function(){
-$("input").keyup(function(){
-    var timeOfCall = ($('#timeOfCall').val()),
+ 
+ $('.page-wrapper,bootstrap-datetimepicker-widget').on('click keyup mouseenter', function() {
+     var timeOfCall = ($('#timeOfCall').val()),
        
         timeOfResponse = ($('#timeOfResponse').val()),
         hours = timeOfResponse.split(':')[0] - timeOfCall.split(':')[0],
         minutes = timeOfResponse.split(':')[1] - timeOfCall.split(':')[1];
+        second = timeOfResponse.split(':')[2] - timeOfCall.split(':')[2];
+        jam = 'jam';
+        menit = 'menit';
     
     if (timeOfCall <= "12:00:00" && timeOfResponse >= "13:00:00"){
       a = 1;
     } else {
       a = 0;
+    }
+    second = second.toString().length<2?'0'+second:second;
+    if(second<0){ 
+        minutes--;
+        second = 60 + second;        
     }
     minutes = minutes.toString().length<2?'0'+minutes:minutes;
     if(minutes<0){ 
@@ -738,7 +743,7 @@ $("input").keyup(function(){
     }
     hours = hours.toString().length<2?'0'+hours:hours;
    
-    $('#delay').val(hours-a+ ':' + minutes);
+    $('#delay').val(hours-a+ jam+  ':'  +minutes+  menit);
 });
 });
 </script> 
