@@ -156,6 +156,9 @@ $(function() {
 </div>
 </body></html>
  --}}
+
+ <body class="custom">
+   
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
@@ -424,7 +427,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('selisih_jam') ? 'has-error' : ''}}">
                 <label >Selisih Jam</label>
-        <input class="form-control timepicker" type="text" id="delay" name="selisih_jam" readonly />
+        <input class="form-control timepicker" type="text"  id="delay" name="selisih_jam" readonly />
                   @if ($errors->has('selisih_jam'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('selisih_jam')}}</strong>
@@ -623,6 +626,7 @@ $(function() {
     </div>  
           </div>
           </div>  
+ </body>
 
 {{-- <script >
   $(document).ready(function(){
@@ -654,6 +658,7 @@ $(function() {
     $('.timepicker').datetimepicker({
       
         format: 'HH:mm'
+
 
     });
    
@@ -716,21 +721,17 @@ $(function() {
 <script>
 $(document).ready(function(){
  
- $('.page-wrapper,bootstrap-datetimepicker-widget').on('click keyup mouseenter', function() {
+ $('.custom').on('change blur mouseover mouseout mouseleave keydown keypress scroll focus resize click keyup mouseenter', function() {
      var timeOfCall = ($('#timeOfCall').val()),
        
         timeOfResponse = ($('#timeOfResponse').val()),
         hours = timeOfResponse.split(':')[0] - timeOfCall.split(':')[0],
         minutes = timeOfResponse.split(':')[1] - timeOfCall.split(':')[1];
         second = timeOfResponse.split(':')[2] - timeOfCall.split(':')[2];
-        jam = 'jam';
-        menit = 'menit';
+        jam = ' jam ';
+        menit = ' menit ';
     
-    if (timeOfCall <= "12:00:00" && timeOfResponse >= "13:00:00"){
-      a = 1;
-    } else {
-      a = 0;
-    }
+    
     second = second.toString().length<2?'0'+second:second;
     if(second<0){ 
         minutes--;
@@ -742,8 +743,8 @@ $(document).ready(function(){
         minutes = 60 + minutes;        
     }
     hours = hours.toString().length<2?'0'+hours:hours;
-   
-    $('#delay').val(hours-a+ jam+  ':'  +minutes+  menit);
+    $('#delay').val(hours + jam+  ':'  + minutes +  menit);
+
 });
 });
 </script> 
@@ -996,6 +997,7 @@ ng.ready( function() {
     });
 });
 </script> --}} 
+
 
 
 @endsection
