@@ -18,6 +18,7 @@ Date::setLocale('id');
     <!--End Page Title-->
 
     <!-- Event Section -->
+    @if(count($tb_m_event)>0)
     <section class="event-section">
         <div class="auto-container">
             <div class="event-table">
@@ -59,10 +60,25 @@ Date::setLocale('id');
                 <!-- Event Block -->
                 
             </div>
+<br>
+            <center>    
+    {{ $tb_m_event->appends(request()->input())->links() }}
+            </center>
+        </div>
 
+    </section>
+    @else
+    <section class="event-section">
+        <div class="auto-container">
+            <div class="event-table">
+                <div class="title-box"><center>Belum Ada Event</center></div>
+                
+            </div>
             
         </div>
+
     </section>
+    @endif
     <!--End Event Section -->
 
   

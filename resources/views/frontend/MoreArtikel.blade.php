@@ -12,6 +12,7 @@ Date::setLocale('id');
 
     <!-- Sidebar Page Container -->
                 <!--Content Side-->
+                @if(count($tb_m_artikel)>0)
                 <div class="content-side col-lg-8 col-md-12 col-sm-12">
                     <div class="blog-standard">
                         @foreach($tb_m_artikel as $data)
@@ -103,17 +104,11 @@ Date::setLocale('id');
                         </div>
  --}}
                         <!-- Styled Pagination -->
-                        <div class="styled-pagination">
-                            <ul class="clearfix">
-                                <li><a href="#">1</a></li>
-                                <li><span class="active">Page 2 Of 4</span></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                            </ul>
-                        </div>
+                        {{ $tb_m_artikel->appends(request()->input())->links() }}
+    
                     </div>
                 </div>
-
+                @endif
                 <!-- Sidebar Side -->
              
     

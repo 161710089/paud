@@ -104,12 +104,18 @@
                     <div class="footer-social-links">
                         <ul class="social-links">
                         	@foreach($tb_s_sekolah as $data)
+                            @if($data->tb_s_sosmed->Facebook>0)
                             <li><a href="{{ $data->tb_s_sosmed->Facebook }}">Facebook</a></li>
+                            @endif
+                            @if($data->tb_s_sosmed->Twitter>0)
                             <li><a href="{{ $data->tb_s_sosmed->Twitter }}">Twitter</a></li>
+                            @endif
+                            @if($data->tb_s_sosmed->Instagram>0)
                             <li><a href="{{ $data->tb_s_sosmed->Instagram }}">Instagram</a></li>
-                            <li><a href="#">Pinterest</a></li>
+                            @endif
+                        {{--     <li><a href="#">Pinterest</a></li>
                             <li><a href="#">Linkedin</a></li>
-                            @endforeach
+                         --}}    @endforeach
                         </ul>
                     </div>
                 </div>                                                                  

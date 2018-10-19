@@ -129,11 +129,17 @@
                     <div class="outer-box">
                         <ul class="social-icon-one">
                         	@foreach($tb_s_sekolah as $data)
+                            @if($data->tb_s_sosmed->Facebook>0)
                             <li><a href="{{ $data->tb_s_sosmed->Facebook }}"><i class="fa fa-facebook-official"></i></a></li>
+                            @endif
+                            @if($data->tb_s_sosmed->Instagram>0)
                             <li><a href="{{ $data->tb_s_sosmed->Instagram }}"><i class="fa fa-instagram"></i></a></li>
+                            @endif
+                            @if($data->tb_s_sosmed->Twitter>0)
                             <li><a href="{{ $data->tb_s_sosmed->Twitter }}"><i class="fa fa-twitter-square"></i></a></li>
+                            @endif
                             @endforeach
-                            <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+                            {{-- <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -396,12 +402,18 @@
                     <div class="footer-social-links">
                         <ul class="social-links">
                         	@foreach($tb_s_sekolah as $data)
+                            @if($data->tb_s_sosmed->Facebook>0)
                             <li><a href="{{ $data->tb_s_sosmed->Facebook }}">Facebook</a></li>
+                            @endif
+                            @if($data->tb_s_sosmed->Twitter>0)
                             <li><a href="{{ $data->tb_s_sosmed->Twitter }}">Twitter</a></li>
+                            @endif
+                            @if($data->tb_s_sosmed->Instagram>0)
                             <li><a href="{{ $data->tb_s_sosmed->Instagram }}">Instagram</a></li>
-                            <li><a href="#">Pinterest</a></li>
+                            @endif
+                            {{-- <li><a href="#">Pinterest</a></li>
                             <li><a href="#">Linkedin</a></li>
-                            @endforeach
+                           --}}  @endforeach
                         </ul>
                     </div>
                 </div>                                                                  

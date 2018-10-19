@@ -39,6 +39,8 @@ Route::get('moreartikel','FrontendController@MoreArtikel')->name('MoreArtikel');
 Route::get('moreGallery','FrontendController@moreGallery')->name('moreGallery');
 Route::get('singleArtikel/{tb_m_artikel}','FrontendController@singleArtikel')->name('singleArtikel');
 Route::get('moreartikel/show-artikel/{tb_m_artikel}','FrontendController@singleArtikel')->name('singleArtikel');
+Route::get('tess','FrontendController@tesss')->name('tesss');
+
 Route::get('moreartikel/kategori/{kategori}','FrontendController@artikelKategori')->name('artikelKategori');
 Route::get('moreEvent','FrontendController@moreEvent')->name('moreEvent');
 Route::get('moreEvent/show-event/{tb_m_event}','FrontendController@singleEvent')->name('singleEvent');
@@ -162,3 +164,14 @@ Route::get('profile', 'userController@profile')->name('profile');
 Route::get('tiket', 'userController@tiket')->name('tiket');
 
 				});
+
+Route::group(
+    [
+        'prefix' => config('visitlog.route', 'visitlog')
+    ],
+    function () {
+        Route::get('/', 'VisitLogController@index')->name('__visitlog__');
+        Route::delete('delete_visitlog/{id}', 'VisitLogController@destroy')->name('__delete_visitlog__');
+        Route::delete('delete_visitlog_all', 'VisitLogController@destroyAll')->name('__delete_visitlog_all__');
+    }
+);

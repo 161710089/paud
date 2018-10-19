@@ -251,15 +251,20 @@ $(function() {
                                     <li>
                                         <div class="">
                                              <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
+                                            @foreach($sekolahs as $data)
+                                        <a href="https://mail.google.com/mail/#search/rfc822msgid%3Aabcdefg%40example.com" class="link border-top">
+                                            @endforeach
+                                                {{-- @foreach($tb_s_contact_us as $data)
+                                                
                                                 <div class="d-flex no-block align-items-center p-10">
                                                     <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
                                                     <div class="m-l-10">
-                                                        <h5 class="m-b-0">Event today</h5> 
-                                                        <span class="mail-desc">Just a reminder that event</span> 
+                                                        <h5 class="m-b-0">{{ $data->name }}</h5> 
+                                                        <span class="mail-desc">{{ $data->message }}</span> 
                                                     </div>
                                                 </div>
                                             </a>
+                                                @endforeach --}}
                                         </div>
                                     </li>
                                 </ul>

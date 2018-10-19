@@ -86,6 +86,15 @@ public function MoreArtikel(Request $request)
         return view('frontend.MoreArtikel' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','recentpost_artikel','tb_m_kategori_gallery','widgetgallery','tb_m_artikel_single','a'));
     }
 
+    public function tesss(Request $request)
+    {
+        $sekolahs=tb_s_sekolah::all();
+        $tb_s_contact_us=tb_s_contact_us::all();
+        
+       
+        return view('tesss' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','recentpost_artikel','tb_m_kategori_gallery','widgetgallery','tb_m_artikel_single','a','sekolahs','tb_s_contact_us'));
+    }
+
 public function moreEvent(Request $request)
     {
         $tb_m_mata_pelajaran=tb_m_mata_pelajaran::all();
@@ -94,7 +103,7 @@ public function moreEvent(Request $request)
         $tb_m_pengajar=tb_m_pengajar::all();
         $jumlahguru= tb_m_pengajar::all();
         $tb_m_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(2);
-        $tb_m_event =tb_m_event::orderBy('waktu','desc')->get();
+        $tb_m_event =tb_m_event::orderBy('waktu','desc')->paginate(1);
         $tb_m_gallery=tb_m_gallery::all();
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
@@ -321,7 +330,11 @@ public function singleEvent(tb_m_event $tb_m_event)
         $tb_m_gallery = tb_m_gallery::orderBy('created_at','desc')->paginate(9);
         $widgetgallery=tb_m_gallery::orderBy('created_at','desc')->paginate(4);
         $tb_m_service=tb_m_service::orderBy('created_at','desc')->paginate(6);
-        $countFacebook=tb_s_sosmed::where('Facebook')->count();
+        $countFacebook=tb_s_sosmed::whereNull('Facebook')->count();
+        $countTwitter=tb_s_sosmed::whereNull('Twitter')->count();
+        $countInstagram=tb_s_sosmed::whereNull('Instagram')->count();
+        $countEmail=tb_s_sosmed::whereNull('Email')->count();
+        
         $recentpost_artikel=tb_m_artikel::orderBy('created_at','desc')->paginate(3);
         
         

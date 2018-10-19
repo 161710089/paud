@@ -7,6 +7,7 @@ use App\tb_s_sekolah;
 use App\tb_m_pengajar;
 use App\tb_m_siswa;
 use App\tb_m_mata_pelajaran;
+use App\tb_s_contact_us;
 use Auth;
 class AdminController extends Controller
 {
@@ -18,11 +19,13 @@ class AdminController extends Controller
     public function index()
     {
          $tb_s_sekolah =  tb_s_sekolah::all();
+         $tb_s_contact_us =  tb_s_contact_us::all();
+
        $jumlahguru= tb_m_pengajar::where('id')->count();
        $jumlahsiswa= tb_m_siswa::where('id')->count();
        $tb_m_siswa = tb_m_siswa::where('id_user',Auth::user()->id)->get();
         
-        return view('layouts.admin',compact('tb_s_sekolah','jumlahguru','jumlahsiswa','tb_m_siswa'));
+        return view('layouts.admin',compact('tb_s_sekolah','jumlahguru','jumlahsiswa','tb_m_siswa','tb_s_contact_us'));
     }
 
 
@@ -40,8 +43,9 @@ public function dashboard()
        $jumlahguru= tb_m_pengajar::all()->count();
        $jumlahsiswa= tb_m_siswa::all()->count();
       $tb_m_siswa = tb_m_siswa::where('id_user',Auth::user()->id)->get();
-        
-        return view('dashboard.index',compact('sekolahs','jumlahguru','jumlahsiswa','tb_m_mata_pelajaran','tb_m_pengajar','tb_m_siswa'));
+         $tb_s_contact_us =  tb_s_contact_us::all();
+
+        return view('dashboard.index',compact('sekolahs','jumlahguru','jumlahsiswa','tb_m_mata_pelajaran','tb_m_pengajar','tb_m_siswa','tb_s_contact_us'));
     }
     /**
      * Show the form for creating a new resource.

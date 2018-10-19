@@ -122,11 +122,17 @@
                     <div class="outer-box">
                         <ul class="social-icon-one">
                             @foreach($tb_s_sekolah as $data)
+                            @if($data->tb_s_sosmed->Facebook>0)
                             <li><a href="{{ $data->tb_s_sosmed->Facebook }}"><i class="fa fa-facebook-official"></i></a></li>
+                            @endif
+                            @if($data->tb_s_sosmed->Instagram>0)
                             <li><a href="{{ $data->tb_s_sosmed->Instagram }}"><i class="fa fa-instagram"></i></a></li>
+                            @endif
+                            @if($data->tb_s_sosmed->Twitter>0)
                             <li><a href="{{ $data->tb_s_sosmed->Twitter }}"><i class="fa fa-twitter-square"></i></a></li>
+                            @endif
                             @endforeach
-                            <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+                            {{-- <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -165,4 +171,17 @@
 <script src="/frontend/js/appear.js"></script>
 <script src="/frontend/js/script.js"></script>
 </body>
+
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5bc42a9208387933e5bb5058/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+
 </html>

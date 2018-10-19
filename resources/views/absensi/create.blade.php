@@ -17,6 +17,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 
+{{-- Clock Picker --}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clocklet@0.2.3/css/clocklet.css">
+  
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/clocklet@0.2.3/umd/clocklet.js">
+</script>
+<style>
+  .clocklet-color-example { background-color: #dce1e4; border: none; }
+  .clocklet-color-example .clocklet-dial--minute { background-color: #fcf0e8; }
+  .clocklet-color-example .clocklet-hand--minute { background-color: #f5bb95; }
+  .clocklet-color-example .clocklet-tick--minute.clocklet-tick--selected { background-color: #f2a470; }
+  .clocklet-color-example.clocklet--hoverable:not(.clocklet--dragging) .clocklet-tick--minute:hover { background-color: #f5bb95; }
+  .clocklet-color-example .clocklet-dial--hour { background-color: #e9fdf1; }
+  .clocklet-color-example .clocklet-hand--hour { background-color: #98f5bd; }
+  .clocklet-color-example .clocklet-tick--hour.clocklet-tick--selected { background-color: #44ee88; }
+  .clocklet-color-example.clocklet--hoverable:not(.clocklet--dragging) .clocklet-tick--hour:hover { background-color: #98f5bd; }
+  .clocklet-color-example .clocklet-hand-origin { background-color: #f1e369; }
+  .clocklet-color-example .clocklet-ampm::before { background-color: #44eedd; }
+  .clocklet-color-example .clocklet-ampm:hover::before { background-color: #97f5ec; }
+  .clocklet-color-example .clocklet-ampm[data-clocklet-ampm="pm"]::before { background-color: #dd44ee; }
+  .clocklet-color-example .clocklet-ampm[data-clocklet-ampm="pm"]:hover::before { background-color: #eda1f6; }
+</style>
+</body>
+{{--End Clock Picker --}}
 
 <style type="text/css">
         .container{
@@ -121,41 +145,6 @@ $(function() {
 
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-{{-- <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clocklet - An opinionated clock-style vanilla-js timepicker</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.15.0/themes/prism.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Frank+Ruhl+Libre|Playball|Source+Sans+Pro:400,600">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clocklet@0.2.3/css/clocklet.css">
-  
-</head><body><script async src="https://www.googletagmanager.com/gtag/js?id=UA-64398169-1"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', 'UA-64398169-1');</script><script src="https://cdn.jsdelivr.net/npm/clocklet@0.2.3/umd/clocklet.js">
-  
-</script><section class="examples">
-  <div class="example"><style>
-  .clocklet-color-example { background-color: #dce1e4; border: none; }
-  .clocklet-color-example .clocklet-dial--minute { background-color: #fcf0e8; }
-  .clocklet-color-example .clocklet-hand--minute { background-color: #f5bb95; }
-  .clocklet-color-example .clocklet-tick--minute.clocklet-tick--selected { background-color: #f2a470; }
-  .clocklet-color-example.clocklet--hoverable:not(.clocklet--dragging) .clocklet-tick--minute:hover { background-color: #f5bb95; }
-  .clocklet-color-example .clocklet-dial--hour { background-color: #e9fdf1; }
-  .clocklet-color-example .clocklet-hand--hour { background-color: #98f5bd; }
-  .clocklet-color-example .clocklet-tick--hour.clocklet-tick--selected { background-color: #44ee88; }
-  .clocklet-color-example.clocklet--hoverable:not(.clocklet--dragging) .clocklet-tick--hour:hover { background-color: #98f5bd; }
-  .clocklet-color-example .clocklet-hand-origin { background-color: #f1e369; }
-  .clocklet-color-example .clocklet-ampm::before { background-color: #44eedd; }
-  .clocklet-color-example .clocklet-ampm:hover::before { background-color: #97f5ec; }
-  .clocklet-color-example .clocklet-ampm[data-clocklet-ampm="pm"]::before { background-color: #dd44ee; }
-  .clocklet-color-example .clocklet-ampm[data-clocklet-ampm="pm"]:hover::before { background-color: #eda1f6; }
-</style>
-
-<input data-clocklet="class-name: clocklet-color-example;  format: hh:mm a" class="form-control" value="02:55 am">
-</div>
-</body></html>
- --}}
 
  <body class="custom">
    
@@ -292,26 +281,20 @@ $(function() {
         </div>
          --}}
 <div class="col-lg-4 col-md-3">
-          <div class=" {{$errors->has('') ? 'has-error' : ''}}">
+          <div class=" {{$errors->has('id_siswa') ? 'has-error' : ''}}">
                 <label >Nama Siswa</label>
         <input class="form-control" type="text" id="nama" name="" readonly />
-                  @if ($errors->has(''))
-                  <span class="help-blocks">
-                    <strong>{{$errors->first('')}}</strong>
-                  </span>
-                @endif
-              </div>
-        </div>
-
-          <div class=" {{$errors->has('id_siswa') ? 'has-error' : ''}}">
-        <input class="" type="hidden" id="id" name="id_siswa" readonly />
                   @if ($errors->has('id_siswa'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('id_siswa')}}</strong>
                   </span>
                 @endif
               </div>
+        </div>
 
+          
+        <input class="" type="hidden" id="id" name="id_siswa" readonly />
+                  
 
 
 <div class="col-md-3 col-lg-4">
@@ -400,7 +383,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_mulai') ? 'has-error' : ''}}">
                 <label >Jam Masuk</label>
-        <input class="form-control timepicker" type="time" name="jam_mulai" value="{{ carbon\carbon::now()->format('H:i:s') }}"  id="timeOfCall" required />
+        <input  class="form-control timepicker" type="time" name="jam_mulai" value="{{ carbon\carbon::now()->format('H:i') }}"  id="timeOfCall" required />
                   @if ($errors->has('jam_mulai'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_mulai')}}</strong>
@@ -415,7 +398,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_akhir') ? 'has-error' : ''}}">
                 <label >Jam Keluar</label>
-        <input class="form-control timepicker" type="time" value="{{ carbon\carbon::now()->format('H:i:s') }}" id="timeOfResponse"  name="jam_akhir" />
+        <input  class="form-control timepicker" type="time" value="{{ carbon\carbon::now()->addHour(2)->format('H:i') }}" id="timeOfResponse"  name="jam_akhir" />
                   @if ($errors->has('jam_akhir'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_akhir')}}</strong>
@@ -426,7 +409,7 @@ $(function() {
 
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('selisih_jam') ? 'has-error' : ''}}">
-                <label >Selisih Jam</label>
+                <label >Lama Pelajaran</label>
         <input class="form-control timepicker" type="text"  id="delay" name="selisih_jam" readonly />
                   @if ($errors->has('selisih_jam'))
                   <span class="help-blocks">
@@ -626,6 +609,7 @@ $(function() {
     </div>  
           </div>
           </div>  
+  
  </body>
 
 {{-- <script >
@@ -657,16 +641,12 @@ $(function() {
 <script>
     $('.timepicker').datetimepicker({
       
-        format: 'HH:mm'
+        format: 'HH:mm:ss'
 
 
     });
    
-    $('.timepicker').datetimepicker({
-      
-        format: 'HH:mm'
-    });
-
+    
 </script>
 
 <script>
@@ -721,7 +701,8 @@ $(function() {
 <script>
 $(document).ready(function(){
  
- $('.custom').on('change blur mouseover mouseout mouseleave keydown keypress scroll focus resize click keyup mouseenter', function() {
+ $('input,body,html,div,span,.page-wrapper,.glyphicon,.glyphicon-chevron-up')
+  .on('load change blur mouseover mouseout mouseleave keydown keypress scroll focus resize click keyup mouseenter', function() {
      var timeOfCall = ($('#timeOfCall').val()),
        
         timeOfResponse = ($('#timeOfResponse').val()),
@@ -742,8 +723,10 @@ $(document).ready(function(){
         hours--;
         minutes = 60 + minutes;        
     }
+    if (timeOfCall[1] <= timeOfResponse[1]) {  
     hours = hours.toString().length<2?'0'+hours:hours;
     $('#delay').val(hours + jam+  ':'  + minutes +  menit);
+    }
 
 });
 });

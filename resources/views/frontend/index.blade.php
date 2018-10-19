@@ -105,7 +105,7 @@
             </div>
         </div>
     </section>
-  
+    @if(count($tb_m_service)>0)        
     <section class="services-section" style="background-image: url(/frontend/images/background/1.jpg);">
         <div class="anim-icons">
             <span class="icon icon-sparrow wow shake"></span>
@@ -138,6 +138,16 @@
             </div>
         </div>
     </section>
+                @else 
+                 <div class="sec-title text-center">
+                    <br>
+                    <br>
+                <h2>Belum Ada<span> Service</span></h2>
+                </div>
+          
+                @endif
+              
+
     <!--End Services Section -->
 
     <!-- Fun Fact -->
@@ -504,10 +514,10 @@ Date::setLocale('id');
                 <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
                         <div class="image-box">
-                            @if(    Date::parse($data->created_at) <= carbon\carbon::now()->addDay(1))
+                            @if(   carbon\carbon::now()   <=  Date::parse($data->created_at)->addDays(5) )
                             <span class="tag">News</span>
                             @endif
-                            <div class="image"><a href="moreartikel/show-artikel/{{ $data->slug }}"><img src="{{ asset('img/Fotoartikel/'.$data->foto) }} " style="max-height:200px; min-height:200px; min-width:500px;  max-width: 500px; margin-top:7px;"  alt=""></a></div>
+                            <div class="image"><a href="moreartikel/show-artikel/{{ $data->slug }}"><img src="{{ asset('img/Fotoartikel/'.$data->foto) }} " style="max-height:200px; min-height:200px; min-width:380px;  max-width: 380px; margin-top:7px;"  alt=""></a></div>
                         </div>
                         <div class="lower-content">
                             <div class="title">
@@ -533,17 +543,21 @@ Date::setLocale('id');
                 @endforeach
                 @else 
                  <div class="sec-title text-center">
+                    <br>
+                    <br>
                 <h2>Belum Ada<span> Artikel</span></h2>
                 </div>
           
                 @endif
-                @if(count($tb_m_artikel)>0)
+                @foreach($tb_s_sekolah as $data)
+                @if(count($tb_s_sekolah))
                             <div class="text float-right">    
                                     <ul class="info" >
                                      <li>Modifed By {{ $countFacebook }}</li>                                     
                                 </ul>
                             </div>
-                            @endif
+                @endif
+                @endforeach
                 <!-- News Block -->
                {{--  <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
                     <div class="inner-box">

@@ -23,7 +23,7 @@ class CreateTbMAbsensisTable extends Migration
             $table->date('tanggal');
             $table->time('jam_mulai');
             $table->time('jam_akhir');
-            $table->time('selisih_jam');
+            $table->string('selisih_jam');
                         
 
             $table->unsignedInteger('id_siswa');

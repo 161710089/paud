@@ -160,7 +160,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Jenssegers\Date\DateServiceProvider::class
+        Jenssegers\Date\DateServiceProvider::class,
+        Sarfraznawaz2005\VisitLog\VisitLogServiceProvider::class,
     ],
 
     /*
@@ -212,8 +213,8 @@ return [
         'Laratrust' => Laratrust\LaratrustFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Date' => Jenssegers\Date\Date::class,
+        'VisitLog' => Sarfraznawaz2005\VisitLog\Facades\VisitLog::class,
 
 
     

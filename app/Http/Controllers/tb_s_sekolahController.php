@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\tb_s_sekolah;
 use App\tb_s_sosmed;
 use App\tb_s_map;
+use App\tb_s_contact_us;
 use File;
 use Session;
 class tb_s_sekolahController extends Controller
@@ -19,8 +20,9 @@ class tb_s_sekolahController extends Controller
     {
          $sekolahs =tb_s_sekolah::all();
          $tb_s_sekolah =  tb_s_sekolah::all();
+         $tb_s_contact_us =tb_s_contact_us::orderBy('created_at','desc')->paginate(4);
         
-        return view('sekolah.index',compact('tb_s_sekolah','sekolahs'));
+        return view('sekolah.index',compact('tb_s_sekolah','sekolahs','tb_s_contact_us'));
     }
 
     /**
