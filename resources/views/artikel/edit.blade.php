@@ -28,6 +28,10 @@
     margin-left:2px;
 }
       </style>
+    
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel </title>
+    @endforeach
 
     
 <link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
@@ -133,7 +137,7 @@ $(function() {
 
      <div class="row md-3">
           
-            <div class="col-md-12 col-lg-12 col-xlg-12">
+            <div class="col-md-6 col-lg-6 col-xlg-6">
               <div class="form-group {{$errors->has('judul') ? 'has-error' : ''}}">
                 <label class="control-label">Judul </label>
                 <input type="text" value="{{ $tb_m_artikel->judul }}" class="form-control" name="judul" required>
@@ -144,6 +148,32 @@ $(function() {
                 @endif
               </div>
             </div>
+
+
+<div class="col-md-6 col-lg-6 col-xlg-6">         
+              <div class=" {{ $errors->has('id_kategori_artikel') ? ' has-error' : '' }}">
+              <label class="control-label">Kategori artikel</label> 
+   <div class="input-group">
+
+              <select name="id_kategori_artikel" class="form-control" >
+                
+                @foreach($tb_m_kategori_artikel as $data)
+                <option value="{{ $data->id }}"   >{{ $data->kategori }}</option>
+                @endforeach
+              </select>
+          
+    </div>
+    
+              @if ($errors->has('id_kategori_artikel'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('id_kategori_artikel') }}</strong>
+                            </span>
+                        @endif
+            </div>
+
+            </div>
+
+
       </div>
       <div class="row md-3">  
 <div class="col-md-12 col-lg-12 col-xlg-12">          

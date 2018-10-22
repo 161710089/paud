@@ -6,6 +6,10 @@ use Jenssegers\Date\Date;
 Date::setLocale('id');
 @endphp
 
+    @foreach($tb_s_sekolah as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Event </title>
+    @endforeach
+
     <section class="page-title">
         <div class="auto-container">
             <h1>Events</h1>

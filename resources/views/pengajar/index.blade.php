@@ -23,12 +23,13 @@
             </div>
 <br>
     <div class="panel panel-succes">
-      @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{  $message }}</p>
-        </div>
-    @endif
-    
+      @if(session()->has('flash_notification.message'))
+<div class="alert alert-{{ session()->get('flash_notification.level') }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  {!! session()->get('flash_notification.message') !!}
+</div>
+@endif
+
 
     
 

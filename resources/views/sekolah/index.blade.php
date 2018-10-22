@@ -19,15 +19,27 @@
                     </div>
                 </div>
             </div>
+
+          @if(session()->has('flash_notification_create.message'))
+<div class="alert alert-{{ session()->get('flash_notification_create.level') }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  {!! session()->get('flash_notification_create.message') !!}
+</div>
+@endif
+          @if(session()->has('flash_notification.message'))
+<div class="alert alert-{{ session()->get('flash_notification.level') }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  {!! session()->get('flash_notification.message') !!}
+</div>
+@endif
+
 <br>
+
         <div class="col-md-12">
             <div class="panel panel-primary">
           <a class="btn btn-secondary" id="button" href="{{ route('sekolah.create') }}"><i class="mdi mdi-plus"></i>Tambah Data Sekolah</a>
-          @if(Session::has('success'))
-   <div class="alert alert-success">
-     {{ Session::get('success') }}
-   </div>
-@endif
+         
+
 
               <div class="panel-body">
                 <div class="table-responsive">

@@ -31,7 +31,9 @@ class tb_s_sekolahController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        $sekolahs =tb_s_sekolah::all();
+    {        
+            
+             $sekolahs =tb_s_sekolah::all();
              $tb_s_sekolah = tb_s_sekolah::all();
     
         return view('sekolah.create',compact('tb_s_sekolah','sekolahs'));
@@ -44,8 +46,14 @@ class tb_s_sekolahController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-
+    {   
+            
+            Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Sekolah Berhasil Dibuat"
+            ]);
+            
+            
         $request->validate([
             
             'logo' => 'required|max:255',
@@ -88,6 +96,11 @@ class tb_s_sekolahController extends Controller
             $destinationPath =public_path().'/img/FotoSekolah/';
             $uploadSucces =$file->move($destinationPath, $filename);
             $tb_s_sekolah->logo =$filename;
+
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Membuat $tb_m_siswa->nama_sekolah"
+        ]);
 
             
         $tb_s_sekolah->save();
@@ -135,6 +148,9 @@ class tb_s_sekolahController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+            
+
         $request->validate([
             
             'logo' => 'required|max:255',
@@ -211,13 +227,25 @@ class tb_s_sekolahController extends Controller
      * @return \Illuminate\Http\Response
      */
      function deleteSekolahRecord($id){
+            Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Sekolah Berhasil Dihapus"
+            ]);
+            
         tb_s_sekolah::where('id',$id)->delete();
     }
 
     public function destroy($id)
     {
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Sekolah Berhasil Dihapus"
+            ]);
+
         $tb_s_sekolah = tb_s_sekolah::findOrFail($id);
         $tb_s_sekolah->delete();
+
+        
         return redirect()->route('sekolah.index');      
     }
 

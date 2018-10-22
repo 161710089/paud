@@ -35,7 +35,10 @@
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
 
-    
+    @foreach($sekolahs as $data)
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel </title>
+    @endforeach
+
 
                            <script type="text/javascript">
                              $(document).on('click', '#close-preview', function(){ 

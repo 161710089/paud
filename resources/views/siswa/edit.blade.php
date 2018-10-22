@@ -195,7 +195,7 @@ $(function() {
   							<div class=" {{ $errors->has('foto') ? ' has-error' : '' }}">
               					<label >Foto</label>
               					<div class="input-group image-preview">
-                					<input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                					<input type="text" value="{{asset('/img/Fotosiswa/'.$tb_m_siswa->foto.'')}}" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
                 					<span class="input-group-btn">
                    				 	<button type="button" class="btn btn-default image-preview-clear" 
                    				 	style="display:none;">
@@ -207,7 +207,8 @@ $(function() {
                         			<span class="glyphicon glyphicon-folder-open"></span>
                         			<span class="image-preview-input-title">Browse</span>
                         			<input type="file" accept="image/png, image/jpeg, image/gif" 
-                        			value="" class="form-control" name="foto"/> 
+                        			value="{{asset('/img/Fotosiswa/'.$tb_m_siswa->foto.'')}}" 
+                        			class="form-control" name="foto"/> 
                     			</div>
                 					</span>
             					</div> 

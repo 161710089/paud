@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 
+  @foreach($sekolahs as $data)
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel </title>
+    @endforeach
+
+
 <div class="row">
     <div class="container">
 
@@ -19,6 +24,13 @@
                     </div>
                 </div>
             </div>
+            @if(session()->has('flash_notification.message'))
+<div class="alert alert-{{ session()->get('flash_notification.level') }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  {!! session()->get('flash_notification.message') !!}
+</div>
+@endif
+
             <br>
         <div class="col-md-12">
             <div class="panel panel-primary">

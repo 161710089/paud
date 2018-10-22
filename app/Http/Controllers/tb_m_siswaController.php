@@ -146,6 +146,11 @@ class tb_m_siswaController extends Controller
             $tb_m_siswa->foto =$filename;
 
             
+            Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Berhasil Membuat $tb_m_siswa->nama_lengkap"
+        ]);
+
         $tb_m_siswa->save();
         }
         
@@ -183,7 +188,8 @@ class tb_m_siswaController extends Controller
         $tb_m_siswa = tb_m_siswa::findOrFail($id);
         $tb_m_ortu = tb_m_ortu::all();
         $selectortu = tb_m_siswa::findOrFail($tb_m_siswa->id)->id_otru;
-        return view('siswa.edit',compact('tb_m_siswa','tb_m_ortu','selectortu','sekolahs'));  }
+        $gambar=tb_m_siswa::where('foto',$tb_m_siswa->foto)->get();
+        return view('siswa.edit',compact('tb_m_siswa','tb_m_ortu','selectortu','sekolahs','gambar'));  }
 
     /**
      * Update the specified resource in storage.
@@ -314,7 +320,7 @@ if ($request->hasFile('foto')) {
 
         $tb_m_siswa->save();
                 
-   
+        
         $tb_m_ortu = tb_m_ortu::findOrFail($tb_m_siswa->id_ortu);
         
         
@@ -343,6 +349,8 @@ if ($request->hasFile('foto')) {
         $tb_m_ortu->penghasilan_wali = $request->penghasilan_wali;
         $tb_m_ortu->alamat_no_telepon_wali = $request->alamat_no_telepon_wali;
        
+
+        
         $tb_m_ortu->save();
     
            
@@ -359,7 +367,17 @@ if ($request->hasFile('foto')) {
      * @return \Illuminate\Http\Response
      */
     function deleteSiswaRecord($id){
-        tb_m_siswa::where('id',$id)->delete();
+                
+            
+            Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Siswa Berhasil Dihapus"
+            ]);
+            
+            
+
+        tb_m_siswa::where('id',$id)
+        ->delete();
     }
 
     public function destroy($id)

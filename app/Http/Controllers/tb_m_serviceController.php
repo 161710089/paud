@@ -62,6 +62,12 @@ class tb_m_serviceController extends Controller
             $uploadSucces =$file->move($destinationPath, $filename);
             $tb_m_service->foto =$filename;
 
+            Session::flash("flash_notification", [
+            "level"=>"success",
+             "message"=>"Berhasil Membuat $tb_m_service->judul"
+        ]);
+
+
             
         
         $tb_m_service->save();
@@ -141,6 +147,12 @@ class tb_m_serviceController extends Controller
                     }
                 }
         $tb_m_service->foto = $filename;
+
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil menyimpan $tb_m_service->judul"
+        ]);
+
         $tb_m_service->save();
             }
         return redirect()->route('service.index');
@@ -157,6 +169,11 @@ class tb_m_serviceController extends Controller
         //
     }
     function deleteServiceRecord($id){
+       Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Service Berhasil Dihapus"
+            ]);
+                 
         tb_m_service::where('id',$id)->delete();
     }
 }

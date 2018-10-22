@@ -13,6 +13,7 @@ use Input;
 use Auth;
 use Carbon\Carbon;
 use Excel;
+use Session;
 class tb_m_absensiController extends Controller
 {
     /**
@@ -37,8 +38,9 @@ class tb_m_absensiController extends Controller
           $sekolahs =  tb_s_sekolah::all();
           $jumlahguru= tb_m_pengajar::where('id')->count();
           $tb_m_siswa=tb_m_siswa::all();
+          $start = new Carbon('first day of this month');
        
-        return view('absensi.index',compact('tb_m_siswa','tb_m_absensi','sekolahs','months','jumlahguru'));
+        return view('absensi.index',compact('tb_m_siswa','tb_m_absensi','sekolahs','months','jumlahguru','start'));
     }
 
     public function filtertanggal(Request $request)
@@ -80,14 +82,16 @@ return view('absensi.index',compact('tb_m_absensi','sekolahs'));
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {       
+            
+
         $request->validate([
      
             'id_siswa' => 'required|max:255',
             'id_pengajar' => 'required|max:255',
             'tanggal' => 'required|max:255|before:tomorrow',
-            'jam_mulai' => 'required|max:255',
-            'jam_akhir' => 'required|max:255',
+            'jam_mulai' => 'required|max:255|before:jam_akhir',
+            'jam_akhir' => 'required|max:255|after:jam_mulai',
             'selisih_jam' => 'required|max:255',
      
   ]);
@@ -99,6 +103,12 @@ return view('absensi.index',compact('tb_m_absensi','sekolahs'));
         $tb_m_absensi->jam_akhir = $request->jam_akhir;
         $tb_m_absensi->selisih_jam = $request->selisih_jam;
                      
+
+                     Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Membuat Absensi"
+        ]);
+
                        $tb_m_absensi->save();
     
 
@@ -142,14 +152,17 @@ return view('absensi.index',compact('tb_m_absensi','sekolahs'));
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {           
+
              $request->validate([
      
             'id_siswa' => 'required|max:255',
             'id_pengajar' => 'required|max:255',
-            'tanggal' => 'required|max:255',
-            'jam_mulai' => 'required|max:255',
-            'jam_akhir' => 'required|max:255',
+            'tanggal' => 'required|max:255|before:tomorrow',
+            'jam_mulai' => 'required|max:255|before:jam_akhir',
+            'jam_akhir' => 'required|max:255|after:jam_mulai',
+            'selisih_jam' => 'required|max:255',
+                   
      
   ]);
 
@@ -159,7 +172,14 @@ return view('absensi.index',compact('tb_m_absensi','sekolahs'));
         $tb_m_absensi->tanggal = $request->tanggal;
         $tb_m_absensi->jam_mulai = $request->jam_mulai;
         $tb_m_absensi->jam_akhir = $request->jam_akhir;
+        $tb_m_absensi->selisih_jam = $request->selisih_jam;
                      
+
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Mengubah Absensi" 
+        ]);
+
                        $tb_m_absensi->save();
     
 
@@ -174,6 +194,11 @@ return view('absensi.index',compact('tb_m_absensi','sekolahs'));
      */
     
  function deleteAbsensiRecord($id){
+    Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Absensi Berhasil Dihapus"
+            ]);
+            
         tb_m_absensi::where('id',$id)->delete();
     }
 

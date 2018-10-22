@@ -84,7 +84,11 @@ class tb_m_pengajarController extends Controller
             $uploadSucces =$file->move($destinationPath, $filename);
             $tb_m_pengajar->foto =$filename;
 
-            
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Membuat $tb_m_pengajar->nama"
+        ]);
+
         $tb_m_pengajar->save();
         }
     
@@ -187,7 +191,7 @@ class tb_m_pengajarController extends Controller
         }
         Session::flash("flash_notification", [
         "level"=>"success",
-        "message"=>"Berhasil menyimpan $tb_m_pengajar->nama_lengkap"
+        "message"=>"Berhasil menyimpan $tb_m_pengajar->nama"
         ]);
 
         $tb_m_pengajar->save();
@@ -208,6 +212,11 @@ class tb_m_pengajarController extends Controller
      * @return \Illuminate\Http\Response
      */
     function deletePengajarRecord($id){
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Pengajar Berhasil Dihapus"
+            ]);
+            
         tb_m_pengajar::where('id',$id)->delete();
     }
 

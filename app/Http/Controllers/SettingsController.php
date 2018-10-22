@@ -46,10 +46,10 @@ class SettingsController extends Controller
 		$user->save();
 		
 		Session::flash("flash_notification", [
-			"level"=>"success",
-			"message"=>"Profil berhasil diubah"
-		]);
-		return redirect('settings/profile');
+            "level"=>"success",
+            "message"=>"Profil Berhasil Diubah"
+            ]);
+        return redirect('settings/profile');
 	}
 
 	public function editPassword()

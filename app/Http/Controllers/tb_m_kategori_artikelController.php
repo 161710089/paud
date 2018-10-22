@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tb_s_sekolah;
 use App\tb_m_kategori_artikel;
+use Session;
 class tb_m_kategori_artikelController extends Controller
 {
     /**
@@ -42,7 +43,10 @@ class tb_m_kategori_artikelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+
+            
+
         $request->validate([
             
             'kategori' => 'required|max:255|unique:tb_m_kategori_galleries',
@@ -52,6 +56,12 @@ class tb_m_kategori_artikelController extends Controller
         $tb_m_kategori_artikel->kategori = $request->kategori;
         $tb_m_kategori_artikel->slug = str_slug($request->kategori,'-');
         
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Membuat $tb_m_kategori_artikel->judul"
+        ]);
+
+
         $tb_m_kategori_artikel->save();
         
     
@@ -91,7 +101,10 @@ class tb_m_kategori_artikelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+
+            
+
         $request->validate([
             
             'kategori' => 'required|max:255|unique:tb_m_kategori_galleries',
@@ -100,6 +113,11 @@ class tb_m_kategori_artikelController extends Controller
         $tb_m_kategori_artikel->kategori = $request->kategori;
         $tb_m_kategori_artikel->slug = str_slug($request->kategori,'-');
         
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil menyimpan $tb_m_kategori_artikel->judul"
+        ]);
+
 
         $tb_m_kategori_artikel->save();
         
@@ -118,6 +136,12 @@ class tb_m_kategori_artikelController extends Controller
         //
     }
     function deleteKategoriArtikelRecord($id){
+Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"kategri Artikel Berhasil Dihapus"
+            ]);
+            
+
         tb_m_kategori_artikel::where('id',$id)->delete();
     }
 }

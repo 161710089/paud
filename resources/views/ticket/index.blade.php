@@ -1,6 +1,14 @@
 @extends('layouts.admin')
 @section('content')
     <h3 class="page-title">@lang('Ticket')</h3>
+    
+    @if(session()->has('flash_notification.message'))
+<div class="alert alert-{{ session()->get('flash_notification.level') }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  {!! session()->get('flash_notification.message') !!}
+</div>
+@endif
+
     <p>
         <a href="{{ route('ticket.create') }}" class="btn btn-success">@lang('Tambah')</a>
         

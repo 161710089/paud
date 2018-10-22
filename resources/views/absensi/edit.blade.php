@@ -1,95 +1,330 @@
+
+
+
+
 @extends('layouts.admin')
 @section('content')
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
- <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>   --}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js">
+      
+    </script>
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    
+    @foreach($sekolahs as $data)
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Abensi </title>
+    @endforeach
+
 
 <!-- Bootstrap Date-Picker Plugin -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+{{-- Clock Picker --}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clocklet@0.2.3/css/clocklet.css">
+  
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/clocklet@0.2.3/umd/clocklet.js">
+</script>
+<style>
+  .clocklet-color-example { background-color: #dce1e4; border: none; }
+  .clocklet-color-example .clocklet-dial--minute { background-color: #fcf0e8; }
+  .clocklet-color-example .clocklet-hand--minute { background-color: #f5bb95; }
+  .clocklet-color-example .clocklet-tick--minute.clocklet-tick--selected { background-color: #f2a470; }
+  .clocklet-color-example.clocklet--hoverable:not(.clocklet--dragging) .clocklet-tick--minute:hover { background-color: #f5bb95; }
+  .clocklet-color-example .clocklet-dial--hour { background-color: #e9fdf1; }
+  .clocklet-color-example .clocklet-hand--hour { background-color: #98f5bd; }
+  .clocklet-color-example .clocklet-tick--hour.clocklet-tick--selected { background-color: #44ee88; }
+  .clocklet-color-example.clocklet--hoverable:not(.clocklet--dragging) .clocklet-tick--hour:hover { background-color: #98f5bd; }
+  .clocklet-color-example .clocklet-hand-origin { background-color: #f1e369; }
+  .clocklet-color-example .clocklet-ampm::before { background-color: #44eedd; }
+  .clocklet-color-example .clocklet-ampm:hover::before { background-color: #97f5ec; }
+  .clocklet-color-example .clocklet-ampm[data-clocklet-ampm="pm"]::before { background-color: #dd44ee; }
+  .clocklet-color-example .clocklet-ampm[data-clocklet-ampm="pm"]:hover::before { background-color: #eda1f6; }
+</style>
+</body>
+{{--End Clock Picker --}}
+
+<style type="text/css">
+        .container{
+    margin-top:20px;
+}
+.image-preview-input {
+    position: relative;
+  overflow: hidden;
+  margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+      </style>
+
+    
+<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+{{-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> --}}
+{{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
+<!------ Include the above in your HEAD tag ---------->
+
+    
+
+                           <script type="text/javascript">
+                             $(document).on('click', '#close-preview', function(){ 
+    $('.image-preview').popover('hide');
+    // Hover befor close the preview
+    $('.image-preview').hover(
+        function () {
+           $('.image-preview').popover('show');
+        }, 
+         function () {
+           $('.image-preview').popover('hide');
+        }
+    );    
+});
+
+$(function() {
+    // Create the close button
+    var closebtn = $('<button/>', {
+        type:"button",
+        text: 'x',
+        id: 'close-preview',
+        style: 'font-size: initial;',
+    });
+    closebtn.attr("class","close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+        trigger:'manual',
+        html:true,
+        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+        content: "There's no image",
+        placement:'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function(){
+        $('.image-preview').attr("data-content","").popover('hide');
+        $('.image-preview-filename').val("");
+        $('.image-preview-clear').hide();
+        $('.image-preview-input input:file').val("");
+        $(".image-preview-input-title").text("Browse"); 
+    }); 
+    // Create the preview image
+    $(".image-preview-input input:file").change(function (){     
+        var img = $('<img/>', {
+            id: 'dynamic',
+            width:250,
+            height:200
+        });      
+        var file = this.files[0];
+        var reader = new FileReader();
+        // Set preview image into the popover data-content
+        reader.onload = function (e) {
+            $(".image-preview-input-title").text("Change");
+            $(".image-preview-clear").show();
+            $(".image-preview-filename").val(file.name);            
+            img.attr('src', e.target.result);
+            $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+        }        
+        reader.readAsDataURL(file);
+    });  
+});
+                           </script>    
+
+
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> --}}
       {{-- <script src="//code.jquery.com/jquery-1.10.1.min.js"></script> --}}
 
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        {{-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> --}}
-          
-            <div class="page-breadcrumb">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+ <body class="custom">
+   
+             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Edit Absensi</h4>
+                        <h4 class="page-title">Tambah Absensi</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{Route('dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item"><a href="{{Route('absensi.index') }}">Absensi</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"> Edit Absensi</li>
+                                    <li class="breadcrumb-item active" aria-current="page"> Tambah Absensi</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
-<br>             
+<br>
+
+
+    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+   <div class="form-group {{ $errors->has('id_mapel') ? ' has-error' : '' }}">
+                                <label class="control-label">Nama Kelas </label>    
+                                <select name="id_mapel" class="form-select" id="kelas">
+                                <option>Pilih Kelas</option>
+                                @foreach($tb_m_mata_pelajaran as $data)
+                                    <option value="{{ $data->id }}">{{ $data->nama_mata_pelajaran }}</option>
+                                @endforeach
+                        </select>
+                        @if ($errors->has('id_mapel'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('id_mapel') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+    
+                    <div class="form-group {{ $errors->has('id_pengajar') ? ' has-error' : '' }}">
+                                <label class="control-label">Nama Siswa </label>    
+                                <select name="id_pengajar" class="form-select" id="namasis">
+                                <option>Pilih Siswa</option>
+                                @foreach($tb_m_pengajar as $data)
+                                    <option value="{{ $data->id }}">
+                                        {{ $data->nama }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('id_pengajars'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('id_pengajars') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('#kelas').change(function() {
+            $('#namasis').html('');
+            $.ajax({
+                method : 'GET',
+                dataType: 'html',
+                url : 'filter/kelas/' + $(this).val(),
+                success : function(data){
+                    $('#namasis').append(data);
+
+                },
+                error : function() {
+                    $('#namasis').html('Tidak Ada Hasil');
+                }
+
+            });         
+        });
+    });
+</script>
+ --}}
+
+<form action="{{ route('absensi.update',$tb_m_absensi->id) }}" method="post" enctype="multipart/form-data" >
+            <input name="_method" type="hidden" value="PATCH">
+            {{ csrf_field() }}
+
+
+                                        
                                     
 
+{{-- <form method="GET" action="{{ route('absensi.create') }}" class="" role="search" >
+    <label>Nik:</label>
+  <div class="input-group custom-search-form">
+                                        
+        <input type="text" name="search" class="form-control" placeholder="Search ....">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-default-sm">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+
+    </div>
+    
+  
+</form>
+ --}}
+
             
-<form action="{{ route('absensi.update',$tb_m_absensi->id) }}" method="post" enctype="multipart/form-data" >
-			  		<input name="_method" type="hidden" value="PATCH">
-			  		{{ csrf_field() }}
-
- 
-      
-          <form action="{{route('absensi.update',$tb_m_absensi->id)}}" enctype="multipart/form-data" method="post">
-          	<input type="hidden" name="_method" value="PATCH">
-              {{csrf_field()}}
 
 
-<div class="row">
+ <div class="row">
 <div class="col-md-3 col-lg-4" >
   <label>Cari Nik</label>
   <input type="text"  class="form-control" placeholder="Cari Nik......" id="searchNik"> 
               
 </div>
 </div>
+      
+          
+
               
             <div class="row md-3">
-        <div class="col-lg-4 col-md-3">
-          <div class=" {{$errors->has('') ? 'has-error' : ''}}">
+        {{-- <div class="col-md-3 col-lg-4">
+           <div class="form-group {{ $errors->has('id_siswa') ? ' has-error' : '' }}">
+              <label class="control-label">Nama Siswa</label> 
+              <select  name="id_siswa" id="nama" class="form-select" readonly>
+              <option>Pilih Siswa</option>
+              
+              @foreach($tb_m_siswa as $data)
+              <option value="{{ $data->id}}" readonly>{{ $data->nama_lengkap}}</option>
+              @endforeach
+            
+              </select>
+              @if ($errors->has('id_siswa'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('id_siswa') }}</strong>
+                            </span>
+                        @endif
+            </div>
+        </div>
+         --}}
+<div class="col-lg-4 col-md-3">
+          <div class=" {{$errors->has('id_siswa') ? 'has-error' : ''}}">
                 <label >Nama Siswa</label>
         <input class="form-control" type="text" id="nama" value="{{ $tb_m_absensi->tb_m_siswa->nama_lengkap }}" name="" readonly />
-                  @if ($errors->has(''))
-                  <span class="help-blocks">
-                    <strong>{{$errors->first('')}}</strong>
-                  </span>
-                @endif
-              </div>
-        </div>
-
-          <div class=" {{$errors->has('id_siswa') ? 'has-error' : ''}}">
-        <input class="" type="hidden" id="id" name="id_siswa" readonly />
                   @if ($errors->has('id_siswa'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('id_siswa')}}</strong>
                   </span>
                 @endif
               </div>
+        </div>
+
+          
+        <input class="" type="hidden" id="id" value="{{ $tb_m_absensi->tb_m_siswa->id }}" name="id_siswa" readonly />
+                  
+
 
 <div class="col-md-3 col-lg-4">
 
-<div class="form-group {{ $errors->has('id_pengajar') ? ' has-error' : '' }}">
+<div class=" {{ $errors->has('id_pengajar') ? ' has-error' : '' }}">
               <label class="control-label">Nama Pengajar</label> 
-              <select name="id_pengajar" class="jss-selectize " >
+   <div class="input-group">
+
+              <select name="id_pengajar" class="jss-selectize" >
                 
                 @foreach($tb_m_pengajar as $data)
-                <option value="{{ $data->id }} " 
-                	{{$selectpengajar == $data->id ? 'selected="selected"':'' }}>{{ $data->nama}} 
-</option>
+                <option value="{{ $data->id }}"{{$selectpengajar == $data->id ? 'selected="selected"':'' }}>{{ $data->nama}}</option>
                 @endforeach
               </select>
+                <span class="input-group-btn">
+          <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default-sm">
+            <i class="mdi mdi-plus"></i>
+          </button>
+        </span>
+
+    </div>
+    
               @if ($errors->has('id_pengajar'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('id_pengajar') }}</strong>
@@ -107,11 +342,43 @@
 });</script>
 
 
+{{-- <div class="col-md-3 col-lg-4">
+          <div class=" {{$errors->has('id') ? 'has-error' : ''}}">
+                <label >ID</label>
+                <input type="text"  class="form-control" id="id" 
+                 name="id" required>
+                @if ($errors->has('id'))
+                  <span class="help-blocks">
+                    <strong>{{$errors->first('id')}}</strong>
+                  </span>
+                @endif
+              </div>
+        </div>
+ --}}        
+
+        
+
+
+
+        {{-- <div class="col-md-3 col-lg-4" >   
+          <div class=" {{$errors->has('id_pengajar') ? 'has-error' : ''}}">
+                <label >Nama id_pengajar</label>
+              <select class="itemName" style="width:500px;" name="id_pengajar"></select>  
+              @if ($errors->has('id_pengajar'))
+                  <span class="help-blocks">
+                    <strong>{{$errors->first('id_pengajar')}}</strong>
+                  </span>
+                @endif
+              </div>
+            </div>
+ --}}
 
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('tanggal') ? 'has-error' : ''}}">
                 <label >Tanggal</label>
-                       <input class="form-control date" type="text" value="{{ $tb_m_absensi->tanggal }}" name="tanggal" required>
+                       <input class="form-control date" type="text" id="dateInput" 
+                       onchange="whatsTheDay()" value="{{$tb_m_absensi->tanggal}}" name="tanggal" required>
+                       <p id="err"></p>
                   @if ($errors->has('tanggal'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('tanggal')}}</strong>
@@ -124,7 +391,7 @@
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_mulai') ? 'has-error' : ''}}">
                 <label >Jam Masuk</label>
-        <input class="form-control" type="time" name="jam_mulai" value="{{ $tb_m_absensi->jam_mulai }}" placeholder="HH-MM-SS"  id="timeOfCall" required />
+        <input  class="form-control timepicker" type="text" name="jam_mulai" value="{{ $tb_m_absensi->jam_mulai }}"  id="timeOfCall" required />
                   @if ($errors->has('jam_mulai'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_mulai')}}</strong>
@@ -139,7 +406,7 @@
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_akhir') ? 'has-error' : ''}}">
                 <label >Jam Keluar</label>
-        <input class="form-control" type="time" id="timeOfResponse" value="{{ $tb_m_absensi->jam_akhir }}" name="jam_akhir" />
+        <input  class="form-control timepicker" type="text" value="{{ $tb_m_absensi->jam_akhir }}" id="timeOfResponse"  name="jam_akhir" />
                   @if ($errors->has('jam_akhir'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_akhir')}}</strong>
@@ -150,8 +417,8 @@
 
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('selisih_jam') ? 'has-error' : ''}}">
-                <label >selisih_jam</label>
-        <input class="form-control" type="text" value="{{$tb_m_absensi->selisih_jam}}" id="delay" name="selisih_jam" readonly />
+                <label >Lama Pelajaran</label>
+        <input class="form-control timepicker" type="text" value="{{ $tb_m_absensi->selisih_jam }}"  id="delay" name="selisih_jam" readonly />
                   @if ($errors->has('selisih_jam'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('selisih_jam')}}</strong>
@@ -163,13 +430,14 @@
 <br>
 <div class="row md-3">
            <div class="col-lg-4 col-md-3">
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button id="submit" onclick="sumitable" type="submit" class="btn btn-primary">Tambah</button>
               </div>
 </div>
      
                     
           
 </form>
+
 {{-- <script >
   $(document).ready(function(){
 
@@ -192,30 +460,19 @@
 </script> --}}
 
 
-        <script type="text/javascript">
-            $('#timepicker1').timepicker();
-        </script>
-<script type="text/javascript">
-
-    $('.timepicker').datetimepicker({
-
-        format: 'HH:mm:ss'
-
-    }); 
+        
 
 </script>  
 
 <script>
-    $('.timeOfCall').datetimepicker({
+    $('.timepicker').datetimepicker({
       
         format: 'HH:mm:ss'
+
+
     });
    
-    $('.timeOfResponse').datetimepicker({
-      
-        format: 'HH:mm:ss'
-    });
-
+    
 </script>
 
 <script>
@@ -230,7 +487,7 @@
     $('.date').datepicker({  
 
 
-       format: 'yyyy-mm-dd'
+       format: 'yyyy/mm/dd'
 
      });  
 
@@ -250,7 +507,7 @@
       select:function(e,ui){
         $('#nama').val(ui.item.nama);
         $('#id').val(ui.item.id);          
-      }
+            }
     });
 </script>
 
@@ -266,29 +523,42 @@
 
     });
 </script>
-
+{{-- bootstrap-datetimepicker-widget dropdown-menu usetwentyfour bottom --}}
 <script>
 $(document).ready(function(){
-$("input").keyup(function(){
-    var timeOfCall = ($('#timeOfCall').val()),
+ 
+ $('input,body,html,div,span,.page-wrapper,.custom')
+  .on('load change blur mouseover mouseout mouseleave keydown keypress scroll focus resize click keyup mouseenter', function() {
+     var timeOfCall = ($('#timeOfCall').val()),
        
         timeOfResponse = ($('#timeOfResponse').val()),
         hours = timeOfResponse.split(':')[0] - timeOfCall.split(':')[0],
         minutes = timeOfResponse.split(':')[1] - timeOfCall.split(':')[1];
+        second = timeOfResponse.split(':')[2] - timeOfCall.split(':')[2];
+        jam = ' jam ';
+        menit = ' menit ';
     
-    if (timeOfCall <= "12:00:00" && timeOfResponse >= "13:00:00"){
-      a = 1;
-    } else {
-      a = 0;
+    
+    second = second.toString().length<2?'0'+second:second;
+    if(second<0){ 
+        minutes--;
+        second = 60 + second;        
     }
     minutes = minutes.toString().length<2?'0'+minutes:minutes;
     if(minutes<0){ 
         hours--;
         minutes = 60 + minutes;        
     }
+    if (timeOfCall <= timeOfResponse) {
+
     hours = hours.toString().length<2?'0'+hours:hours;
-   
-    $('#delay').val(hours-a+ ':' + minutes);
+    $('#delay').val(hours + jam+  ':'  + minutes +  menit);
+    
+    }
+    else
+      $('#delay').val(00 + jam+  ':'  + 00 +  menit);
+    
+
 });
 });
 </script> 
@@ -399,6 +669,50 @@ jQuery(document).ready(function($){
 
 </script>
  --}}
+
+<script type="text/javascript">
+  function whatsTheDay() {
+var inDat = document.getElementById('dateInput').value;
+var inDate = new Date(inDat)
+    if(inDate.getDay() == 0){ 
+// 0 = sunday , 1 = monday ..etc
+//alert('sunday');
+// do any thing
+document.getElementById('submit').disabled = true;
+document.getElementById('submit').value = 'disabled';
+document.getElementById('err').innerHTML ='Hari Minggu Libur'
+}else{
+//alert('not sunday');
+document.getElementById('submit').value = 'submit';
+document.getElementById('err').innerHTML = 'Hari ini ada Absensi';
+document.getElementById('submit').disabled = false;
+}
+}
+
+ function sumitable(){
+var inDate = document.getElementById('dateInput').valueAsDate;
+if(inDate.getDay() != 0){
+document.forms["myform"].submit();
+}
+}
+</script>
+
+<style type="text/css">
+  input{
+display:block;
+margin:10px;
+width:200px;
+border-radius:15px 0 15px 0;
+border:none;
+padding:5px;
+border:solid 2px green;
+font-size:18px;
+color:green;
+}
+input#submit{
+background:gold;
+}
+</style>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>   
 <script src="{{ asset('filter/jquery.min.js') }}"></script>
@@ -496,5 +810,9 @@ ng.ready( function() {
         };
     });
 });
-</script> --}} @endsection
+</script> --}} 
+
+
+
+@endsection
 

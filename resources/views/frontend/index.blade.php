@@ -549,15 +549,6 @@ Date::setLocale('id');
                 </div>
           
                 @endif
-                @foreach($tb_s_sekolah as $data)
-                @if(count($tb_s_sekolah))
-                            <div class="text float-right">    
-                                    <ul class="info" >
-                                     <li>Modifed By {{ $countFacebook }}</li>                                     
-                                </ul>
-                            </div>
-                @endif
-                @endforeach
                 <!-- News Block -->
                {{--  <div class="news-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
                     <div class="inner-box">

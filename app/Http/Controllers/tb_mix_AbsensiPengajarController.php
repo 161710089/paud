@@ -68,6 +68,11 @@ class tb_mix_AbsensiPengajarController extends Controller
             $uploadSucces =$file->move($destinationPath, $filename);
             $tb_m_pengajar->foto =$filename;
 
+            Session::flash("flash_notification", [
+            "level"=>"success",
+             "message"=>"Berhasil menyimpan $tb_m_pengajar->nama"
+             ]);
+
             
         $tb_m_pengajar->save();
         }

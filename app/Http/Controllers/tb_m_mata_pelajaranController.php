@@ -54,7 +54,11 @@ class tb_m_mata_pelajaranController extends Controller
         $tb_m_mata_pelajaran->nama_mata_pelajaran = $request->nama_mata_pelajaran;
 
         $tb_m_mata_pelajaran->save();
-        
+       
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Membuat $tb_m_mata_pelajaran->nama_mata_pelajaran"
+        ]);
     
 
         return redirect()->route('mata_pelajaran.index');
@@ -129,6 +133,11 @@ class tb_m_mata_pelajaranController extends Controller
 
    
     function deleteMapelRecord($id){
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Mata Pelajaran Berhasil Dihapus"
+            ]);
+            
         tb_m_mata_pelajaran::where('id',$id)->delete();
     }
 

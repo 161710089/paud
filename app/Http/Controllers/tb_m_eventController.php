@@ -49,7 +49,10 @@ class tb_m_eventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {       
+
+             
+
           $request->validate([
             
         'judul' => 'required|max:255|unique:tb_m_events',
@@ -85,6 +88,12 @@ class tb_m_eventController extends Controller
             $tb_m_event->foto =$filename;
 
             }
+
+            Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Membuat Event $tb_m_event->judul"
+        ]);
+
         $tb_m_event->save();
 return redirect()->route('event.index');
     }
@@ -127,7 +136,13 @@ return redirect()->route('event.index');
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {       
+             Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Event Berhasil Diubah"
+            ]);
+            
+
           $request->validate([
             
         'judul' => 'required|max:255',
@@ -178,9 +193,10 @@ return redirect()->route('event.index');
             $tb_m_event->foto = $filename;
             $tb_m_event->save();
         }
+        
         Session::flash("flash_notification", [
         "level"=>"success",
-        "message"=>"Berhasil menyimpan $tb_m_event->nama_lengkap"
+        "message"=>"Berhasil menyimpan Event $tb_m_event->judul"
         ]);
 
         $tb_m_event->save();
@@ -202,6 +218,12 @@ return redirect()->route('event.index');
         return redirect()->route('event.index')->with('success','Pengajar Deleted');
     }
     function deleteEventRecord($id){
+
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Event Berhasil Dihapus"
+            ]);
+            
         tb_m_event::where('id',$id)->delete();
     }
 }

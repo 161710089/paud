@@ -15,7 +15,7 @@ class CreateTbMKategoriArtikelsTable extends Migration
     {
         Schema::create('tb_m_kategori_artikels', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kategori');
+            $table->string('kategori')->unique();
             $table->string('slug');
             $table->timestamps();
         });

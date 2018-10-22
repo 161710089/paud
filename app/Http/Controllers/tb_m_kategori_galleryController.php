@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tb_m_kategori_gallery;
 use App\tb_s_sekolah;
+use Session;
 class tb_m_kategori_galleryController extends Controller
 {
     /**
@@ -43,6 +44,11 @@ class tb_m_kategori_galleryController extends Controller
      */
     public function store(Request $request)
     {
+            Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Kategori Gallery Berhasil Dibuat"
+            ]);
+            
         $request->validate([
             
             'kategori' => 'required|max:255|unique:tb_m_kategori_galleries',
@@ -89,7 +95,9 @@ class tb_m_kategori_galleryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+            
+
         $request->validate([
             
             'kategori' => 'required|max:255|unique:tb_m_kategori_galleries',
@@ -100,6 +108,12 @@ class tb_m_kategori_galleryController extends Controller
         $tb_m_kategori_gallery->save();
         
         
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil menyimpan $tb_m_kategori_gallery->judul"
+        ]);
+
+
          return redirect()->route('kategori_gallery.index');
     }
 
@@ -114,6 +128,11 @@ class tb_m_kategori_galleryController extends Controller
         //
     }
     function deleteKategoriGalleryRecord($id){
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Kategori Gallery Berhasil Dihapus"
+            ]);
+            
         tb_m_kategori_gallery::where('id',$id)->delete();
     }
 }

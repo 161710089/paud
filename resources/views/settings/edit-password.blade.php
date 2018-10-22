@@ -19,7 +19,12 @@
                 </div>
             </div>
 			<div class="panel panel-default">
-				
+				  @if(session()->has('flash_notification.message'))
+<div class="alert alert-{{ session()->get('flash_notification.level') }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  {!! session()->get('flash_notification.message') !!}
+</div>
+@endif
 				<div class="panel-body">
 					{!! Form::open(['url' => url('/settings/password'),'method' => 'post', 'class'=>'form-horizontal']) !!}
 						

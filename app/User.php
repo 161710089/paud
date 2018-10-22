@@ -61,4 +61,9 @@ public function tb_m_buy_ticket()
     {
         return $this->hasMany('App\tb_m_buy_ticket');
     }
+public function tb_m_pendapatUser()
+    {
+        return $this->hasMany('App\tb_m_pendapat');
+    }
+
 }

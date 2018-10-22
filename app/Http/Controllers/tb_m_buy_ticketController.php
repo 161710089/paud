@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tb_s_sekolah;
 use App\tb_m_buy_ticket;
+use Session;
 
 class tb_m_buy_ticketController extends Controller
 {
@@ -92,6 +93,11 @@ class tb_m_buy_ticketController extends Controller
         return redirect()->route('pembeli_tiket.index');
     }
     function deleteBuyTicketRecord($id){
+            Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Pembeli Tiket Berhasil Dihapus"
+            ]);
+            
         tb_m_buy_ticket::where('id',$id)->delete();
     }
 }

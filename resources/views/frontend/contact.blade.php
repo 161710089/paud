@@ -28,7 +28,7 @@
         <div class="auto-container">
             <h1>Contact Us</h1>
             <ul class="page-breadcrumb">
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li>Contact Us</li>
             </ul>
         </div>
@@ -142,8 +142,11 @@
     </section>
   
     <!--End Contact Form Section -->
-
     <!-- Map Section -->
+    @if($garis_bujurNull<1)
+    @if($garis_lintangNull<1)
+    @if($garis_lintang>0)
+    @if($garis_bujur>0)
                 @foreach($tb_s_sekolah as $data)
     <section class="map-section">
         <div class="auto-container">
@@ -163,6 +166,11 @@
         </div>
     </section>
                 @endforeach
+    @else
+    @endif
+    @endif
+    @endif
+    @endif
     <!--End Map Section -->
 
 

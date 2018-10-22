@@ -13,4 +13,8 @@ public $timestamp = false;
 public function tb_s_sekolah() {
 		return $this->hasOne('App\tb_s_sekolah', 'id_sekolah');
 	}
+
+public function tb_s_pendapat() {
+		return $this->hasOne('App\tb_s_pendapat', 'id_pendapat');
+	}
 }

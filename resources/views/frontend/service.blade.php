@@ -1,5 +1,10 @@
 @extends('layouts.user')
 @section('content')
+   
+    @foreach($tb_s_sekolah as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Service </title>
+    @endforeach
+
     <section class="page-title">
         <div class="auto-container">
             <h1>Services</h1>

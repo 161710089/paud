@@ -47,7 +47,9 @@ class tb_m_galleryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+            
+
          $tb_m_gallery = new tb_m_gallery;
         $tb_m_gallery->judul = $request->judul;
         $tb_m_gallery->id_kategori_gallery = $request->id_kategori_gallery;
@@ -63,6 +65,11 @@ class tb_m_galleryController extends Controller
             $tb_m_gallery->foto =$filename;
 
             
+            Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Membuat $tb_m_gallery->judul"
+        ]);
+
         $tb_m_gallery->save();
         }
     
@@ -106,7 +113,11 @@ class tb_m_galleryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+
+
+            
+
         $request->validate([
             
             'judul' => 'required|max:255',
@@ -141,6 +152,13 @@ class tb_m_galleryController extends Controller
                     }
                 }
             $tb_m_gallery->foto = $filename;
+
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil menyimpan $tb_m_gallery->judul"
+        ]);
+
+
             $tb_m_gallery->save();
         }
         
@@ -162,6 +180,12 @@ class tb_m_galleryController extends Controller
         return redirect()->route('gallery.index')->with('success','Pengajar Deleted');
     }
     function deleteGalleryRecord($id){
+
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Gallery Berhasil Dihapus"
+            ]);
+            
         tb_m_gallery::where('id',$id)->delete();
     }
 }

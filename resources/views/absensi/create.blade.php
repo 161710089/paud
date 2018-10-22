@@ -10,6 +10,11 @@
       
     </script>
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    
+    @foreach($sekolahs as $data)
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Abensi </title>
+    @endforeach
+
 
 <!-- Bootstrap Date-Picker Plugin -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
@@ -383,7 +388,8 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_mulai') ? 'has-error' : ''}}">
                 <label >Jam Masuk</label>
-        <input  class="form-control timepicker" type="time" name="jam_mulai" value="{{ carbon\carbon::now()->format('H:i') }}"  id="timeOfCall" required />
+        <input  class="form-control timepicker" type="text" name="jam_mulai" 
+        value="{{ carbon\carbon::now()->format('H:i') }}"  id="timeOfCall" required />
                   @if ($errors->has('jam_mulai'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_mulai')}}</strong>
@@ -398,7 +404,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_akhir') ? 'has-error' : ''}}">
                 <label >Jam Keluar</label>
-        <input  class="form-control timepicker" type="time" value="{{ carbon\carbon::now()->addHour(2)->format('H:i') }}" id="timeOfResponse"  name="jam_akhir" />
+        <input  class="form-control timepicker" type="text" value="{{ carbon\carbon::now()->addHour(2)->format('H:i') }}" id="timeOfResponse"  name="jam_akhir" />
                   @if ($errors->has('jam_akhir'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_akhir')}}</strong>
@@ -701,7 +707,7 @@ $(function() {
 <script>
 $(document).ready(function(){
  
- $('input,body,html,div,span,.page-wrapper,.glyphicon,.glyphicon-chevron-up')
+ $('input,body,html,div,span,.page-wrapper,.custom')
   .on('load change blur mouseover mouseout mouseleave keydown keypress scroll focus resize click keyup mouseenter', function() {
      var timeOfCall = ($('#timeOfCall').val()),
        
@@ -723,10 +729,15 @@ $(document).ready(function(){
         hours--;
         minutes = 60 + minutes;        
     }
-    if (timeOfCall[1] <= timeOfResponse[1]) {  
+    if (timeOfCall <= timeOfResponse) {
+
     hours = hours.toString().length<2?'0'+hours:hours;
     $('#delay').val(hours + jam+  ':'  + minutes +  menit);
+    
     }
+    else
+      $('#delay').val(00 + jam+  ':'  + 00 +  menit);
+    
 
 });
 });

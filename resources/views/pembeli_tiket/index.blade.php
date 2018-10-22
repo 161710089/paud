@@ -3,9 +3,16 @@
 @section('content')
     <h3 class="page-title">@lang('Pembeli Ticket')</h3>
     
+    
     <div class="panel panel-default">
         
-        <div class="panel-body table-responsive">
+    @if(session()->has('flash_notification.message'))
+<div class="alert alert-{{ session()->get('flash_notification.level') }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  {!! session()->get('flash_notification.message') !!}
+</div>
+@endif
+    <div class="panel-body table-responsive">
             <table class="table table-bordered  {{ count($tb_m_buy_ticket) > 0 ? 'datatable' : '' }} ">
                 <thead>
                     <tr>

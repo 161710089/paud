@@ -81,7 +81,7 @@ Route::get('/delete-kategori-gallery/{id}', 'tb_m_kategori_galleryController@del
 Route::get('/delete-kategori-artikel/{id}', 'tb_m_kategori_artikelController@deleteKategoriArtikelRecord');
 Route::get('/delete-mapel/{id}', 'tb_m_mata_pelajaranController@deleteMapelRecord');
 Route::get('/delete-pengajar/{id}', 'tb_m_pengajarController@deletePengajarRecord');
-Route::get('/delete-sekolah/{id}', 'tb_s_sekolahController@destroy');
+Route::get('/delete-sekolah/{id}', 'tb_s_sekolahController@deleteSekolahRecord');
 Route::get('/delete-siswa/{id}', 'tb_m_siswaController@deleteSiswaRecord');
 Route::get('/delete-service/{id}', 'tb_m_serviceController@deleteServiceRecord');
 Route::get('/delete-buy-ticket/{id}', 'tb_m_buy_ticketController@deleteBuyTicketRecord');

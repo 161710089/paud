@@ -35,7 +35,7 @@ class tb_m_artikelController extends Controller
           $tb_m_artikel =  tb_m_artikel::all();
           $sekolahs =  tb_s_sekolah::all(); 
           $tb_m_kategori_artikel=tb_m_kategori_artikel::all();
-       
+        
        
         return view('artikel.create',compact('tb_m_artikel','sekolahs','tb_m_kategori_artikel'));
     }
@@ -47,7 +47,13 @@ class tb_m_artikelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {       
+             Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Artikel Berhasil Dibuat"
+            ]);
+            
+
          $request->validate([
             
         'judul' => 'required|max:255|unique:tb_m_artikels',
@@ -73,6 +79,11 @@ class tb_m_artikelController extends Controller
             $destinationPath =public_path().'/img/Fotoartikel/';
             $uploadSucces =$file->move($destinationPath, $filename);
             $tb_m_artikel->foto =$filename;
+        
+        Session::flash("flash_notification", [
+        "level"=>"success",
+        "message"=>"Berhasil Membuat $tb_m_artikel->judul"
+        ]);
 
             
         $tb_m_artikel->save();
@@ -108,6 +119,7 @@ class tb_m_artikelController extends Controller
         $sekolahs =  tb_s_sekolah::all();
         $tb_m_artikel = tb_m_artikel::findOrFail($id);
          $tb_m_kategori_artikel=tb_m_kategori_artikel::all();
+         
        
         return view('artikel.edit',compact('tb_m_artikel','sekolahs','tb_m_kategori_artikel'));  
 
@@ -121,7 +133,9 @@ class tb_m_artikelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+            
+
         $request->validate([
             
         'judul' => 'required|max:255',
@@ -166,7 +180,7 @@ class tb_m_artikelController extends Controller
         }
         Session::flash("flash_notification", [
         "level"=>"success",
-        "message"=>"Berhasil menyimpan $tb_m_artikel->nama_lengkap"
+        "message"=>"Berhasil menyimpan $tb_m_artikel->judul"
         ]);
 
         $tb_m_artikel->save();
@@ -190,6 +204,11 @@ class tb_m_artikelController extends Controller
     }
 
     function deleteArtikelRecord($id){
+        Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Artikel Berhasil Dihapus"
+            ]);
+            
         tb_m_artikel::where('id',$id)->delete();
     }
 }

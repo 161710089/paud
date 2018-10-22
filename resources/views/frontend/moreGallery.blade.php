@@ -1,6 +1,11 @@
 @extends('layouts.user')
 @section('content')
 
+
+    @foreach($tb_s_sekolah as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Gaallery </title>
+    @endforeach
+
     <section class="gallery-section">
         <div class="auto-container">
             <div class="sec-title text-center pink-devider">

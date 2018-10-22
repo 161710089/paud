@@ -8,7 +8,10 @@ use Jenssegers\Date\Date;
 Date::setLocale('id');
 @endphp
 
-    
+    @foreach($tb_s_sekolah as $data)
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel </title>
+    @endforeach
+
 
     <!-- Sidebar Page Container -->
                 <!--Content Side-->

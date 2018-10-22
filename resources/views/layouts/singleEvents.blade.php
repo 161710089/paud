@@ -7,6 +7,10 @@
 <link href="/frontend/css/style.css" rel="stylesheet">
 <link href="/frontend/css/responsive.css" rel="stylesheet">
 
+@foreach($sekolahs as $data)
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/FotoSekolah/'.$data->logo) }}">
+@endforeach
+
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">

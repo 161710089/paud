@@ -27,19 +27,11 @@ class tb_s_contact_usController extends Controller
         $tb_m_gallery=tb_m_gallery::all();
         $tb_m_kategori_gallery=tb_m_kategori_gallery::all();
         $widgetgallery=tb_m_gallery::orderBy('created_at','asc')->paginate(4);
-       
-        $kategori1=tb_m_gallery::whereHas('tb_m_kategori_gallery',function($query) use ($request){
-                        $query->where('kategori','edukasi');
-                    })
-                    ->paginate(3);
-        $kategori2=tb_m_gallery::whereHas('tb_m_kategori_gallery',function($query) use ($request){
-                        $query->where('kategori','menggambar');
-                    })
-                    ->paginate(3);
-        $tb_m_gallery=tb_m_gallery::all();
-        $tb_m_gallery=tb_m_gallery::all();
-        
-        return view('frontend.contact' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','kategori1','kategori2'));   }
+        $garis_lintang=tb_s_maps::whereNull('garis_lintang')->count();
+        $garis_bujur=tb_s_maps::whereNull('garis_bujur')->count();
+                
+
+        return view('frontend.contact' ,compact('tb_m_siswa','tb_m_pengajar','tb_s_sekolah','tb_m_mata_pelajaran','jumlahguru','tb_m_artikel','tb_m_event','tb_m_gallery','tb_m_kategori_gallery','widgetgallery','garis_bujur','garis_lintang'));   }
  
    /**
     * Show the application dashboard.

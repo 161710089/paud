@@ -176,6 +176,11 @@ class tb_m_ticketController extends Controller
     }
 
         function deleteTicketRecord($id){
+            Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Tiket Berhasil Dihapus"
+            ]);
+            
         tb_m_ticket::where('id',$id)->delete();
     }
 

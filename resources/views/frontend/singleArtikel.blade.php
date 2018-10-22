@@ -6,6 +6,11 @@ use Jenssegers\Date\Date;
 Date::setLocale('id');
 @endphp
 
+    @foreach($tb_s_sekolah as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel </title>
+    @endforeach
+
+
      <div class="content-side col-lg-8 col-md-12 col-sm-12">
                     <div class="blog-single">
                         <div class="news-block-two wow fadeIn">

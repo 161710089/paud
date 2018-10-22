@@ -23,6 +23,13 @@
                 </div>
             </div>
          
+@if(session()->has('flash_notification.message'))
+<div class="alert alert-{{ session()->get('flash_notification.level') }} alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  {!! session()->get('flash_notification.message') !!}
+</div>
+@endif
+
                                     
   {{-- <div class="col-md-3 col-lg-auto float-right" >
 <form method="GET" action="siswa" class="" role="search" >
@@ -133,6 +140,13 @@
 
         <div class="panel-heading"><a class="btn btn-secondary"  href="{{ route('siswa.create') }}"><i class="mdi mdi-plus"></i> Tambah data Siswa</a> 
         </div>
+
+           @if(Session::has('success'))
+   <div class="alert alert-success">
+     {{ Session::get('success') }}
+   </div>
+@endif
+
         <br>
         <div class="row">
           <table id="zero_config">
