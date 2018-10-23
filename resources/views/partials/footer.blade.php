@@ -9,45 +9,25 @@
                         <div class="footer-column col-lg-4 col-md-12 col-sm-12">
                             <div class="footer-widget testimonial-widget">                            
                                 <div class="single-item-carousel owl-carousel owl-theme">
+                                    @foreach($tb_m_pendapat as $data)
                                     <div class="testimonial-block">
-                                        <h2 class="name">John doue</h2>
+                                        <h2 class="name">{{ $data->nama }}</h2>
                                         <div class="inner-box">
-                                            <div class="thumb"><img src="/frontend/images/resource/thumb-1.jpg" alt=""></div>
-                                            <div class="text">Efficiently enable enabled sources and cost Procces Affective Products. Completely synthesize princi centered sources and cost effective products.</div>
+                                            <div class="thumb">
+                                                <img src="{{ asset('img/Fotopendapat/'.$data->foto) }}" 
+                                                style="min-height:90px; min-width:90px; 
+                                                       max-height:90px; max-width:90px; " alt=""></div>
+                                            <div class="text">{!! $data->pendapat !!}</div>
                                             <ul class="social-links">
-                                                <li><a href="#"><i class="fa fa-facebook-official"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+                                                <li><a href="{{ $data->tb_s_sosmed->Facebook }}"><i class="fa fa-facebook-official"></i></a></li>
+                                                <li><a href="{{ $data->tb_s_sosmed->Instagram }}"><i class="fa fa-instagram"></i></a></li>
+                                                <li><a href="{{ $data->tb_s_sosmed->Twitter }}"><i class="fa fa-twitter-square"></i></a></li>
+                                                <li><a href="{{ $data->tb_s_sosmed->Pinterest }}"><i class="fa fa-pinterest-square"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="testimonial-block">
-                                        <h2 class="name">John doue</h2>
-                                        <div class="inner-box">
-                                            <div class="thumb"><img src="/frontend/images/resource/thumb-1.jpg" alt=""></div>
-                                            <div class="text">Efficiently enable enabled sources and cost Procces Affective Products. Completely synthesize princi centered sources and cost effective products.</div>
-                                            <ul class="social-links">
-                                                <li><a href="#"><i class="fa fa-facebook-official"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-block">
-                                        <h2 class="name">John doue</h2>
-                                        <div class="inner-box">
-                                            <div class="thumb"><img src="/frontend/images/resource/thumb-1.jpg" alt=""></div>
-                                            <div class="text">Efficiently enable enabled sources and cost Procces Affective Products. Completely synthesize princi centered sources and cost effective products.</div>
-                                            <ul class="social-links">
-                                                <li><a href="#"><i class="fa fa-facebook-official"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    @endforeach
+                                    
                                 </div>
                             </div>
                         </div>

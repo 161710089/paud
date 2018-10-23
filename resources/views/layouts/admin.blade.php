@@ -360,6 +360,8 @@ $(function() {
 
                          <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('pembeli_tiket.index')  }}" aria-expanded="false"><i class="far fa-money-bill-alt"></i><span class="hide-menu">Data Pembeli Tiket</span></a></li>
 
+                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('pendapat_user.index')  }}" aria-expanded="false"><i class="mdi mdi-ticket"></i><span class="hide-menu">Komentar Web</span></a></li>
+
                        @endrole
 
                        @role('user')
@@ -372,6 +374,8 @@ $(function() {
 
                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('tiket')  }}" aria-expanded="false"><i class="mdi mdi-ticket"></i><span class="hide-menu">Data Tiket</span></a></li>
 
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('komentar-web')  }}" aria-expanded="false"><i class="mdi mdi-ticket"></i><span class="hide-menu">Berikan Komentar</span></a></li>
                        @endrole
                     </ul>
                 </nav>
@@ -455,9 +459,10 @@ $(function() {
             type="text/javascript">   </script> --}}
     <script src="/js/test.js" 
             type="text/javascript">   </script>
+            @role('admin')
     <script src="{{ asset('/tinymce/tinymce.min.js') }}"></script>
   <script>tinymce.init({ selector:'textarea' });</script>
-
+            @endrole
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.1/vue-resource.min.js"></script>

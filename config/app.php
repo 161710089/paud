@@ -161,7 +161,6 @@ return [
         Laratrust\LaratrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
-        Sarfraznawaz2005\VisitLog\VisitLogServiceProvider::class,
     ],
 
     /*
@@ -214,8 +213,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Date' => Jenssegers\Date\Date::class,
-        'VisitLog' => Sarfraznawaz2005\VisitLog\Facades\VisitLog::class,
-
+      
 
     
 

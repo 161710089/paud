@@ -87,6 +87,8 @@ Route::get('/delete-service/{id}', 'tb_m_serviceController@deleteServiceRecord')
 Route::get('/delete-buy-ticket/{id}', 'tb_m_buy_ticketController@deleteBuyTicketRecord');
 Route::get('/delete-ticket/{id}', 'tb_m_ticketController@deleteTicketRecord');
 Route::get('/delete-user-ticket/{id}', 'userController@deleteUserTicketRecord');
+Route::get('/delete-user-pendapat-user/{id}', 'userController@deletePendapatUserRecord');
+Route::get('/delete-user-ticket/{id}', 'userController@deleteUserTicketRecord');
 
 Route::group(['prefix'=>'admin' ,'middleware'=>['auth','role:admin']], 
 	function (){
@@ -118,6 +120,10 @@ Route::resource('PengajarMapel','tb_mix_PengajarMapelController');
 Route::resource('maps','tb_s_mapController');
 Route::resource('service','tb_m_serviceController');
 Route::resource('pembeli_tiket','tb_m_buy_ticketController');
+Route::resource('pendapat','tb_m_pendapatController');
+Route::resource('pendapat_user','tb_m_pendapatUserController');
+
+Route::post('/pendapat_user/{publish}', 'tb_m_pendapatUserController@Publish')->name('pendapat_user.publish');
 
 
 // Search
@@ -162,6 +168,12 @@ Route::group(['prefix'=>'user' ,'middleware'=>['auth','role:user']],
 Route::get('absensi', 'userController@absensi')->name('absensi');
 Route::get('profile', 'userController@profile')->name('profile');
 Route::get('tiket', 'userController@tiket')->name('tiket');
+Route::get('komentar-web', 'userController@pendapat_user')->name('komentar-web');
+Route::post('komentar-web.store', 'userController@store')->name('komentar-web.store');
+
+
+// Route::resource('komentar-web','tb_m_pendapatUserController');
+
 
 				});
 

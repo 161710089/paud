@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\tb_s_sekolah;
+use App\tb_m_pendapat_user;
 class tb_m_pendapatUserController extends Controller
 {
     /**
@@ -13,7 +14,10 @@ class tb_m_pendapatUserController extends Controller
      */
     public function index()
     {
-        //
+          $sekolahs =  tb_s_sekolah::all();
+          $tb_m_pendapat_user =  tb_m_pendapat_user::orderBy('created_at','desc')->get();
+          
+        return view('pendapat_user.index',compact('sekolahs','tb_m_pendapat_user'));
     }
 
     /**
@@ -34,7 +38,28 @@ class tb_m_pendapatUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Artikel Berhasil Dibuat"
+            ]);
+            
+
+         $request->validate([
+            
+        'pendapat' => 'required|min:3',
+        'id_user' => 'required|max:255',
+        
+
+           ]);
+        $tb_m_artikel = new tb_m_artikel;
+        $tb_m_artikel->pendapat = $request->pendapat;
+        $tb_m_artikel->id_user = $request->id_user;
+        
+
+        $tb_m_artikel->save();
+        
+        
+        return redirect()->route('artikel.index');
     }
 
     /**
@@ -80,5 +105,17 @@ class tb_m_pendapatUserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function Publish($id)
+    {
+        $tb_m_pendapat_user = tb_m_pendapat_user::find($id);
+        if ($tb_m_pendapat_user->status === 1) {
+            $tb_m_pendapat_user->status = 0;
+        } else {
+            $tb_m_pendapat_user->status= 1;
+        }
+        $tb_m_pendapat_user->save();
+        return redirect()->route('pendapat_user.index');
     }
 }

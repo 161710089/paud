@@ -99,7 +99,7 @@ class tb_s_sekolahController extends Controller
 
         Session::flash("flash_notification", [
         "level"=>"success",
-        "message"=>"Berhasil Membuat $tb_m_siswa->nama_sekolah"
+        "message"=>"Berhasil Membuat $tb_s_sekolah->nama_sekolah"
         ]);
 
             

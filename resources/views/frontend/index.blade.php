@@ -74,30 +74,24 @@
 
     <!-- Services Section -->
     
+                    @foreach($tb_m_pendapat_user as $data)
+                    @if($data->status == 1)
+                    <div class="testimonial-block-two">
   <section class="testimonial-section" style="background-image: url(/frontend/images/background/5.jpg);">
         <div class="auto-container">
             <div class="inner-container">
                 <div class="single-item-carousel owl-carousel owl-theme">
                     <!-- Testimonial Block Two -->
-                    <div class="testimonial-block-two">
+                    
                         <div class="inner-box">
-                            <div class="thumb"><img src="/frontend/images/resource/thumb-2.jpg" alt=""></div>
+                            <div class="thumb"><img src="{{ asset('img/Fotosiswa/'.$data->user->tb_m_siswa->foto) }}" 
+                                style="max-height:111px; max-width: 130px; min-height:111px; min-width: 130px; margin-top:7px; alt=""></div>
                             <span class="icon flaticon-right-quotes-symbol"></span>
-                            <div class="text">I’m so happy to found Enfant. Not only is it an incredibly supportive environment for working parents, with flexible daycare options, but the teachers are also so caring and patient with the children.</div>
+                            <div class="text">{{ $data->pendapat }}</div>
                             <div class="info">
-                                <div class="name">John Doue - <span class="designation"> Teachers</span></div>
-                            </div> 
-                        </div>
-                    </div>
+                                <div class="name">{{ $data->user->name }} - 
 
-                    <!-- Testimonial Block Two -->
-                    <div class="testimonial-block-two">
-                        <div class="inner-box">
-                            <div class="thumb"><img src="/frontend/images/resource/thumb-2.jpg" alt=""></div>
-                            <span class="icon flaticon-right-quotes-symbol"></span>
-                            <div class="text">I’m so happy to found Enfant. Not only is it an incredibly supportive environment for working parents, with flexible daycare options, but the teachers are also so caring and patient with the children.</div>
-                            <div class="info">
-                                <div class="name">John Doue - <span class="designation"> Teachers</span></div>
+                                <span class="designation">Siswa</span></div>
                             </div> 
                         </div>
                     </div>
@@ -105,6 +99,9 @@
             </div>
         </div>
     </section>
+                    @endif
+                    @endforeach
+                    
     @if(count($tb_m_service)>0)        
     <section class="services-section" style="background-image: url(/frontend/images/background/1.jpg);">
         <div class="anim-icons">

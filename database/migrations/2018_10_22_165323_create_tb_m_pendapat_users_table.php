@@ -16,6 +16,7 @@ class CreateTbMPendapatUsersTable extends Migration
         Schema::create('tb_m_pendapat_users', function (Blueprint $table) {
             $table->increments('id');
             $table->text('pendapat');
+            $table->boolean('status');
             $table->unsignedInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('CASCADE');
             
