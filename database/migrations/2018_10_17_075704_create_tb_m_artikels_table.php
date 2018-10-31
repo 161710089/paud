@@ -15,7 +15,7 @@ class CreateTbMArtikelsTable extends Migration
     {
         Schema::create('tb_m_artikels', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('judul');
+            $table->string('judul')->unique();
             $table->string('foto');
             $table->text('deskripsi');
             $table->string('slug');

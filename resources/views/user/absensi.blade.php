@@ -1,21 +1,28 @@
 @extends('layouts.admin')
 @section('content')
+@php
+use Jenssegers\Date\Date;
+
+Date::setLocale('id');
+@endphp
 
 <html>
 
 <head>
+    @foreach($sekolahs as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | User | Absensi </title>
+    @endforeach
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SISTEM ABSENSI REAL TIME</title>
-
+  
      <!-- Core CSS - Include with every page -->
-    <link href="/cesese/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="{{ asset('cesese/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 
     {{-- Page-Level Plugin CSS - Tables --}}
-    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('css/plugins/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
 {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> --}}
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>    
@@ -26,7 +33,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
 
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
   
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -74,20 +81,28 @@
   
   
     
+      <br>
       <div class="row md-3">
-        
-        <div class="col-md-5 col-lg-5 col-xlg-2">
-      
-      <label>Dari Tanggal</label>
-      <input type="text" id="time" value="{{ carbon\carbon::createFromDate(2018, 1, 1)->toDateString()}}" 
-      class="form-select date" name="a" required="">
-        </div>
-
-        <div class="col-md-5 col-lg-5 col-xlg-2">
-      <label>Sampai Tanggal</label>
-      <input type="text" id="time2" value="{{ carbon\carbon::tomorrow()->toDateString()}}" 
-      class="form-select date" name="b" required="">
-        </div>
+       
+        <div class="col-md-6 col-lg-6 col-xlg-2">
+    <label>Pilih Bulan </label>
+     <select name="a" class="form-select" >
+                <option>Pilih Bulan</option>
+                <option value="1">Januari </option>
+                <option value="2">Febuari</option>
+                <option value="3">Maret</option>
+                <option value="4">April</option>
+                <option value="5">Mei</option>
+                <option value="6">Juni</option>
+                <option value="7">July</option>
+                <option value="8">Agustus</option>
+                <option value="9">September </option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+                  
+              
+     </select>    </div>
 
       <div class="col-md-2 col-lg-2 col-xlg-2">
         <label class="control-label text-white">.</label>
@@ -99,10 +114,8 @@
       </div>
     </div>
   </form>
+  <br>
 </div>
-  
-
-                              <div class="panel-body">
  
                             <div class="table-responsive">
 
@@ -170,11 +183,6 @@
 <td class="success " rowspan="2" >Detail</td>
 <td colspan="100%" class="text-center success">Pertemuan</td>
 </tr>
-@php
-use Jenssegers\Date\Date;
-
-Date::setLocale('id');
-@endphp
 <tr>
 @php $no = 1; @endphp
 @foreach($tb_m_absensi as $data)
@@ -206,7 +214,7 @@ Date::setLocale('id');
 </tr>
 <tr><td  class="">Lama Mengajar</td>
 @foreach($tb_m_absensi as $data)
-  <td class="text-center">{{Date::parse($data->selisih_jam)->format('H:i') }} menit</td>
+  <td class="text-center">{{$data->selisih_jam }}</td>
 @endforeach
 </tr>
 

@@ -30,13 +30,13 @@
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
 
     @foreach($sekolahs as $data)
-    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel </title>
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel | Create</title>
     @endforeach
 
 

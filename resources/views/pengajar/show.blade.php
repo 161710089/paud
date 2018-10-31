@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 @section('content')
 
+
+	@foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Pengajar | Show </title>
+    @endforeach
+
+	
 	<div class="row">
 		<div class="container">
 	
@@ -47,30 +53,25 @@
 							</div>
 				</div>				
 					
- 	<div class="col-md-6 col-lg-4 col-xlg-3">
-					<div class=" {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
-			  			<label >Jenis Kelamin</label><br>	
-								<input type="radio" class="radio-control" name="jenis_kelamin" 
-								value="Laki-laki" {{ $tb_m_pengajar->jenis_kelamin == 'Laki-laki' ? 'checked' : '' }} disabled>Laki laki&nbsp&nbsp
-								<input type="radio" class="radio-control" name="jenis_kelamin"  
-								value="Perempuan" {{ $tb_m_pengajar->jenis_kelamin == 'Perempuan' ? 'checked' : '' }} disabled>Perempuan&nbsp&nbsp
-								
-			  		@if ($errors->has('jenis_kelamin'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('jenis_kelamin') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
+				<div class="col-md-6 col-lg-4 col-xlg-3">
+					<div class=" {{$errors->has('tempat_lahir') ? 'has-error' : ''}}">
+								<label >Tempat Lahir</label>
+								<input type="text" value="{{ $tb_m_pengajar->tempat_lahir }}" class="form-control" name="tempat_lahir" readonly>
+								@if ($errors->has('tempat_lahir'))
+									<span class="help-blocks">
+										<strong>{{$errors->first('tempat_lahir')}}</strong>
+									</span>
+								@endif
+							</div>
+				</div>
 
 			  	<div class="col-md-6 col-lg-4 col-xlg-3">
-					<div class=" {{$errors->has('ttl') ? 'has-error' : ''}}">
-								<label >Tempat Tanggal Lahir</label>
-								<input type="text" value="{{ $tb_m_pengajar->ttl }}" class="form-control" name="ttl" readonly>
-								@if ($errors->has('ttl'))
+					<div class=" {{$errors->has('tanggal_lahir') ? 'has-error' : ''}}">
+								<label >Tanggal Lahir</label>
+								<input type="text" value="{{ $tb_m_pengajar->tanggal_lahir }}" class="form-control" name="tanggal_lahir" readonly>
+								@if ($errors->has('tanggal_lahir'))
 									<span class="help-blocks">
-										<strong>{{$errors->first('ttl')}}</strong>
+										<strong>{{$errors->first('tanggal_lahir')}}</strong>
 									</span>
 								@endif
 							</div>
@@ -128,22 +129,7 @@
 </div>
 
 
-<div class="col-md-6 col-lg-4 col-xlg-3">					
-  <div class=" {{ $errors->has('foto') ? ' has-error' : '' }}">
-              <label >Foto</label>  
-              <img src="{{ asset('img/Fotopengajar/'.$tb_m_pengajar->foto) }}" class="img-circle" style="max-height:270px; max-width: 270px; margin-top:7px;">
-              @if ($errors->has('foto'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('foto') }}</strong>
-                            </span>
-                        @endif
-            </div>
-        </div>
-
-<div class="col-md-6 col-lg-4 col-xlg-3">
-
-
-			
+				<div class="col-md-6 col-lg-4 col-xlg-3">
 					<div class="form-group {{ $errors->has('id_mapel') ? ' has-error' : '' }}">
 			  			<label class="control-label">Nama Mapel</label>	
 			  			<select  name="id_mapel" class="form-control" disabled>	
@@ -160,9 +146,24 @@
                             </span>
                         @endif
 			  		</div>
-
-			</div>
+				</div>
 			
+			 	<div class="col-md-6 col-lg-4 col-xlg-3">
+					<div class=" {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
+			  			<label >Jenis Kelamin</label><br>	
+								<input type="radio" class="radio-control" name="jenis_kelamin" 
+								value="Laki-laki" {{ $tb_m_pengajar->jenis_kelamin == 'Laki-laki' ? 'checked' : '' }} disabled>Laki laki&nbsp&nbsp
+								<input type="radio" class="radio-control" name="jenis_kelamin"  
+								value="Perempuan" {{ $tb_m_pengajar->jenis_kelamin == 'Perempuan' ? 'checked' : '' }} disabled>Perempuan&nbsp&nbsp
+								
+			  		@if ($errors->has('jenis_kelamin'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('jenis_kelamin') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
 
     </div>
   </div>

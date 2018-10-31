@@ -16,7 +16,7 @@ class CreateTbMServicesTable extends Migration
         Schema::create('tb_m_services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('foto');
-            $table->string('judul');
+            $table->string('judul')->unique();
             $table->text('deskripsi');
             $table->timestamps();
         });

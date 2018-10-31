@@ -2,7 +2,7 @@
 @section('content')
 
 	@foreach($sekolahs as $data)
-    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel </title>
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Artikel | Show</title>
     @endforeach
 
 
@@ -61,7 +61,7 @@
 			  	<div class="col-md-6 col-lg-4 col-xlg-3">
 					<div class=" {{$errors->has('slug') ? 'has-error' : ''}}">
 								<label >Slug</label>
-								<input type="text" value="{{ $tb_m_artikel->slug }}" class="form-control" name="slug" readonly>
+								<input type="hidden" value="{{ $tb_m_artikel->slug }}" class="form-control" name="slug" readonly>
 								@if ($errors->has('slug'))
 									<span class="help-blocks">
 										<strong>{{$errors->first('slug')}}</strong>

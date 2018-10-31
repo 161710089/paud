@@ -134,6 +134,11 @@
 @endif
  --}}
       <br>
+
+      @foreach($sekolahs as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Pendapat </title>
+      @endforeach
+
 <div class="row">
 <table id="zero_config">
 @foreach($tb_m_pendapat as  $data)

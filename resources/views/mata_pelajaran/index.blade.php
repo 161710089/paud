@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 @section('content')
 
+
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Mata Pelajaran </title>
+    @endforeach
+
+
 <div class="row">
     <div class="container">
 
@@ -67,6 +73,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script type="text/javascript">
 function deleteMapel(id){

@@ -45,8 +45,8 @@ class tb_m_serviceController extends Controller
     {
         $request->validate([
             
-            'judul' => 'required|max:255|unique:tb_m_services',
-            'foto' => 'required|max:255',
+            'judul' => 'required|unique:tb_m_services',
+            'foto|max:20048' => 'required',
             'deskripsi' => 'required',
             
            ]);
@@ -114,8 +114,8 @@ class tb_m_serviceController extends Controller
     {
         $request->validate([
             
-            'judul' => 'required|max:255',
-            'foto' => 'required|max:255',
+            'judul' => 'required',
+            'foto|max:20048' => 'required',
             'deskripsi' => 'required',
             
            ]);

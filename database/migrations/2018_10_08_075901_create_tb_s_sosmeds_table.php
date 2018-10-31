@@ -18,6 +18,7 @@ class CreateTbSSosmedsTable extends Migration
             $table->string('Facebook')->nullable();
             $table->string('Instagram')->nullable();
             $table->string('Twitter')->nullable();
+            $table->string('Pinterest')->nullable();
             $table->string('Email')->nullable();
             $table->timestamps();
         });

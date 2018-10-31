@@ -4,18 +4,17 @@
 <meta charset="utf-8">
 <!-- Stylesheets -->
 
-<link href="/frontend/css/bootstrap.css" rel="stylesheet">
-<link href="/frontend/plugins/revolution/css/settings.css" rel="stylesheet" type="text/css"><!-- REVOLUTION SETTINGS STYLES -->
-<link href="/frontend/plugins/revolution/css/layers.css" rel="stylesheet" type="text/css"><!-- REVOLUTION LAYERS STYLES -->
-<link href="/frontend/plugins/revolution/css/navigation.css" rel="stylesheet" type="text/css"><!-- REVOLUTION NAVIGATION STYLES -->
-<link href="/frontend/css/style.css" rel="stylesheet">
-<link href="/frontend/css/responsive.css" rel="stylesheet">
+<link href="{{ asset('frontend/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/plugins/revolution/css/settings.css') }}" rel="stylesheet" type="text/css"><!-- REVOLUTION SETTINGS STYLES -->
+<link href="{{ asset('frontend/plugins/revolution/css/layers.css') }}" rel="stylesheet" type="text/css"><!-- REVOLUTION LAYERS STYLES -->
+<link href="{{ asset('frontend/plugins/revolution/css/navigation.css') }}" rel="stylesheet" type="text/css"><!-- REVOLUTION NAVIGATION STYLES -->
+<link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
 
 @foreach($sekolahs as $data)
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/FotoSekolah/'.$data->logo) }}">
- 
 @endforeach
-
+    
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
@@ -33,7 +32,7 @@
                     <div class="top-left">
                         <ul class="contact-list clearfix">
                             @foreach($tb_s_sekolah as $data) 
-                            <li><a href="\kindergarden.com">info@kindergarden.com</a></li>
+                            <li><a href="{{ route('Home') }}">Info{{ $data->nama_sekolah }}.com</a></li>
                             <li>{{ $data->no_telepon }}</li>
                             @endforeach
                         </ul>
@@ -41,7 +40,7 @@
                  
                     <div class="top-right clearfix ">
                         <ul class="clearfix ">
-                            <li class=""><a class="text-white" href="\login">Sign in</a>  </li>
+                            <li class=""><a class="text-white" href="{{ Route('login') }}">Sign in</a>  </li>
                             
                         </ul>
                     </div>
@@ -103,18 +102,18 @@
                         
                         <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
                             <ul class="navigation clearfix">
-                                <li><a href="/">Home</a></li>
+                                <li><a href="{{ route('Home') }}">Home</a></li>
 
                                 <li><a href="{{ Route('about_us') }}">About Us</a></li>
                                 <li class="dropdown"><a href="#">Pages</a>
                                     <ul>
-                                        <li><a href="service">Services</a></li>
-                                        <li><a href="moreEvent">Event</a></li>
-                                        <li><a href="moreartikel">Artikel</a></li>
+                                        <li><a href="{{ route('service') }}">Services</a></li>
+                                        <li><a href="{{ route('moreEvent') }}">Event</a></li>
+                                        <li><a href="{{ route('MoreArtikel') }}">Artikel</a></li>
 
                                     </ul>
                                 </li> 
-                                <li><a href="moreGallery">Gallery</a></li>
+                                <li><a href="{{ Route('moreGallery') }}">Gallery</a></li>
 								<li><a href="{{ Route('contact') }}">Contact</a></li>
 
                             </ul>
@@ -126,17 +125,19 @@
                     <div class="outer-box">
                         <ul class="social-icon-one">
                             @foreach($tb_s_sekolah as $data)
-                            @if($data->tb_s_sosmed->Facebook>0)
+                            @if($countFacebook<1)
                             <li><a href="{{ $data->tb_s_sosmed->Facebook }}"><i class="fa fa-facebook-official"></i></a></li>
                             @endif
-                            @if($data->tb_s_sosmed->Instagram>0)
+                            @if($countInstagram<1)
                             <li><a href="{{ $data->tb_s_sosmed->Instagram }}"><i class="fa fa-instagram"></i></a></li>
                             @endif
-                            @if($data->tb_s_sosmed->Twitter>0)
+                            @if($countTwitter<1)
                             <li><a href="{{ $data->tb_s_sosmed->Twitter }}"><i class="fa fa-twitter-square"></i></a></li>
                             @endif
+                            @if($countPinterest<1)
+                            <li><a href="{{ $data->tb_s_sosmed->Pinterest }}"><i class="fa fa-pinterest-square"></i></a></li>
+                            @endif
                             @endforeach
-                            {{-- <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -150,7 +151,6 @@
     <!--End Main Header -->
     
 @yield('content')
-
 
 		<!-- Main Footer -->
     <footer class="main-footer">
@@ -174,6 +174,8 @@
                                                        max-height:90px; max-width:90px; " alt=""></div>
                                             <div class="text">{!! $data->pendapat !!}</div>
                                             <ul class="social-links">
+
+
                                                 <li><a href="{{ $data->tb_s_sosmed->Facebook }}"><i class="fa fa-facebook-official"></i></a></li>
                                                 <li><a href="{{ $data->tb_s_sosmed->Instagram }}"><i class="fa fa-instagram"></i></a></li>
                                                 <li><a href="{{ $data->tb_s_sosmed->Twitter }}"><i class="fa fa-twitter-square"></i></a></li>
@@ -239,18 +241,18 @@
                     <div class="footer-social-links">
                         <ul class="social-links">
                         	@foreach($tb_s_sekolah as $data)
-                                @if($data->tb_s_sosmed->Facebook>0)
+                                @if($countFacebook<1)
                             <li><a href="{{ $data->tb_s_sosmed->Facebook }}">Facebook</a></li>
                                 @endif
-                                @if($data->tb_s_sosmed->Facebook>0)
+                                @if($countTwitter<1)
                             <li><a href="{{ $data->tb_s_sosmed->Twitter }}">Twitter</a></li>
                                 @endif
-                                @if($data->tb_s_sosmed->Facebook>0)  
+                                @if($countInstagram<1)  
                             <li><a href="{{ $data->tb_s_sosmed->Instagram }}">Instagram</a></li>
                                 @endif
-                            {{-- <li><a href="#">Pinterest</a></li>
-                            <li><a href="#">Linkedin</a></li>
-                           --}}  
+                                @if($countPinterest<1)
+                            <li><a href="{{ $data->tb_s_sosmed->Pinterest }}">Pinterest</a></li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>
@@ -282,32 +284,33 @@
 </div>
 
 
-<script src="/frontend/js/jquery.js"></script> 
-<script src="/frontend/js/popper.min.js"></script>
-<script src="/frontend/js/bootstrap.min.js"></script>
+<script src="{{ asset('frontend/js/jquery.js') }}"></script> 
+<script src="{{ asset('frontend/js/popper.min.js') }}"></script>
+<script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
 <!--Revolution Slider-->
-<script src="/frontend/plugins/revolution/js/jquery.themepunch.revolution.min.js"></script>
-<script src="/frontend/plugins/revolution/js/jquery.themepunch.tools.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script src="/frontend/plugins/revolution/js/extensions/revolution.extension.video.min.js"></script>
-<script src="/frontend/js/main-slider-script.html"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/jquery.themepunch.tools.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.actions.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.carousel.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.migration.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.navigation.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.parallax.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
+<script src="{{ asset('frontend/plugins/revolution/js/extensions/revolution.extension.video.min.js') }}"></script>
+<script src="{{ asset('frontend/js/main-slider-script.html') }}"></script>
 <!--End Revolution Slider-->
-<script src="/frontend/js/jquery.fancybox.js"></script>
-<script src="/frontend/js/owl.js"></script>
-<script src="/frontend/js/wow.js"></script>
-<script src="/frontend/js/countdown.js"></script>
-<script src="/frontend/js/isotope.js"></script>
-<script src="/frontend/js/appear.js"></script>
-<script src="/frontend/js/script.js"></script>
+<script src="{{ asset('frontend/js/jquery.fancybox.js') }}"></script>
+<script src="{{ asset('frontend/js/owl.js') }}"></script>
+<script src="{{ asset('frontend/js/wow.js') }}"></script>
+<script src="{{ asset('frontend/js/countdown.js') }}"></script>
+<script src="{{ asset('frontend/js/isotope.js') }}"></script>
+<script src="{{ asset('frontend/js/appear.js') }}"></script>
+<script src="{{ asset('frontend/js/script.js') }}"></script>
 
 <!--Start of Tawk.to Script-->
+
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
@@ -320,6 +323,5 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-
 </html>
 

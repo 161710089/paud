@@ -48,20 +48,16 @@ class tb_s_sekolahController extends Controller
     public function store(Request $request)
     {   
             
-            Session::flash("flash_notification", [
-            "level"=>"success",
-            "message"=>"Sekolah Berhasil Dibuat"
-            ]);
             
             
         $request->validate([
             
-            'logo' => 'required|max:255',
-            'nama_sekolah' => 'required|max:255|unique:tb_s_sekolahs',
-            'waktu_buka' => 'required|max:255',
-            'hari_buka' => 'required|max:255',
-            'alamat' => 'required|max:255',
-            'no_telepon' => 'required|max:255',
+            'logo' => 'required|max:20048',
+            'nama_sekolah' => 'required|unique:tb_s_sekolahs',
+            'waktu_buka' => 'required',
+            'hari_buka' => 'required',
+            'alamat' => 'required',
+            'no_telepon' => 'required',
         
         
            ]);
@@ -70,6 +66,7 @@ class tb_s_sekolahController extends Controller
         $tb_s_sosmed->Facebook = $request->Facebook;
         $tb_s_sosmed->Instagram = $request->Instagram;
         $tb_s_sosmed->Twitter = $request->Twitter;
+        $tb_s_sosmed->Pinterest = $request->Pinterest;
         $tb_s_sosmed->Email = $request->Email;
         $tb_s_sosmed->save();
     
@@ -106,7 +103,11 @@ class tb_s_sekolahController extends Controller
         $tb_s_sekolah->save();
         }
     
-
+            Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Berhasil Membuat $tb_s_sekolah->nama_sekolah"
+            ]);
+            
         return redirect()->route('sekolah.index');
      
     }
@@ -153,11 +154,11 @@ class tb_s_sekolahController extends Controller
 
         $request->validate([
             
-            'logo' => 'required|max:255',
-            'nama_sekolah' => 'required|max:255',
-            'waktu_buka' => 'required|max:255',
-            'hari_buka' => 'required|max:255',
-            'alamat' => 'required|max:255',
+            'logo' => 'required|max:20048',
+            'nama_sekolah' => 'required',
+            'waktu_buka' => 'required',
+            'hari_buka' => 'required',
+            'alamat' => 'required',
             
            ]);
         $tb_s_sekolah = tb_s_sekolah::findOrFail($id);
@@ -166,6 +167,8 @@ class tb_s_sekolahController extends Controller
         $tb_s_sekolah->waktu_buka = $request->waktu_buka;
         $tb_s_sekolah->hari_buka = $request->hari_buka;
         $tb_s_sekolah->alamat = $request->alamat;
+        $tb_s_sekolah->no_telepon = $request->no_telepon;
+        
         
         $tb_s_sekolah->save();
        if ($request->hasFile('logo')) {
@@ -206,6 +209,7 @@ class tb_s_sekolahController extends Controller
         $tb_s_sosmed->Facebook = $request->Facebook;
         $tb_s_sosmed->Twitter = $request->Twitter;
         $tb_s_sosmed->Instagram = $request->Instagram;
+        $tb_s_sosmed->Pinterest = $request->Pinterest;
         $tb_s_sosmed->Email = $request->Email;
         $tb_s_sosmed->save();
 

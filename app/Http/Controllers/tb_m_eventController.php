@@ -56,12 +56,12 @@ class tb_m_eventController extends Controller
           $request->validate([
             
         'judul' => 'required|max:255|unique:tb_m_events',
-        'foto' => 'required',
-        'waktu' => 'required|max:255',
-        'waktu_selesai' => 'required|max:255',
-        'alamat' => 'required|max:255',
-        'deskripsi' => 'required|max:255',
-        'ruangan' => 'required|max:255',
+        'foto' => 'required|image|max:20048',
+        'waktu' => 'required|before:waktu_selesai',
+        'waktu_selesai' => 'required|after:waktu',
+        'alamat' => 'required',
+        'deskripsi' => 'required',
+        'ruangan' => 'required',
         
         'id_pengajar' => 'required',
 
@@ -145,14 +145,14 @@ return redirect()->route('event.index');
 
           $request->validate([
             
-        'judul' => 'required|max:255',
-        'foto' => 'required',
-        'waktu' => 'required|max:255',
+        'judul' => 'required',
+        'foto' => 'required|image|max:20048',
+        'waktu' => 'required|before:waktu_selesai',
         'id_pengajar' => 'required',
-        'waktu_selesai' => 'required|max:255',
-        'ruangan' => 'required|max:255',
-        'alamat' => 'required|max:255',
-        'deskripsi' => 'required|max:255',
+        'waktu_selesai' => 'required|after:waktu',
+        'ruangan' => 'required',
+        'alamat' => 'required',
+        'deskripsi' => 'required',
         
 
            ]);

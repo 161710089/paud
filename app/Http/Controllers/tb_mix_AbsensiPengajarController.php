@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\tb_m_pengajar;
+use Session;
+use File;
 class tb_mix_AbsensiPengajarController extends Controller
 {
     /**

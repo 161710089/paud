@@ -17,7 +17,8 @@ class CreateTbMSiswasTable extends Migration
             $table->increments('id');
              $table->string('nama_lengkap');
             $table->string('jenis_kelamin');
-            $table->string('ttl');
+            $table->date('tanggal_lahir');
+            $table->string('tempat_lahir');
             $table->integer('nik')->unique();
             $table->string('nama_panggilan')->nullable();
             $table->string('nama_jalan')->nullable();

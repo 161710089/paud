@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 
+
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Pengajar </title>
+    @endforeach
+
 {{-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script> --}}
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->

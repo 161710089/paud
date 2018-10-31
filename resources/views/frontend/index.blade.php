@@ -62,8 +62,8 @@
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="image-box">
-                            <figure class="image-1 wow fadeInRight"><img src="/frontend/images/resource/image-1.png" alt=""></figure>
-                            <figure class="image-2 wow zoomIn"><img src="/frontend/images/resource/dots.png" alt=""></figure>
+                            <figure class="image-1 wow fadeInRight"><img src="{{ asset('frontend/images/resource/image-1.png') }}" alt=""></figure>
+                            <figure class="image-2 wow zoomIn"><img src="{{ asset('frontend/images/resource/dots.png') }}" alt=""></figure>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     @foreach($tb_m_pendapat_user as $data)
                     @if($data->status == 1)
                     <div class="testimonial-block-two">
-  <section class="testimonial-section" style="background-image: url(/frontend/images/background/5.jpg);">
+  <section class="testimonial-section" style="background-image: url({{ asset('frontend/images/background/5.jpg') }});">
         <div class="auto-container">
             <div class="inner-container">
                 <div class="single-item-carousel owl-carousel owl-theme">
@@ -103,7 +103,7 @@
                     @endforeach
                     
     @if(count($tb_m_service)>0)        
-    <section class="services-section" style="background-image: url(/frontend/images/background/1.jpg);">
+    <section class="services-section" style="background-image: url({{ asset('frontend/images/background/1.jpg') }});">
         <div class="anim-icons">
             <span class="icon icon-sparrow wow shake"></span>
         </div>
@@ -117,7 +117,7 @@
                 <div class="service-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
                         <div class="icon-box"><img src="{{ asset('img/Fotoservice/'.$data->foto) }}" alt=""></div>
-                        <h3><a href="services.html">{{ $data->judul }}</a></h3>
+                        <h3><a href="{{ route('service') }}">{{ $data->judul }}</a></h3>
                         <div class="text">{!! $data->deskripsi !!}.</div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                 <!-- Service Block -->
                 <div class="service-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
-                        <div class="icon-box"><img src="/frontend/images/resource/icon-playing.png" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/resource/icon-playing.png') }}" alt=""></div>
                         <h3><a href="services.html">Active Playing</a></h3>
                         <div class="text">Alterum accommodare duo cu. Ius labore luptatum efficiendi ex, ne vim enim rebum.</div>
                     </div>
@@ -148,7 +148,7 @@
     <!--End Services Section -->
 
     <!-- Fun Fact -->
-    <section class="fun-facts-section" style="background-image:url(/frontend/images/background/2.jpg);">
+    <section class="fun-facts-section" style="background-image:url({{ asset('frontend/images/background/2.jpg') }});">
         <div class="auto-container">
             
             <div class="row clearfix">
@@ -158,7 +158,7 @@
                         <div class="content">
                             <div class="icon-box"><span class="flaticon-abc-squares"></span></div>
                            <div class="count-outer count-box">
-                                <span class="count-text" data-speed="2000" 
+                                <span class="count-text" data-speed="2500" 
                                 data-stop="{{ App\tb_m_siswa::all()->count() }}">0 </span>
                             </div>
                            <div class="counter-title">Jumlah Siswa</div>
@@ -174,7 +174,7 @@
                         <div class="content">
                             <div class="icon-box"><span class="flaticon-stop"></span></div>
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="2000" 
+                                <span class="count-text" data-speed="2500" 
                                 data-stop="300">0 </span>
                             </div>
                             <div class="counter-title">Best Awards Won</div>
@@ -191,7 +191,7 @@
                         <div class="content">
                             <div class="icon-box"><span class="flaticon-smiling-girl"></span></div>
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="2000" data-stop="{{App\tb_m_pengajar::all()->count() }}">0 </span>
+                                <span class="count-text" data-speed="2500" data-stop="{{App\tb_m_pengajar::all()->count() }}">0 </span>
                             </div>
                             <div class="counter-title">Jumlah Guru</div>
                         </div>
@@ -204,10 +204,10 @@
                         <div class="content">
                             <div class="icon-box"><span class="flaticon-edit-2"></span></div>
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="3000" 
-                                data-stop="300">0 </span>
+                                <span class="count-text" data-speed="2500" 
+                                data-stop="{{ App\tb_m_event::all()->count() }}">0 </span>
                             </div>
-                            <div class="counter-title">Pencils Wood</div>
+                            <div class="counter-title">Jumlah Event</div>
                         </div>
                     </div>
                 </div>
@@ -236,7 +236,7 @@
                         @endforeach
                     </ul>
                     <div class="btn-box">
-                        <a href="moreGallery" class="theme-btn btn-style-one">More Gallery</a>
+                        <a href="{{ route('moreGallery') }}" class="theme-btn btn-style-one">More Gallery</a>
                     </div>
                   </div>
 
@@ -304,7 +304,7 @@ Date::setLocale('id');
 @endphp
     <!-- Event Section -->
             @if(count($tb_m_event)>0)
-    <section class="event-section" style="background-image: url(/frontend/images/background/pattern-1.png);">
+    <section class="event-section" style="background-image: url({{ asset('frontend/images/background/pattern-1.png') }});">
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Don't Miss Our <span>Events</span></h2>
@@ -408,7 +408,7 @@ Date::setLocale('id');
 
 
             <div class="link-box text-center">
-                <a href="moreEvent" class="theme-btn btn-style-one">More Event</a>
+                <a href="{{ route('moreEvent') }}" class="theme-btn btn-style-one">More Event</a>
             </div>
         </div>
     </section>
@@ -424,7 +424,7 @@ Date::setLocale('id');
     <!--End Event Section -->
 
     <!-- Next Event -->
-    <section class="next-event" style="background-image: url(/frontend/images/background/4.jpg);">
+    <section class="next-event" style="background-image: url({{ asset('frontend/images/background/4.jpg') }});">
         <div class="auto-container">
             <div class="row clearfix">
                 <!-- Content Column -->
@@ -499,7 +499,7 @@ Date::setLocale('id');
 
     <!-- News Section -->
     @if(count($tb_m_artikel)>0)
-    <section class="news-section" style="background-image: url(/frontend/images/background/pattern-2.png);">
+    <section class="news-section" style="background-image: url({{ asset('frontend/images/background/pattern-2.png') }});">
         <div class="auto-container">
             <div class="sec-title text-center blue-devider">
                 <h2> Our Latest <span>News</span></h2>
@@ -594,12 +594,10 @@ Date::setLocale('id');
 
     
 
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
 @endsection
 
 <!--Scroll to top-->
-<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
-</body>
-</html>
 
 
 

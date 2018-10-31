@@ -17,7 +17,8 @@ class CreateTbMPengajarsTable extends Migration
             $table->increments('id');
             $table->string('nama');
             $table->string('jenis_kelamin');
-            $table->string('ttl');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
             $table->string('agama');
             $table->string('kewarganegaraan');
             $table->string('pendidikan');

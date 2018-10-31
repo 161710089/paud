@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 
+	@foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Siswa | Show </title>
+    @endforeach
+
+
 	<div class="row">
 		<div class="container">
 			<div class="page-breadcrumb">
@@ -57,7 +62,46 @@
 							</div>
 						</div>
 
- 						<div class="col-md-6 col-lg-4 col-xlg-3">
+
+			 			<div class="col-md-6 col-lg-4 col-xlg-3">
+							<div class=" {{$errors->has('nik') ? 'has-error' : ''}}">
+								<label >Nik</label>
+								<input type="text" value="{{ $tb_m_siswa->nik }}" class="form-control" name="nik" readonly>
+								@if ($errors->has('nik'))
+									<span class="help-blocks">
+										<strong>{{$errors->first('nik')}}</strong>
+									</span>
+								@endif
+							</div>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+			  			<div class="col-md-6 col-lg-4 col-xlg-3">
+							<div class=" {{$errors->has('tempat_lahir') ? 'has-error' : ''}}">
+								<label >Tempat Lahir</label>
+								<input type="text" value="{{ $tb_m_siswa->tempat_lahir }}" class="form-control" name="tempat_lahir" readonly>
+								@if ($errors->has('tempat_lahir'))
+									<span class="help-blocks">
+										<strong>{{$errors->first('tempat_lahir')}}</strong>
+									</span>
+								@endif
+							</div>
+						</div>
+
+			  			<div class="col-md-6 col-lg-4 col-xlg-3">
+							<div class=" {{$errors->has('tanggal_lahir') ? 'has-error' : ''}}">
+								<label >Tanggal Lahir</label>
+								<input type="text" value="{{ $tb_m_siswa->tanggal_lahir }}" class="form-control" name="tanggal_lahir" readonly>
+								@if ($errors->has('tanggal_lahir'))
+									<span class="help-blocks">
+										<strong>{{$errors->first('tanggal_lahir')}}</strong>
+									</span>
+								@endif
+							</div>
+						</div>
+
+						<div class="col-md-6 col-lg-4 col-xlg-3">
 							<div class=" {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
 			  					<label >Jenis Kelamin</label><br>	
 								<input type="radio" class="radio-control" name="jenis_kelamin" 
@@ -71,33 +115,22 @@
                         		@endif
                     		</div>
                 		</div>
-					</div>
-
-					<div class="row mb-3">
-			  			<div class="col-md-6 col-lg-4 col-xlg-3">
-							<div class=" {{$errors->has('ttl') ? 'has-error' : ''}}">
-								<label >Tempat Tanggal Lahir</label>
-								<input type="text" value="{{ $tb_m_siswa->ttl }}" class="form-control" name="ttl" readonly>
-								@if ($errors->has('ttl'))
-									<span class="help-blocks">
-										<strong>{{$errors->first('ttl')}}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
-			 	
-			 			<div class="col-md-6 col-lg-4 col-xlg-3">
-							<div class=" {{$errors->has('nik') ? 'has-error' : ''}}">
-								<label >Nik</label>
-								<input type="text" value="{{ $tb_m_siswa->nik }}" class="form-control" name="nik" readonly>
-								@if ($errors->has('nik'))
-									<span class="help-blocks">
-										<strong>{{$errors->first('nik')}}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
-					</div>
+                	</div>
+                	<div class="row md-3">	
+						<div class="col-md-6 col-lg-4 col-xlg-3">					
+  							<div class=" {{ $errors->has('foto') ? ' has-error' : '' }}">
+              					<label >Foto</label>  
+              					<img src="{{ asset('img/Fotosiswa/'.$tb_m_siswa->foto) }}" 
+              					style="max-height:270px; max-width: 270px; margin-top:7px;">
+              					@if ($errors->has('foto'))
+                            		<span class="help-block">
+                                		<strong>{{ $errors->first('foto') }}</strong>
+                            		</span>
+                        		@endif
+            				</div>
+        				</div>
+                	</div>
+			 			
 
 
 <ul class="nav nav-tabs" role="tablist">
@@ -707,18 +740,7 @@
 
 						</div>
 
-						<div class="col-md-6 col-lg-4 col-xlg-3">					
-  							<div class=" {{ $errors->has('foto') ? ' has-error' : '' }}">
-              					<label >Foto</label>  
-              					<img src="{{ asset('img/Fotosiswa/'.$tb_m_siswa->foto) }}" 
-              					style="max-height:270px; max-width: 270px; margin-top:7px;">
-              					@if ($errors->has('foto'))
-                            		<span class="help-block">
-                                		<strong>{{ $errors->first('foto') }}</strong>
-                            		</span>
-                        		@endif
-            				</div>
-        				</div>
+						
     				</div>
   				</div>
 			</div>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class tb_m_siswa extends Model
 {
        protected $table = 'tb_m_siswas';
-protected $fillable = array('nama_lengkap','nama_panggilan','jenis_kelamin','ttl','nik','nama_jalan','nama_desa','							kecamatan','kabupaten','provinsi','agama','kewarganegaraan','anak_ke','
+protected $fillable = array('nama_lengkap','nama_panggilan','jenis_kelamin','tempat_lahir','tanggal_lahir','nik','nama_jalan','nama_desa','							kecamatan','kabupaten','provinsi','agama','kewarganegaraan','anak_ke','
 							jumlah_saudara_kandung','jumlah_saudara_tiri','jumlah_saudara_angkat','status_yatim','
 							bahasa','golongan_darah','penyakit','imunisasi','ciri_ciri','tinggi_berat_badan','
 							jarak_rumah','id_user','id_ortu');

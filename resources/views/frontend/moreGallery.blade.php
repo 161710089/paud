@@ -1,11 +1,13 @@
+<!DOCTYPE html>
 @extends('layouts.user')
 @section('content')
 
 
     @foreach($tb_s_sekolah as $data)
-        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Gaallery </title>
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Gallery </title>
     @endforeach
 
+@if(count($tb_m_gallery)>0)
     <section class="gallery-section">
         <div class="auto-container">
             <div class="sec-title text-center pink-devider">
@@ -48,6 +50,16 @@
             </div>
         </div>
     </section>
+    @else
+    <section class="gallery-section">
+        <div class="auto-container">
+            <div class="sec-title text-center pink-devider">
+                <h2>Belum Ada <span>Gallery</span></h2>
+            </div>
 
+        </div>
+    </section>
+@endif
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
 
 @endsection

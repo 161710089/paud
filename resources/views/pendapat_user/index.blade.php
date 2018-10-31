@@ -1,32 +1,39 @@
 @extends('layouts.admin')
 @section('content')
+
+    @foreach($sekolahs as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Pendapat User </title>
+    @endforeach
+
 @php
 use Jenssegers\Date\Date;
 
 Date::setLocale('id');
 @endphp
 
-    <table class="table table-striped table-bordered table-hover">
-  
-<tr>
-  <td class=" success">No</td>
-  <td class="success" >Nama User</td>
-  <td class="success" >Komentar</td>
-  <td class=" success">Tanggal</td>
-  <th class="success">Status</th>
-  <td class=" success">Action</td>
-
-</tr>
-                    @php $no=1; @endphp
-                    @foreach($tb_m_pendapat_user  as $data )
-                                        
+   <div class="panel-body table-responsive">
+            <table class="table table-bordered  {{ count($tb_m_pendapat_user) > 0 ? 'datatable' : '' }} ">
+                <thead>
                     <tr>
-                        <td>{{ $no++ }}</td>
+                        
+                        <th>@lang('Nama User')</th>
+                        <th>@lang('Pendapat')</th>
+                        <th>@lang('Tanggal')</th>
+                        <th>@lang('Status')</th>
+                        <th>@lang('Action')</th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    @if (count($tb_m_pendapat_user) > 0)
+                        @foreach ($tb_m_pendapat_user as $data)
+                      <tr data-entry-id="{{ $data->id }}">
                         <td class="">{{  $data->user->name}}</td>
                         <td class="">{!! $data->pendapat!!}</td>
                         <td class="">{{Date::parse($data->created_at)->diffForHumans()}}</td>
-                        <td> @if($data->status == 1)
-                                <form action="{{ route('pendapat_user.publish',$data->id) }}" method="post">
+                        <td> 
+                          @if($data->status == 1)
+                                <form action="{{ route('pendapat_user.publish',$data->id)}}" method="post">
                                     @csrf
                                 <button type="submit" class="btn btn-danger">Jangan Publish</button>
                                 </form>
@@ -44,6 +51,11 @@ Date::setLocale('id');
                             
                      </tr>
                      @endforeach
+                     @else
+                        <tr>
+                            <td colspan="10">@lang('No Entries in Table')</td>
+                        </tr>
+                    @endif
 </table>
 
 

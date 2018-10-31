@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Pendapat | Show </title>
+    @endforeach
+
+
    <style type="text/css">
         .container{
     margin-top:20px;
@@ -30,7 +35,7 @@
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
@@ -233,12 +238,12 @@ $(function() {
         </div>
 
         <div class="col-md-6 col-lg-6 col-xlg-6">
-          <div class=" {{$errors->has('p') ? 'has-error' : ''}}">
+          <div class=" {{$errors->has('Pinterest') ? 'has-error' : ''}}">
                 <label >Link p</label>
-                <input type="text" value="{{ $tb_m_pendapat->tb_s_sosmed->p }}" class="form-control" name="p" disabled>
-                @if ($errors->has('p'))
+                <input type="text" value="{{ $tb_m_pendapat->tb_s_sosmed->Pinterest }}" class="form-control" name="p" disabled>
+                @if ($errors->has('Pinterest'))
                   <span class="help-blocks">
-                    <strong>{{$errors->first('p')}}</strong>
+                    <strong>{{$errors->first('Pinterest')}}</strong>
                   </span>
                 @endif
               </div>

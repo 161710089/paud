@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 @extends('layouts.user')
 @section('content')
  @php
@@ -14,7 +15,7 @@ Date::setLocale('id');
         <div class="auto-container">
             <h1>Events</h1>
             <ul class="page-breadcrumb">
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="{{ route('Home') }}">Home</a></li>
                 <li>Events</li>
             </ul>
         </div>
@@ -85,5 +86,5 @@ Date::setLocale('id');
     @endif
     <!--End Event Section -->
 
-  
+  <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
 @endsection

@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 
+	@foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Sekolah | Create </title>
+    @endforeach
+
+
    <style type="text/css">
         .container{
     margin-top:20px;
@@ -30,7 +35,7 @@
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
@@ -282,7 +287,7 @@ $(function() {
 		<div class="row md-3">
 							<div class="col-md-6 col-lg-4 col-xlg-3">
 							<div class="form-group {{$errors->has('Instagram') ? 'has-error' : ''}}">
-								<label class="control-label">Instagram</label>
+								<label class="control-label">Link Instagram</label>
 								<input type="text"  class="form-control" name="Instagram" disabled >
 								@if ($errors->has('Instagram'))
 									<span class="help-blocks">
@@ -294,7 +299,7 @@ $(function() {
 
 						<div class="col-md-6 col-lg-4 col-xlg-3">
 							<div class="form-group {{$errors->has('Twitter') ? 'has-error' : ''}}">
-								<label class="control-label">Twitter</label>
+								<label class="control-label">Link Twitter</label>
 								<input type="text"  class="form-control" name="Twitter" disabled >
 								@if ($errors->has('Twitter'))
 									<span class="help-blocks">
@@ -306,7 +311,7 @@ $(function() {
 	
 						<div class="col-md-6 col-lg-4 col-xlg-3">
 							<div class="form-group {{$errors->has('Facebook') ? 'has-error' : ''}}">
-								<label class="control-label">Facebook</label>
+								<label class="control-label">Link Facebook</label>
 								<input type="text"  class="form-control" name="Facebook" disabled >
 								@if ($errors->has('Facebook'))
 									<span class="help-blocks">
@@ -325,6 +330,18 @@ $(function() {
 								@if ($errors->has('Email'))
 									<span class="help-blocks">
 										<strong>{{$errors->first('Email')}}</strong>
+									</span>
+								@endif
+							</div>
+						</div>
+
+						<div class="col-md-6 col-lg-4 col-xlg-3">
+							<div class="form-group {{$errors->has('Pinterest') ? 'has-error' : ''}}">
+								<label class="control-label">Pinterest</label>
+								<input type="text"  class="form-control" name="Pinterest" disabled >
+								@if ($errors->has('Pinterest'))
+									<span class="help-blocks">
+										<strong>{{$errors->first('Pinterest')}}</strong>
 									</span>
 								@endif
 							</div>
@@ -554,7 +571,7 @@ $(function() {
 							<div class="col-md-6 col-lg-4 col-xlg-3">
 							<div class="form-group {{$errors->has('Email') ? 'has-error' : ''}}">
 								<label class="control-label">Email</label>
-								<input type="text"  class="form-control" name="Email"  >
+								<input type="Email"  class="form-control" name="Email"  >
 								@if ($errors->has('Email'))
 									<span class="help-blocks">
 										<strong>{{$errors->first('Email')}}</strong>

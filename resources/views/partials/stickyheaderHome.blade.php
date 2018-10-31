@@ -13,7 +13,7 @@
                     <nav class="main-menu">
                         <div class="navbar-collapse show collapse clearfix">
                             <ul class="navigation clearfix">
-                                     <li class="current"><a href="\">Home</a></li>
+                                     <li><a href="{{ route('Home') }}">Home</a></li>
                          			 <li><a href="{{ Route('about_us') }}">About Us</a></li>
                                 <li class="dropdown"><a href="#">Pages</a>
                                     <ul>

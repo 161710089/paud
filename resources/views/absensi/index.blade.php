@@ -13,22 +13,24 @@
     @endforeach
 
      <!-- Core CSS - Include with every page -->
-    <link href="/cesese/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="{{ asset('cesese/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 
     {{-- Page-Level Plugin CSS - Tables --}}
-    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('css/plugins/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
 {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> --}}
 <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>    
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+{{-- Bug tanggal --}}
+{{-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> --}}
 
     
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
 
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
   
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -80,9 +82,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                           <br>
-<div class="col-md-auto col-lg-auto  float-left" >
   <form method="GET" action="absensi" class="" role="search" >
-  <div class="input-group custom-search-form">
+{{--   <div class="input-group custom-search-form">
                                         
   <input type="text" name="search" class="form-select" placeholder="Search Nik....">
           <span class="group-btn">
@@ -91,8 +92,64 @@
           </button>
         </span>
 
-    </div><br>
-<ul class="nav nav-tabs">
+    </div>
+ --}}
+
+<div class="col-md-6 col-lg-6  float-left" >
+   <div class="input-group">
+              <label>Cari Nik:</label>
+              <select name="search" class="jss-selectize" required>
+                <option ></option>
+                @foreach($tb_m_siswa as $data)
+                <option value="{{ $data->nik }}"   >{{ $data->nik }}</option>
+                @endforeach
+              </select>
+               {{--  <span class="input-group-btn">
+          <button type="submit" class="btn btn-default-sm">
+            <i class="fa fa-search"></i>
+          </button>
+        </span> --}}
+
+    </div>    
+<button type="submit" class="btn btn-default-sm">Submit</button>
+    </div>
+<div class="col-md-6 col-lg-6" > 
+<div class="row md-6">
+        
+      <label>Pilih Bulan </label>
+     <select name="a" class="form-select" required>
+                <option value="">Pilih Bulan</option>
+                <option value="1">Januari </option>
+                <option value="2">Febuari</option>
+                <option value="3">Maret</option>
+                <option value="4">April</option>
+                <option value="5">Mei</option>
+                <option value="6">Juni</option>
+                <option value="7">July</option>
+                <option value="8">Agustus</option>
+                <option value="9">September </option>
+                <option value="10">Oktober</option>
+                <option value="11">November</option>
+                <option value="12">Desember</option>
+                  
+              
+     </select>
+</div>
+
+{{-- <div class="col-md-6 col-lg-6" > 
+        
+      <label>Pilih Tahun </label>
+     <select name="a" class="form-select" >
+                <option>Pilih Bulan</option>
+                @foreach($tb_m_absensi as $data)
+                <option value="{{ Date::parse($data->tanggal)->format('Y') }}">{{ Date::parse($data->tanggal)->format('Y') }}</option>
+                @endforeach  
+              
+     </select>
+</div>
+
+ --}}</div>
+{{-- <ul class="nav nav-tabs">
   <a data-toggle="collapse" href="#collapse1">Cari Tanggal</a>
 </ul>
 <br>
@@ -120,16 +177,17 @@
            Submit
           </button>
         </span>
-        <br>
+        <br> --}}
   </form>
-</div>
-</div>
-  
+{{-- </div> --}}
+{{-- </div>
+ --}}  
 
 
                               <div class="panel-body">
  
                             <div class="table-responsive">
+    <br>
 
 
  
@@ -146,6 +204,7 @@
            <b>{{ $data->tb_m_siswa->nama_lengkap }}</b><br>
            <?php $header = $data->tb_m_siswa->nama_lengkap ?>
        @endif
+
                                           @endforeach
                                           </td>
   
@@ -284,10 +343,12 @@ Date::setLocale('id');
 </html>
 
 
-                  
+
+              </div>                  
               </div>
             </div>  
         </div>
+      </body>
     
 <script type="text/javascript">
     $('#searchNik').autocomplete({

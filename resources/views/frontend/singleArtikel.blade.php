@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 @extends('layouts.artikel')
 @section('content')
   @php
@@ -19,7 +20,15 @@ Date::setLocale('id');
                                     <li><span class="date">{{Date::parse($tb_m_artikel_single->created_at)->format('d')}}</span>{{Date::parse($tb_m_artikel_single->created_at)->format('M Y')}}</li>
                                     <li><span class="fa fa-user"></span> {{ $tb_m_artikel_single->user->name }}</li>
                                     <li><span class="fa fa-heart"></span> 128 Likes</li>
-                                    <li><span class="fa fa-comment"></span> 32 Comments</li>
+                                    <li>
+<div id="link-block">
+    <a href="singleArtikel/{tb_m_artikel}">Article 1</a>
+    <a href="http://www.pureexample.com/article2.html#disqus_thread"></a>
+    <a href="http://www.pureexample.com/article3.html">Article 3</a>
+    <a href="http://www.pureexample.com/article4.html">Article 4</a>
+    <a href="http://www.pureexample.com/article5.html">Article 5</a>
+</div>
+                                    </li>
                                 </ul>
                                 <h3>{{ $tb_m_artikel_single->judul }}</h3>
                                 <div class="image-box">
@@ -140,7 +149,14 @@ Date::setLocale('id');
                             </form>
                         </div> --}}
 
-
+<script type="text/javascript">
+    $(document).ready(function () {
+    $("div[id='link-block']").find("a").each(function () {
+        var url = $(this).attr("href");
+        $(this).attr("href", url + "#disqus_thread");
+    });
+});
+</script>
 <div id="disqus_thread"></div>
 <script>
 
@@ -166,5 +182,5 @@ s.setAttribute('data-timestamp', +new Date());
 
                     </div>
                 </div>
-@endsection
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
+@endsection

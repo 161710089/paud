@@ -2,10 +2,20 @@
 @section('content')
 
 
-   <link href="/cesese/textarea.css" rel="stylesheet">
+  @foreach($sekolahs as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | User | Komentar Web </title>
+    @endforeach
+
+
+  <link href="{{ asset('cesese/textarea.css') }}" rel="stylesheet">
  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+@php
+use Jenssegers\Date\Date;
+
+Date::setLocale('id');
+@endphp
 
 
 <script>
@@ -29,9 +39,9 @@
 					<tr>
 						<td>{{ $no++ }}</td>
                         <td class="">{!! $data->pendapat!!}</td>
-                        <td class="">{{ $data->created_at}}</td>
+                        <td class="">{{ Date::parse($data->created_at)->diffForHumans()}}</td>
                         <td>
-                            <a class="btn btn-warning" href="{{ route('gallery.edit',$data->id) }}">Edit</a>
+                            <a class="btn btn-warning" href="{{ route('edit_pendapat_user',$data->id) }}">Edit</a>
                         </td>
                         <td class="">
                             
@@ -51,11 +61,7 @@
 		 <div class="well well-lg">
 		 	<h3>Komentar Tentang Web Kami</h3>
               <div class="media1">
-         @foreach($tb_m_siswa as $data)
-        <a class="pull-left" href="#">
-          <img class="media-object img-circle" width="80px" src="{{ asset('img/Fotosiswa/'.$data->foto) }}" style="min-height:65px; min-width:65px;   max-height:65px; max-width:65px; margin-top:7px;" alt="Generic placeholder image">
-        </a>
-        @endforeach
+         
         <div class="media-body">
                                                 
                            <div class="form-group" style="padding:12px;">

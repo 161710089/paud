@@ -16,7 +16,8 @@ class CreateTbMOrtusTable extends Migration
         Schema::create('tb_m_ortus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_ayah')->nullable();
-            $table->string('ttl_ayah')->nullable();
+            $table->date('tanggal_lahir_ayah')->nullable();
+            $table->string('tempat_lahir_ayah')->nullable();
             $table->string('agama_ayah')->nullable();
             $table->string('kewarganegaraan_ayah')->nullable();
             $table->string('pendidikan_ayah')->nullable();
@@ -25,7 +26,8 @@ class CreateTbMOrtusTable extends Migration
             $table->string('alamat_no_telepon_ayah')->nullable();
            
             $table->string('nama_ibu')->nullable();
-            $table->string('ttl_ibu')->nullable();
+            $table->date('tanggal_lahir_ibu')->nullable();
+            $table->string('tempat_lahir_ibu')->nullable();
             $table->string('agama_ibu')->nullable();
             $table->string('kewarganegaraan_ibu')->nullable();
             $table->string('pendidikan_ibu')->nullable();
@@ -34,7 +36,8 @@ class CreateTbMOrtusTable extends Migration
             $table->string('alamat_no_telepon_ibu')->nullable();
            
             $table->string('nama_wali')->nullable();
-            $table->string('ttl_wali')->nullable();
+            $table->date('tanggal_lahir_wali')->nullable();
+            $table->string('tempat_lahir_wali')->nullable();
             $table->string('agama_wali')->nullable();
             $table->string('kewarganegaraan_wali')->nullable();
             $table->string('pendidikan_wali')->nullable();

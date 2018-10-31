@@ -10,7 +10,7 @@ use App\tb_m_buy_ticket;
 use Auth;
 use App\tb_m_pendapat_user;
 use Session;
-
+use Carbon\Carbon;
 class userController extends Controller
 {
     public function absensi(Request $request)
@@ -22,15 +22,17 @@ class userController extends Controller
         $sekolahs=tb_s_sekolah::all();
 		$tb_m_absensi = tb_m_absensi::whereHas('tb_m_siswa',function($query) use ($request){
                         $query->where('id_user',Auth::user()->id);
-                       })->whereBetween('tanggal', [$a, $b])
+                       })->whereMonth('tanggal',$request->a)
 
                             ->orderBy('tanggal', 'asc')
                             ->paginate(2);
         $tb_m_siswa = tb_m_siswa::where('id_user',Auth::user()->id)->get();
+        $awalbulan = new Carbon('first day of this month');
+    
                 
                               
         
-        return view('user.absensi', compact('tb_s_sekolah','tb_m_absensi', 'a','b','sekolahs','tb_m_siswa'));
+        return view('user.absensi', compact('tb_s_sekolah','tb_m_absensi', 'a','b','sekolahs','tb_m_siswa','awalbulan'));
     }
     public function profile(Request $request)
     {
@@ -53,7 +55,8 @@ class userController extends Controller
     {
         $sekolahs =tb_s_sekolah::all();
         $tb_m_siswa = tb_m_siswa::where('id_user',Auth::user()->id)->get();
-        $tb_m_pendapat_user= tb_m_pendapat_user::where('id_user',Auth::user()->id)->paginate(8);
+        $tb_m_pendapat_user= tb_m_pendapat_user::where('id_user',Auth::user()->id)->orderBy('created_at','desc')->paginate(8);
+
         return view('user.pendapat_user', compact('tb_m_siswa','sekolahs','tb_m_pendapat_user'));
     }
 
@@ -61,14 +64,14 @@ class userController extends Controller
     {
           Session::flash("flash_notification", [
             "level"=>"success",
-            "message"=>"Pendapat Berhasil Dikirim"
+            "message"=>"Kometar Berhasil Dikirim"
             ]);
             
 
          $request->validate([
             
         'pendapat' => 'required|min:3',
-        'id_user' => 'required|max:255',
+        'id_user' => 'required',
         
 
            ]);
@@ -84,10 +87,19 @@ class userController extends Controller
         return redirect()->route('komentar-web');
     }
 
+
     function deletePendapatUserRecord($id){
         tb_m_pendapat_user::where('id',$id)->delete();
     }
 
+    public function edit($id)
+    {
+          $sekolahs =  tb_s_sekolah::all();
+          $tb_m_siswa = tb_m_siswa::where('id_user',Auth::user()->id)->get();
+          $tb_m_pendapat_user = tb_m_pendapat_user::findOrFail($id);
+      
+        return view('user.edit_pendapat_user',compact('sekolahs','tb_m_pendapat_user','tb_m_siswa'));
+    }
     
 
 }

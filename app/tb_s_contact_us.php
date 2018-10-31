@@ -8,5 +8,5 @@ class tb_s_contact_us extends Model
 {
 public $table = 'tb_s_contact_uses';
  
-public $fillable = ['name','email','message'];
+public $fillable = ['name','email','subject','no_telepon','message'];
 }

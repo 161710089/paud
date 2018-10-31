@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
     
     @foreach($sekolahs as $data)
-    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Abensi </title>
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Abensi |Edit </title>
     @endforeach
 
 
@@ -78,7 +78,7 @@
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 {{-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> --}}
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
@@ -391,7 +391,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_mulai') ? 'has-error' : ''}}">
                 <label >Jam Masuk</label>
-        <input  class="form-control timepicker" type="text" name="jam_mulai" value="{{ $tb_m_absensi->jam_mulai }}"  id="timeOfCall" required />
+        <input  class="form-control timepicker" type="time" name="jam_mulai" value="{{ $tb_m_absensi->jam_mulai }}"  id="timeOfCall" required />
                   @if ($errors->has('jam_mulai'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_mulai')}}</strong>
@@ -406,7 +406,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_akhir') ? 'has-error' : ''}}">
                 <label >Jam Keluar</label>
-        <input  class="form-control timepicker" type="text" value="{{ $tb_m_absensi->jam_akhir }}" id="timeOfResponse"  name="jam_akhir" />
+        <input  class="form-control timepicker" type="time" value="{{ $tb_m_absensi->jam_akhir }}" id="timeOfResponse"  name="jam_akhir" />
                   @if ($errors->has('jam_akhir'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_akhir')}}</strong>

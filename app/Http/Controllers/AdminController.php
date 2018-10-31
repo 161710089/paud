@@ -9,6 +9,14 @@ use App\tb_m_siswa;
 use App\tb_m_mata_pelajaran;
 use App\tb_s_contact_us;
 use Auth;
+use Jenssegers\Date\Date;
+use Carbon\carbon;
+Date::setLocale('id');
+use App\tb_m_pendapat_user;
+use App\tb_m_event;
+use App\tb_m_artikel;
+use App\tb_m_buy_ticket;
+use App\tb_m_gallery;
 class AdminController extends Controller
 {
     /**
@@ -33,19 +41,37 @@ class AdminController extends Controller
 public function dashboard()
     {
 
-            $tb_m_pengajar = [];
-         $tb_m_mata_pelajaran = [];
-        foreach (tb_m_pengajar::all() as $pengajar) {
-        array_push($tb_m_pengajar, $pengajar->nama);
-        array_push($tb_m_mata_pelajaran, $pengajar->tb_m_mata_pelajaran->count());
+            $tb_m_buy_ticket = [];
+         $tb_m_tiket = [];
+        foreach (tb_m_buy_ticket::all() as $data) {
+        array_push($tb_m_buy_ticket, $data->tb_m_ticket->tb_m_event->judul);
+        array_push($tb_m_tiket, $data->user->count());
                                                                 }
-       $sekolahs =  tb_s_sekolah::all();
-       $jumlahguru= tb_m_pengajar::all()->count();
-       $jumlahsiswa= tb_m_siswa::all()->count();
-      $tb_m_siswa = tb_m_siswa::where('id_user',Auth::user()->id)->get();
-         $tb_s_contact_us =  tb_s_contact_us::all();
 
-        return view('dashboard.index',compact('sekolahs','jumlahguru','jumlahsiswa','tb_m_mata_pelajaran','tb_m_pengajar','tb_m_siswa','tb_s_contact_us'));
+       $countnewsiswa=tb_m_siswa::whereDate( 'created_at' ,'>=', carbon::now()->subMonth(1) )->get()->count();
+       $sekolahs =  tb_s_sekolah::all();
+       $jumlahpengajar= tb_m_pengajar::all()->count();
+       $jumlahsiswa= tb_m_siswa::all()->count();
+       $jumlahevent= tb_m_event::all()->count();
+       $jumlahGallery= tb_m_gallery::all()->count();
+       $jumlahartikel= tb_m_artikel::all()->count();
+       $jumlahtiketterjual=tb_m_buy_ticket::all()->count();
+       $tb_m_siswa = tb_m_siswa::where('id_user',Auth::user()->id)->get();
+       $tb_s_contact_us =  tb_s_contact_us::all();
+       $countPendapatuserpublish =  tb_m_pendapat_user::where('status',1)->get()->count();
+       $countPendapatuserUnpublish =  tb_m_pendapat_user::where('status',0)->get()->count();
+       $countPendapatuser =  tb_m_pendapat_user::all()->count();
+       
+       $tb_s_contact_us =  tb_s_contact_us::all();
+       
+       $januari=tb_m_siswa::all();
+       
+
+       $febuari=tb_m_siswa::whereMonth('created_at',2)->count();
+            
+          $tb_m_pendapat_user =  tb_m_pendapat_user::orderBy('created_at','desc')->paginate(3);
+         
+        return view('dashboard.index',compact('sekolahs','jumlahpengajar','jumlahsiswa','tb_m_mata_pelajaran','tb_m_pengajar','tb_m_siswa','tb_s_contact_us','januari','febuari','maret','april','mei','juni','july','agustus','september','oktober','november','desember','siswa','start','tb_m_pendapat_user','jumlahevent','jumlahartikel','jumlahtiketterjual','tb_m_tiket','tb_m_buy_ticket','countnewsiswa','jumlahGallery','countPendapatuserpublish','countPendapatuserUnpublish','countPendapatuser'));
     }
     /**
      * Show the form for creating a new resource.

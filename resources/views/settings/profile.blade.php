@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 @section('content')
+
+      @foreach($sekolahs as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Settings </title>
+      @endforeach
+
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">

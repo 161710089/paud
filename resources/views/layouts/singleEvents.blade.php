@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 
-<link href="/frontend/css/bootstrap.css" rel="stylesheet">
-<link href="/frontend/css/style.css" rel="stylesheet">
-<link href="/frontend/css/responsive.css" rel="stylesheet">
+<link href="{{ asset('frontend/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
 
 @foreach($sekolahs as $data)
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/FotoSekolah/'.$data->logo) }}">
@@ -33,7 +33,7 @@
                     <div class="top-left">
                         <ul class="contact-list clearfix">
                             @foreach($tb_s_sekolah as $data) 
-                            <li><a href="kindergarden.com">info@kindergarden.com</a></li>
+                            <li><a href="{{ route('Home') }}">Info{{ $data->nama_sekolah }}.com</a></li>
                             <li>{{ $data->no_telepon }}</li>
                             @endforeach
                         </ul>
@@ -103,14 +103,14 @@
                         
                         <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
                             <ul class="navigation clearfix">
-                                <li><a href="/">Home</a></li>
+                                <li><a href="{{ route('Home') }}">Home</a></li>
 
                                 <li><a href="{{ Route('about_us') }}">About Us</a></li>
                                 <li class="dropdown"><a href="#">Pages</a>
                                     <ul>
-                                        <li><a href="service">Services</a></li>
-                                        <li><a href="moreEvent">Event</a></li>
-                                        <li><a href="/moreartikel">Artikel</a></li>
+                                        <li><a href="{{ route('service') }}">Services</a></li>
+                                        <li><a href="{{ route('moreEvent') }}">Event</a></li>
+                                        <li><a href="{{ route('MoreArtikel') }}">Artikel</a></li>
 
                                     </ul>
                                 </li> 
@@ -126,17 +126,19 @@
                     <div class="outer-box">
                         <ul class="social-icon-one">
                             @foreach($tb_s_sekolah as $data)
-                            @if($data->tb_s_sosmed->Facebook>0)
+                            @if($countFacebook<1)
                             <li><a href="{{ $data->tb_s_sosmed->Facebook }}"><i class="fa fa-facebook-official"></i></a></li>
                             @endif
-                            @if($data->tb_s_sosmed->Instagram>0)
+                            @if($countInstagram)
                             <li><a href="{{ $data->tb_s_sosmed->Instagram }}"><i class="fa fa-instagram"></i></a></li>
                             @endif
-                            @if($data->tb_s_sosmed->Twitter>0)
+                            @if($countTwitter)
                             <li><a href="{{ $data->tb_s_sosmed->Twitter }}"><i class="fa fa-twitter-square"></i></a></li>
                             @endif
                             @endforeach
-                            {{-- <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li> --}}
+                            @if($countPinterest)
+                            <li><a href="{{ $data->tb_s_sosmed->Pinterest }}"><i class="fa fa-pinterest-square"></i></a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -163,17 +165,17 @@
 
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
-<script src="/frontend/js/jquery.js"></script> 
-<script src="/frontend/js/jquery-ui.js"></script> 
-<script src="/frontend/js/popper.min.js"></script>
-<script src="/frontend/js/bootstrap.min.js"></script>
-<script src="/frontend/js/jquery.fancybox.js"></script>
-<script src="/frontend/js/owl.js"></script>
-<script src="/frontend/js/wow.js"></script>
-<script src="/frontend/js/countdown.js"></script>
-<script src="/frontend/js/isotope.js"></script>
-<script src="/frontend/js/appear.js"></script>
-<script src="/frontend/js/script.js"></script>
+<script src="{{ asset('frontend/js/jquery.js') }}"></script> 
+<script src="{{ asset('frontend/js/jquery-ui.js') }}"></script> 
+<script src="{{ asset('frontend/js/popper.min.js') }}"></script>
+<script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('frontend/js/jquery.fancybox.js') }}"></script>
+<script src="{{ asset('frontend/js/owl.js') }}"></script>
+<script src="{{ asset('frontend/js/wow.js') }}"></script>
+<script src="{{ asset('frontend/js/countdown.js') }}"></script>
+<script src="{{ asset('frontend/js/isotope.js') }}"></script>
+<script src="{{ asset('frontend/js/appear.js') }}"></script>
+<script src="{{ asset('frontend/js/script.js') }}"></script>
 </body>
 
 <script type="text/javascript">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\tb_s_sekolah;
 use App\tb_m_pendapat_user;
+use Session;
 class tb_m_pendapatUserController extends Controller
 {
     /**
@@ -47,7 +48,7 @@ class tb_m_pendapatUserController extends Controller
          $request->validate([
             
         'pendapat' => 'required|min:3',
-        'id_user' => 'required|max:255',
+        'id_user' => 'required',
         
 
            ]);
@@ -93,7 +94,29 @@ class tb_m_pendapatUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Berhasil Merubah Komentar"
+            ]);
+            
+
+         $request->validate([
+            
+        'pendapat' => 'required|min:3',
+        'id_user' => 'required',
+        
+
+           ]);
+        $tb_m_pendapat_user = tb_m_pendapat_user::findOrFail($id);
+        $tb_m_pendapat_user->pendapat = $request->pendapat;
+        $tb_m_pendapat_user->id_user = $request->id_user;
+        $tb_m_pendapat_user->status = $request->status;
+                
+
+        $tb_m_pendapat_user->save();
+        
+        
+        return redirect()->route('komentar-web');
     }
 
     /**

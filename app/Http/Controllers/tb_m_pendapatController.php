@@ -46,9 +46,9 @@ class tb_m_pendapatController extends Controller
     {
         $request->validate([
             
-            'nama' => 'required|max:255',
+            'nama' => 'required',
             'pendapat' => 'required',
-            'foto' => 'required',
+            'foto|max:20048' => 'required',
                   
       
         ]);
@@ -57,6 +57,7 @@ class tb_m_pendapatController extends Controller
         $tb_s_sosmed->Facebook = $request->Facebook;
         $tb_s_sosmed->Instagram = $request->Instagram;
         $tb_s_sosmed->Twitter = $request->Twitter;
+        $tb_s_sosmed->Pinterest = $request->Pinterest;
         $tb_s_sosmed->save();
     
 
@@ -123,9 +124,9 @@ class tb_m_pendapatController extends Controller
     {
         $this->validate($request, [
         
-            'nama' => 'required|max:255',
-            'pendapat' => 'required|max:255',
-            'foto' => 'required',
+            'nama' => 'required',
+            'pendapat' => 'required',
+            'foto|max:20048' => 'required',
            
         ]);
 
@@ -176,6 +177,8 @@ class tb_m_pendapatController extends Controller
         $tb_s_sosmed->Facebook = $request->Facebook;
         $tb_s_sosmed->Twitter = $request->Twitter;
         $tb_s_sosmed->Instagram = $request->Instagram;
+        $tb_s_sosmed->Pinterest = $request->Pinterest;
+        
         $tb_s_sosmed->save();
    
         

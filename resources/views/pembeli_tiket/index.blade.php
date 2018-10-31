@@ -1,8 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h3 class="page-title">@lang('Pembeli Ticket')</h3>
     
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Pembeli Tiket </title>
+    @endforeach
+
+    <h3 class="page-title">@lang('Pembeli Ticket')</h3>
+
     
     <div class="panel panel-default">
         

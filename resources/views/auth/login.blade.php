@@ -1,6 +1,15 @@
 @extends('layouts.authentic')
 
 @section('content')
+
+@php
+use App\tb_s_sekolah;
+$sekolahs=tb_s_sekolah::all();
+@endphp
+    @foreach($sekolahs as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Login </title>
+    @endforeach
+
   <div class="main-wrapper">
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
@@ -20,10 +29,7 @@
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
             <div class="auth-box bg-dark border-top border-secondary">
                 <div id="loginform">
-                    <div class="text-center p-t-20 p-b-20">
-                        <span class="db"><img src="/assets/images/logo.png" alt="logo" /></span>
-                    </div>
-              
+                    <h3 class="text-white text-center">Silahkan Login !</h3>
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
 

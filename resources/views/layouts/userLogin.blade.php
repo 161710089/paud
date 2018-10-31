@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/FotoSekolah/'.$data->logo) }}">
 @endforeach
    <!-- Custom CSS -->
-    <link href="/assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link href="{{ asset('assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
 <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -48,7 +48,7 @@
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
@@ -118,7 +118,7 @@ $(function() {
 
 
 
-    <link href="/dist/css/style.min.css" rel="stylesheet">
+    <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
     {{-- <link href="/css/app.css" rel="stylesheet"> --}}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
           crossorigin="anonymous" >
@@ -383,14 +383,14 @@ $(function() {
     <!-- ============================================================== -->
     {{-- <script src="/assets/libs/jquery/dist/jquery.min.js"></script> --}}
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="{{ asset('assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
     {{-- <script src="/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script> --}}
-    <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
-    <script src="/dist/js/waves.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/dist/js/sidebarmenu.js"></script>
-    <script src="/dist/js/custom.min.js"></script>
+    <script src="{{ asset('assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/extra-libs/sparkline/sparkline.js') }}"></script>
+    <script src="{{ asset('dist/js/waves.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('dist/js/custom.min.js') }}"></script>
     <!--This page JavaScript -->
     <!-- <script src="/dist/js/pages/dashboards/dashboard1.js"></script> -->
     <!-- Charts js Files -->
@@ -403,15 +403,15 @@ $(function() {
 
 
 
-    <script src="/assets/libs/flot/excanvas.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="/dist/js/pages/chart/chart-page-init.js"></script>
-    <script src="/tabs/responsive-tabs.js" type="text/javascript"></script>
+    <script src="{{ asset('assets/libs/flot/excanvas.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.pie.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.time.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.stack.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.crosshair.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('dist/js/pages/chart/chart-page-init.js') }}"></script>
+    <script src="{{ asset('tabs/responsive-tabs.js" type="text/javascript') }}"></script>
     {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
     {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
    {{--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" 
@@ -452,7 +452,7 @@ $(function() {
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
     <title>Matrix Template - The Ultimate Multipurpose admin template</title>
     <!-- Custom CSS -->
-    <link href="/assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link href="{{ asset('assets/libs/flot/css/float-chart.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
 <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
@@ -486,7 +486,7 @@ $(function() {
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
@@ -556,7 +556,7 @@ $(function() {
 
 
 
-    <link href="/dist/css/style.min.css" rel="stylesheet">
+    <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
     {{-- <link href="/css/app.css" rel="stylesheet"> --}}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
           crossorigin="anonymous" >
@@ -821,14 +821,14 @@ $(function() {
     <!-- ============================================================== -->
     {{-- <script src="/assets/libs/jquery/dist/jquery.min.js"></script> --}}
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="{{ asset('assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
     {{-- <script src="/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script> --}}
-    <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
-    <script src="/dist/js/waves.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/dist/js/sidebarmenu.js"></script>
-    <script src="/dist/js/custom.min.js"></script>
+    <script src="{{ asset('assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/extra-libs/sparkline/sparkline.js') }}"></script>
+    <script src="{{ asset('dist/js/waves.js') }}"></script>
+    <script src="{{ asset('js/app.j') }}s"></script>
+    <script src="{{ asset('dist/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('dist/js/custom.min.js') }}"></script>
     <!--This page JavaScript -->
     <!-- <script src="/dist/js/pages/dashboards/dashboard1.js"></script> -->
     <!-- Charts js Files -->
@@ -841,20 +841,20 @@ $(function() {
 
 
 
-    <script src="/assets/libs/flot/excanvas.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.pie.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.time.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.stack.js"></script>
-    <script src="/assets/libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="/dist/js/pages/chart/chart-page-init.js"></script>
-    <script src="/tabs/responsive-tabs.js" type="text/javascript"></script>
+    <script src="{{ asset('assets/libs/flot/excanvas.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.pie.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.time.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.stack.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot/jquery.flot.crosshair.js') }}"></script>
+    <script src="{{ asset('assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('dist/js/pages/chart/chart-page-init.js') }}"></script>
+    <script src="{{ asset('tabs/responsive-tabs.js') }}" type="text/javascript"></script>
     {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
     {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
    {{--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" 
             type="text/javascript">   </script> --}}
-    <script src="/js/test.js" 
+    <script src="{{ asset('js/test.js') }}" 
             type="text/javascript">   </script>
     <script src="{{ asset('/tinymce/tinymce.min.js') }}"></script>
   <script>tinymce.init({ selector:'textarea' });</script>

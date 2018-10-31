@@ -7,6 +7,11 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
+
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Siswa </title>
+    @endforeach
+
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
@@ -162,6 +167,7 @@
                 </div>
                 <div>
                 <h6 class="text-black text-center"> {{ $data->ttl }}</h6>
+                
                 </div>
               </div>
             </div>

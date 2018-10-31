@@ -1,5 +1,4 @@
-
-
+<!DOCTYPE html>
 @extends('layouts.user')
 @section('content')
 <!DOCTYPE html>
@@ -10,12 +9,10 @@
 @endforeach
 
 <!-- Stylesheets -->
-<link href="/frontend/css/bootstrap.css" rel="stylesheet">
-<link href="/frontend/css/style.css" rel="stylesheet">
-<link href="/frontend/css/responsive.css" rel="stylesheet">
+<link href="{{ asset('frontend/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
 
-<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-<link rel="icon" href="images/favicon.png" type="image/x-icon">
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -28,7 +25,7 @@
         <div class="auto-container">
             <h1>Contact Us</h1>
             <ul class="page-breadcrumb">
-                <li><a href="/">Home</a></li>
+                <li><a href="{{ route('Home') }}">Home</a></li>
                 <li>Contact Us</li>
             </ul>
         </div>
@@ -122,6 +119,21 @@
 </div>
     </div>
 
+<div class="col-lg-6 col-md-12 col-xs-12 form-group">                
+<div class="form-group {{ $errors->has('subject') ? 'has-error' : '' }}">
+{!! Form::text('subject', old('subject'), ['placeholder'=>'Subject']) !!}
+<span class="text-danger">{{ $errors->first('subject') }}</span>
+</div>
+    </div>
+ 
+    <div class="col-lg-6 col-md-12 col-xs-12 form-group">                
+<div class="form-group {{ $errors->has('no_telepon') ? 'has-error' : '' }}">
+{!! Form::text('no_telepon', old('no_telepon'), ['placeholder'=>'No Telepon']) !!}
+<span class="text-danger">{{ $errors->first('no_telepon') }}</span>
+</div>
+    </div>
+
+
     <div class="col-lg-12 col-md-12 col-xs-12 form-group">                
 <div class="form-group {{ $errors->has('message') ? 'has-error' : '' }}">
 {!! Form::textarea('message', old('message'), ['placeholder'=>'Pesan']) !!}
@@ -176,23 +188,23 @@
 
 
                    
-<script src="/frontend/js/jquery.js"></script> 
-<script src="/frontend/js/popper.min.js"></script>
-<script src="/frontend/js/bootstrap.min.js"></script>
-<script src="/frontend/js/jquery.fancybox.js"></script>
-<script src="/frontend/js/owl.js"></script>
-<script src="/frontend/js/wow.js"></script>
-<script src="/frontend/js/countdown.js"></script>
-<script src="/frontend/js/isotope.js"></script>
-<script src="/frontend/js/validate.js"></script>
-<script src="/frontend/js/appear.js"></script>
-<script src="/frontend/js/script.js"></script>
+<script src="{{ asset('frontend/js/jquery.js') }}"></script> 
+<script src="{{ asset('frontend/js/popper.min.js') }}"></script>
+<script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('frontend/js/jquery.fancybox.js') }}"></script>
+<script src="{{ asset('frontend/js/owl.js') }}"></script>
+<script src="{{ asset('frontend/js/wow.js') }}"></script>
+<script src="{{ asset('frontend/js/countdown.js') }}"></script>
+<script src="{{ asset('frontend/js/isotope.js') }}"></script>
+<script src="{{ asset('frontend/js/validate.js') }}"></script>
+<script src="{{ asset('frontend/js/appear.js') }}"></script>
+<script src="{{ asset('frontend/js/script.js') }}"></script>
 <!--Google Map APi Key-->
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyBKS14AnP3HCIVlUpPKtGp7CbYuMtcXE2o"></script>
 <script src="/frontend/js/map-script.js"></script>
 <!--End Google Map APi-->
 
 
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
 @endsection
 <!--Scroll to top-->
-<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>

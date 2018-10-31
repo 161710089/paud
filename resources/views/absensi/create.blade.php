@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
     
     @foreach($sekolahs as $data)
-    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Abensi </title>
+    <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Abensi | Create </title>
     @endforeach
 
 
@@ -76,7 +76,7 @@
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 {{-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> --}}
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
@@ -288,7 +288,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('id_siswa') ? 'has-error' : ''}}">
                 <label >Nama Siswa</label>
-        <input class="form-control" type="text" id="nama" name="" readonly />
+        <input class="form-control" type="text" id="nama" name="" readonly required />
                   @if ($errors->has('id_siswa'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('id_siswa')}}</strong>
@@ -388,8 +388,8 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_mulai') ? 'has-error' : ''}}">
                 <label >Jam Masuk</label>
-        <input  class="form-control timepicker" type="text" name="jam_mulai" 
-        value="{{ carbon\carbon::now()->format('H:i') }}"  id="timeOfCall" required />
+        <input  class="form-control timepicker" type="time" name="jam_mulai" 
+        value="{{ carbon\carbon::now()->format('H:i:s') }}"  id="timeOfCall" required />
                   @if ($errors->has('jam_mulai'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_mulai')}}</strong>
@@ -404,7 +404,7 @@ $(function() {
 <div class="col-lg-4 col-md-3">
           <div class=" {{$errors->has('jam_akhir') ? 'has-error' : ''}}">
                 <label >Jam Keluar</label>
-        <input  class="form-control timepicker" type="text" value="{{ carbon\carbon::now()->addHour(2)->format('H:i') }}" id="timeOfResponse"  name="jam_akhir" />
+        <input  class="form-control timepicker" type="time" value="{{ carbon\carbon::now()->addHour(2)->format('H:i:s') }}" id="timeOfResponse"  name="jam_akhir" />
                   @if ($errors->has('jam_akhir'))
                   <span class="help-blocks">
                     <strong>{{$errors->first('jam_akhir')}}</strong>
@@ -427,9 +427,10 @@ $(function() {
 </div>
 <br>
 <div class="row md-3">
-           <div class="col-lg-4 col-md-3">
-                <button id="submit" onclick="sumitable" type="submit" class="btn btn-primary">Tambah</button>
+              <div class="col-lg-4 col-md-3">
+                <button id="submit" onclick="sumitable" type="submit" class="btn btn-primary">Tambah</button> 
               </div>
+
 </div>
      
                     
@@ -449,15 +450,15 @@ $(function() {
       <div class="modal-body">
                      <form action="{{route('AbsensiPengajar.store')}}" enctype="multipart/form-data" method="post">
               {{csrf_field()}}
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Biografi">Biografi</a></li> &nbsp; &nbsp;
-  <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Foto">Foto</a></li> 
-</ul>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Biografi">Biografi</a></li> &nbsp; &nbsp;
+    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Foto">Foto</a></li> 
+  </ul>
 
-<div class="tab-content">
-  <div id="Biografi" class="tab-pane fade in active">
+  <div class="tab-content">
+    <div id="Biografi" class="tab-pane fade in active">
 
-<div class="row mb-3">
+  <div class="row mb-3">
           <div class="col-md-6 col-lg-4 col-xlg-2">
           <div class=" {{$errors->has('nama') ? 'has-error' : ''}}">
                 <label >Nama</label>
@@ -469,25 +470,25 @@ $(function() {
                 @endif
               </div>
         </div>        
-          <div class="col-md-6 col-lg-4 col-xlg-2">
-          <div class=" {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
-              <label >Jenis Kelamin</label><br> 
-            <input type="radio" class="radio-control" name="jenis_kelamin" value="Laki-laki">Laki-Laki &nbsp;           
-            <input type="radio" class="radio-control" name="jenis_kelamin" value="Perempuan">Perempuan            
-            @if ($errors->has('jenis_kelamin'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('jenis_kelamin') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-          <div class="col-md-6 col-lg-4 col-xlg-2">
-          <div class=" {{$errors->has('ttl') ? 'has-error' : ''}}">
-                <label >Tempat Tanggal Lahir</label>
-                <input type="text" class="form-control" name="ttl" required>
-                @if ($errors->has('ttl'))
+            <div class="col-md-6 col-lg-4 col-xlg-2">
+          <div class=" {{$errors->has('tempat_lahir') ? 'has-error' : ''}}">
+                <label >Tempat Lahir</label>
+                <input type="text" class="form-control" name="tempat_lahir" required>
+                @if ($errors->has('tempat_lahir'))
                   <span class="help-blocks">
-                    <strong>{{$errors->first('ttl')}}</strong>
+                    <strong>{{$errors->first('tempat_lahir')}}</strong>
+                  </span>
+                @endif
+              </div>
+        </div>
+
+          <div class="col-md-6 col-lg-4 col-xlg-2">
+          <div class=" {{$errors->has('tanggal_lahir') ? 'has-error' : ''}}">
+                <label >Tanggal Lahir</label>
+                <input type="text" class="form-control date" name="tanggal_lahir" required>
+                @if ($errors->has('tanggal_lahir'))
+                  <span class="help-blocks">
+                    <strong>{{$errors->first('tanggal_lahir')}}</strong>
                   </span>
                 @endif
               </div>
@@ -542,9 +543,9 @@ $(function() {
               </div>
             </div>
       
-<div class="col-md-6 col-lg-4 col-xlg-2">         
+  <div class="col-md-6 col-lg-4 col-xlg-2">         
           
-<div class="form-group {{ $errors->has('id_mapel') ? ' has-error' : '' }}">
+    <div class="form-group {{ $errors->has('id_mapel') ? ' has-error' : '' }}">
               <label class="control-label">Nama Mapel</label> 
               <select  name="id_mapel" class="form-select" >
               <option>Pilih Mapel</option>
@@ -561,10 +562,23 @@ $(function() {
                         @endif
             </div>
             
-        </div>  
+        </div> 
+        <div class="col-md-6 col-lg-4 col-xlg-2">
+          <div class=" {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
+              <label >Jenis Kelamin</label><br> 
+            <input type="radio" class="radio-control" name="jenis_kelamin" value="Laki-laki">Laki-Laki &nbsp;           
+            <input type="radio" class="radio-control" name="jenis_kelamin" value="Perempuan">Perempuan            
+            @if ($errors->has('jenis_kelamin'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('jenis_kelamin') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+         
       </div>
     </div>
-<div id="Foto" class="tab-pane fade">
+  <div id="Foto" class="tab-pane fade">
       <div class="row md-3">
         
         <div class="col-md-12 col-lg-12 col-xlg-12">         
@@ -595,7 +609,7 @@ $(function() {
                          @endif
                   </div>
             </div>
-</div>
+  </div>
       </div>
      
      </div>    
@@ -737,12 +751,12 @@ $(document).ready(function(){
     }
     else
       $('#delay').val(00 + jam+  ':'  + 00 +  menit);
-    
+
+        
 
 });
 });
 </script> 
-
 
 
 
@@ -851,7 +865,7 @@ jQuery(document).ready(function($){
  --}}
 
 <script type="text/javascript">
-  function whatsTheDay() {
+function whatsTheDay() {
 var inDat = document.getElementById('dateInput').value;
 var inDate = new Date(inDat)
     if(inDate.getDay() == 0){ 
@@ -896,40 +910,7 @@ background:gold;
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>   
 <script src="{{ asset('filter/jquery.min.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#namasis').change(function() {
-            $('#user').html('');
-            $.ajax({
-                method : 'GET',
-                dataType: 'html',
-                url : 'filter/user/' + $(this).val(),
-                success : function(data){
-                    $('#user').append(data);
-                },
-                error : function() {
-                    $('#user').html('Tidak Ada Hasil');
-                }
 
-            });         
-        });
-        $('#class').change(function() {
-            $('#name').html('');
-            $.ajax({
-                method : 'GET',
-                dataType: 'html',
-                url : 'filter/user/' + $(this).val(),
-                success : function(data){
-                    $('#name').append(data);
-                },
-                error : function() {
-                    $('#name').html('Tidak Ada Hasil');
-                }
-
-            });         
-        })
-    });
-</script>
 
 {{-- Start time: <input type="text" id="diff_time1" value=""><br>
 End time: <input type="text" id="diff_time2" value=""><br>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 @extends('layouts.singleEvents')
 @section('content')
  @php
@@ -16,7 +17,7 @@ Date::setLocale('id');
         <div class="auto-container">
             <h1>Events Single</h1>
             <ul class="page-breadcrumb">
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="{{ route('Home') }}">Home</a></li>
                 <li>Events Single</li>
             </ul>
         </div>
@@ -33,8 +34,8 @@ Date::setLocale('id');
                     <div class="event-detail">
                         <div class="upper-box">
                             <h3>{{ $tb_m_event_single->judul }}</h3>
-                            <p>Information without cross-media functiosolutions.Completelyrelationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.  </p>
-                            <div class="image-box wow fadeIn">
+                            {{-- <p>Information without cross-media functiosolutions.Completelyrelationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.  </p>
+                             --}}<div class="image-box wow fadeIn">
                                  <div class="image"><a href="{{ asset('img/Fotoevent/'.$tb_m_event_single->foto) }}" class="lightbox-image" data-fancybox="gallery"><img src="{{ asset('img/Fotoevent/'.$tb_m_event_single->foto) }}" alt=""></a></div>
                                 <div class="info-box">
                                     <ul class="course-info clearfix">
@@ -55,10 +56,7 @@ Date::setLocale('id');
                                     </ul>
                                 </div>
                             </div>
-                            <p>Information without cross-media functiosolutions.Completelyrelationships viaremier niche markets. Professionally cultivate one-to-one customer service with robust ideas.  Quickly aggregate B2B users and worldwide potentialities. Progressively plagiarize resource-leveling e-commerce through resource-leveling core competencies. Dramatically mesh low-risk high-yield alignments before transparent e-tailers.Appropriately empower dynamic leadership skills after business portals. Globally myocardinate interactive supply chains with distinctive quality vectors. Globally revolutionize global sources.</p>
-                            <p>Enthusiastically mesh long-term high-impact infrastructures vis-a-vis efficient customer service. ally fashion wireless leadership rather than prospective experiences. Energistically myocardinate and-mortar testing procedures whereas next-generation manufactured products.</p>
-                            <h4>Event Descriptione</h4>
-                            <p>Wide potentialities. Progressively plagiarize resource-leveling e-commerce through resource-leveling core competencies. Dramatically mesh low-risk high-yield alignments before transparent e-tailers.Appropriately empower dynamic leadership skills after business portals.</p>
+                            {!! $tb_m_event_single->deskripsi !!}
                         </div>
                     @if(count($tb_m_ticket)>0)
                         <div class="event-paticipant">
@@ -73,7 +71,7 @@ Date::setLocale('id');
                                             alt=""></a></div>
                                         <div class="membar-info">
                                             <h5 class="name">{{ $data->user->tb_m_siswa->nama_lengkap }}</h5>
-                                            <span class="course">Art Courses</span>
+                                            {{-- <span class="course">Art Courses</span> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -110,44 +108,25 @@ Date::setLocale('id');
                                 </div> --}}
                             </div>
                         </div>
+                        </div>
                     </div>
-                </div>
-
-                <!--  -->
-
                 <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
                     <aside class="sidebar event-sidebar">
-
-                        <!-- Categories -->
-       {{--                  <div class="sidebar-widget search-box">
-                            <form method="post" action="http://t.commonsupport.com/arans/blog.html">
-                                <div class="form-group">
-                                    <input type="search" name="search-field" value="" placeholder="Serarch Event" required="">
-                                    <button type="submit"><span class="icon flaticon-magnifying-glass"></span></button>
-                                </div>
-                            </form>
-                        </div>
- --}}
-                        <!-- Buy Tickets -->
+                  
                         
-                                        @foreach($tb_m_ticket as $data)
-                        @if(count($tb_m_ticket)<1)
+                        @foreach($tb_m_ticket as $data)
+                        
+                        @if(Carbon\Carbon::now() <= $data->tersedia_tanggal )
                         <div class="sidebar-widget buy-ticket wow fadeInRight">
                             <div class="title">Tiket Belum Tersedia</div>
                         </div>
                         
-
-                        @elseif(Carbon\Carbon::now() <= $data->tersedia_tanggal )
-                        <div class="sidebar-widget buy-ticket wow fadeInRight">
-                            <div class="title">Tiket Belum Tersedia</div>
-                        </div>
-                        
-                        @elseif($data->jumlah_tiket_tersedia <= $bookingticket)
+                        @elseif($data->jumlah_tiket_tersedia < $bookingticket)
                         <div class="sidebar-widget buy-ticket wow fadeInRight">
                             <div class="title">Tiket Habis</div>
                         </div>
                             
-                        @elseif(Carbon\Carbon::yesterday() >= $data->sampai_tanggal )
+                        @elseif(Carbon\Carbon::now() >= $data->sampai_tanggal )
                         <div class="sidebar-widget buy-ticket wow fadeInRight">
                             <div class="title">Tiket Tidak Tersedia</div>
                         </div>
@@ -172,12 +151,10 @@ Date::setLocale('id');
                             <a href="{{Route('contact') }}">ke situs kami </a> untuk memesan tiket ini!</div>
                             </div>
                         </div>
-
                         
                         @endif
-
-                                        @endforeach
-
+                        @endforeach
+                        
                     </aside>
                 </div>
             
@@ -185,6 +162,5 @@ Date::setLocale('id');
         </div>
     </div>
 
-
-                    
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>         
 @endsection

@@ -1,15 +1,16 @@
+<!DOCTYPE html>
 @extends('layouts.user')
 @section('content')
    
     @foreach($tb_s_sekolah as $data)
-        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Service </title>
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Services </title>
     @endforeach
 
     <section class="page-title">
         <div class="auto-container">
             <h1>Services</h1>
             <ul class="page-breadcrumb">
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="{{ route('Home') }}">Home</a></li>
                 <li>Services</li>
             </ul>
         </div>
@@ -43,7 +44,7 @@
     <!-- End Subscribe Section -->
 
     <!-- Services Section -->
-    <section class="services-section" style="background-image: url(/frontend/images/background/1.jpg);">
+    <section class="services-section" style="background-image: url({{ asset('frontend/images/background/1.jpg') }});">
         <div class="anim-icons">
             <span class="icon icon-sparrow wow shake"></span>
         </div>
@@ -69,7 +70,7 @@
     <!--End Services Section -->
 
     <!-- Next Event -->
-    <section class="next-event" style="background-image: url(/frontend/images/background/4.jpg);">
+    <section class="next-event" style="background-image: url({{ asset('frontend/images/background/4.jpg)') }};">
         <div class="auto-container">
             <div class="row clearfix">
                 <!-- Content Column -->

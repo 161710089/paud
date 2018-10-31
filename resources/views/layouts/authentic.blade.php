@@ -9,10 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
-    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
-    <!-- Custom CSS -->
-    <link href="/dist/css/style.min.css" rel="stylesheet">
+    @foreach($sekolahs as $data)
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/FotoSekolah/'.$data->logo) }}">
+    @endforeach
+<!-- Custom CSS -->
+    <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -120,10 +121,10 @@
     <!-- ============================================================== -->
     <!-- All Required js -->
     <!-- ============================================================== -->
-    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->

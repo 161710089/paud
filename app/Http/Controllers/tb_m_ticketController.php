@@ -48,13 +48,20 @@ class tb_m_ticketController extends Controller
      */
     public function store(Request $request)
     {
+
+
+            Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Berhasil Membuat Tiket"
+            ]);
+
            $request->validate([
      
-            'id_event' => 'required|max:255',
+            'id_event' => 'required',
             'jumlah_tiket_tersedia' => 'required|max:11',
-            'tersedia_tanggal' => 'required',
-            'sampai_tanggal' => 'required',
-            'harga' => 'required|max:11',
+            'tersedia_tanggal' => 'required|before:sampai_tanggal',
+            'sampai_tanggal' => 'required|after:tersedia_tanggal',
+            'harga' => 'required|max:15',
             
             
                                 ]);
@@ -112,13 +119,19 @@ class tb_m_ticketController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+            Session::flash("flash_notification", [
+            "level"=>"danger",
+            "message"=>"Berhasil Mengubah Tiket"
+            ]);
+
            $request->validate([
      
-            'id_event' => 'required|max:255',
+            'id_event' => 'required',
             'jumlah_tiket_tersedia' => 'required|max:11',
-            'tersedia_tanggal' => 'required',
-            'sampai_tanggal' => 'required',
-            'harga' => 'required|max:11',
+            'tersedia_tanggal' => 'required|before:sampai_tanggal',
+            'sampai_tanggal' => 'required|after:tersedia_tanggal',
+            'harga' => 'required|max:15',
             
             
                                 ]);

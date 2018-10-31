@@ -1,6 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 
+  @foreach($sekolahs as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | User | Tiket </title>
+    @endforeach
+
+
 	@if ($tb_m_buy_ticket->count() == 0)
 	<center>	
 	<span class="succes">Tidak ada Tiket Yang Dibeli!</span>	
@@ -20,9 +25,12 @@
 						<td>{{ $no++ }}</td>
                         <td class="">{{ $data->tb_m_ticket->tb_m_event->judul  }}</td>
                         <td class="">
-                            
-                        <button onclick="batalBeli('{{$data->id}}')" class="btn btn-danger"></i>Batal</button>
-              
+                         
+                         @if(carbon\carbon::tomorrow() >= $data->tb_m_ticket->sampai_tanggal  )   
+                        <button onclick="batalBeli('{{$data->id}}')" class="btn btn-danger" disabled></i>Batal</button>
+                          @else
+                        <button onclick="batalBeli('{{$data->id}}')" class="btn btn-danger"></i>Batal</button>  
+                          @endif
                         </td>
                      </tr>
                      @endforeach

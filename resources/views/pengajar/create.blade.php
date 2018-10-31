@@ -1,5 +1,12 @@
 @extends('layouts.admin')
 @section('content')
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Pengajar | Create </title>
+    @endforeach
+
 
     <style type="text/css">
         .container{
@@ -30,7 +37,7 @@
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->
 
@@ -140,25 +147,26 @@ $(function() {
 								@endif
 							</div>
 				</div>				
-				<div class="col-md-6 col-lg-4 col-xlg-2">
-					<div class=" {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
-			  			<label >Jenis Kelamin</label><br>	
-						<input type="radio" class="radio-control" name="jenis_kelamin" value="Laki-laki">Laki-Laki &nbsp;			  		
-						<input type="radio" class="radio-control" name="jenis_kelamin" value="Perempuan">Perempuan			  		
-			  		@if ($errors->has('jenis_kelamin'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('jenis_kelamin') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
+				
 			  	<div class="col-md-6 col-lg-4 col-xlg-2">
-					<div class=" {{$errors->has('ttl') ? 'has-error' : ''}}">
-								<label >Tempat Tanggal Lahir</label>
-								<input type="text" class="form-control" name="ttl" required>
-								@if ($errors->has('ttl'))
+          <div class=" {{$errors->has('tempat_lahir') ? 'has-error' : ''}}">
+                <label >Tempat Lahir</label>
+                <input type="text" class="form-control" name="tempat_lahir" required>
+                @if ($errors->has('tempat_lahir'))
+                  <span class="help-blocks">
+                    <strong>{{$errors->first('tempat_lahir')}}</strong>
+                  </span>
+                @endif
+              </div>
+        </div>
+
+          <div class="col-md-6 col-lg-4 col-xlg-2">
+					<div class=" {{$errors->has('tanggal_lahir') ? 'has-error' : ''}}">
+								<label >Tanggal Lahir</label>
+								<input type="text" class="form-control date" name="tanggal_lahir" required>
+								@if ($errors->has('tanggal_lahir'))
 									<span class="help-blocks">
-										<strong>{{$errors->first('ttl')}}</strong>
+										<strong>{{$errors->first('tanggal_lahir')}}</strong>
 									</span>
 								@endif
 							</div>
@@ -272,9 +280,24 @@ $(function() {
 
 
     	</div>
- 				 
- 			
-			
+
+      <div class="row md-3">
+        <div class="col-md-6 col-lg-4 col-xlg-2">
+          <div class=" {{ $errors->has('jenis_kelamin') ? ' has-error' : '' }}">
+              <label >Jenis Kelamin</label><br> 
+            <input type="radio" class="radio-control" name="jenis_kelamin" value="Laki-laki">Laki-Laki &nbsp;           
+            <input type="radio" class="radio-control" name="jenis_kelamin" value="Perempuan">Perempuan            
+            @if ($errors->has('jenis_kelamin'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('jenis_kelamin') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+      </div>
+         <br>
+      
+      
 					
 							<div >
 								<button type="submit" class="btn btn-primary">Tambah</button>
@@ -329,6 +352,18 @@ $(function() {
       </div>
   </div>
 </div>
+
+<script type="text/javascript">
+
+    $('.date').datepicker({  
+
+
+       format: 'yyyy/mm/dd'
+
+     });  
+
+</script> 
+
 @endsection
 
 

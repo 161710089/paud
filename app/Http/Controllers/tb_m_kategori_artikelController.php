@@ -49,7 +49,7 @@ class tb_m_kategori_artikelController extends Controller
 
         $request->validate([
             
-            'kategori' => 'required|max:255|unique:tb_m_kategori_galleries',
+            'kategori' => 'required|unique:tb_m_kategori_galleries',
 
            ]);
         $tb_m_kategori_artikel = new tb_m_kategori_artikel;
@@ -107,7 +107,7 @@ class tb_m_kategori_artikelController extends Controller
 
         $request->validate([
             
-            'kategori' => 'required|max:255|unique:tb_m_kategori_galleries',
+            'kategori' => 'required',
            ]);
         $tb_m_kategori_artikel = tb_m_kategori_artikel::findOrFail($id);
         $tb_m_kategori_artikel->kategori = $request->kategori;

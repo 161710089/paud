@@ -48,7 +48,7 @@ class tb_m_mata_pelajaranController extends Controller
     {
         $request->validate([
             
-            'nama_mata_pelajaran' => 'required|max:255|unique:tb_m_mata_pelajarans',
+            'nama_mata_pelajaran' => 'required|unique:tb_m_mata_pelajarans',
            ]);
         $tb_m_mata_pelajaran = new tb_m_mata_pelajaran;
         $tb_m_mata_pelajaran->nama_mata_pelajaran = $request->nama_mata_pelajaran;
@@ -100,7 +100,7 @@ class tb_m_mata_pelajaranController extends Controller
     {
         $request->validate([
             
-            'nama_mata_pelajaran' => 'required|max:255|unique:tb_m_mata_pelajarans',
+            'nama_mata_pelajaran' => 'required',
            ]);
         $tb_m_mata_pelajaran = tb_m_mata_pelajaran::findOrFail($id);
         $tb_m_mata_pelajaran->nama_mata_pelajaran = $request->nama_mata_pelajaran;

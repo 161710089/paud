@@ -62,33 +62,41 @@ class tb_m_siswaController extends Controller
 {
         $request->validate([
             
-            'nama_lengkap' => 'required|max:255',
-            'email' => 'required|max:255:unique:users',
-            'jenis_kelamin' => 'required|max:255',
-            'ttl' => 'required',
+            'nama_lengkap' => 'required',
+            'email' => 'required|email|unique:users',
+            'jenis_kelamin' => 'required',
+            'tanggal_lahir' => 'required',
+            'tempat_lahir' => 'required',
+            'foto' =>'required|max:20048',
             'nik' => 'required|max:11|unique:tb_m_siswas',
             
       
         ]);
         $tb_m_ortu = new tb_m_ortu;
         $tb_m_ortu->nama_ayah = $request->nama_ayah;
-        $tb_m_ortu->ttl_ayah = $request->ttl_ayah;
+        $tb_m_ortu->tempat_lahir_ayah = $request->tempat_lahir_ayah;
+        $tb_m_ortu->tanggal_lahir_ayah = $request->tanggal_lahir_ayah;
         $tb_m_ortu->agama_ayah = $request->agama_ayah;
         $tb_m_ortu->kewarganegaraan_ayah = $request->kewarganegaraan_ayah;
         $tb_m_ortu->pendidikan_ayah = $request->pendidikan_ayah;
         $tb_m_ortu->pekerjaan_ayah = $request->pekerjaan_ayah;
         $tb_m_ortu->penghasilan_ayah = $request->penghasilan_ayah;
         $tb_m_ortu->alamat_no_telepon_ayah = $request->alamat_no_telepon_ayah;
+        
         $tb_m_ortu->nama_ibu = $request->nama_ibu;
-        $tb_m_ortu->ttl_ibu = $request->ttl_ibu;
+        $tb_m_ortu->tempat_lahir_ibu = $request->tempat_lahir_ibu;
+        $tb_m_ortu->tanggal_lahir_ibu = $request->tanggal_lahir_ibu;
+        
         $tb_m_ortu->agama_ibu = $request->agama_ibu;
         $tb_m_ortu->kewarganegaraan_ibu = $request->kewarganegaraan_ibu;
         $tb_m_ortu->pendidikan_ibu = $request->pendidikan_ibu;
         $tb_m_ortu->pekerjaan_ibu = $request->pekerjaan_ibu;
         $tb_m_ortu->penghasilan_ibu = $request->penghasilan_ibu;
         $tb_m_ortu->alamat_no_telepon_ibu = $request->alamat_no_telepon_ibu;
+        
         $tb_m_ortu->nama_wali = $request->nama_wali;
-        $tb_m_ortu->ttl_wali = $request->ttl_wali;
+        $tb_m_ortu->tempat_lahir_wali = $request->tempat_lahir_wali;
+        $tb_m_ortu->tanggal_lahir_wali = $request->tanggal_lahir_wali;
         $tb_m_ortu->agama_wali = $request->agama_wali;
         $tb_m_ortu->kewarganegaraan_wali = $request->kewarganegaraan_wali;
         $tb_m_ortu->pendidikan_wali = $request->pendidikan_wali;
@@ -101,7 +109,7 @@ class tb_m_siswaController extends Controller
         $user = User::create([
             'name' => $request['nama_lengkap'],
             'email' => $request['email'],
-            'password' => bcrypt($request['ttl']),
+            'password' => bcrypt($request['nik']),
         ]);
         $userRole = Role::where('name','user')->first();
         $user->attachRole($userRole);
@@ -111,7 +119,8 @@ class tb_m_siswaController extends Controller
         $tb_m_siswa->nama_lengkap = $request->nama_lengkap;
         $tb_m_siswa->nama_panggilan = $request->nama_panggilan;
         $tb_m_siswa->jenis_kelamin = $request->jenis_kelamin;
-        $tb_m_siswa->ttl = $request->ttl;
+        $tb_m_siswa->tanggal_lahir = $request->tanggal_lahir;
+        $tb_m_siswa->tempat_lahir = $request->tempat_lahir;
         $tb_m_siswa->nik = $request->nik;
         $tb_m_siswa->nama_jalan = $request->nama_jalan;
         $tb_m_siswa->nama_desa = $request->nama_desa;
@@ -205,7 +214,8 @@ class tb_m_siswaController extends Controller
             'nama_lengkap' => 'required|max:255',
             'nama_panggilan' => 'max:255',
             'jenis_kelamin' => 'required|max:255',
-            'ttl' => 'required',
+            'tanggal_lahir' => 'required',
+            'tempat_lahir' => 'required',
             'nik' => 'required|max:11',
             'nama_jalan' => 'max:255',
             'nama_desa' => 'max:255',
@@ -226,11 +236,10 @@ class tb_m_siswaController extends Controller
             'ciri_ciri' => 'max:255',
             'tinggi_berat_badan' => 'max:255',
             'jarak_rumah' => 'max:255',          
-            'foto' => 'required',
+            'foto|max:20048' => 'required',
          
           //table Ortu
             'nama_ayah' => 'max:255',
-            'ttl_ayah' => 'max:255',
             'agama_ayah' => 'max:255',
             'kewarganegaraan_ayah' => '',
             'pendidikan_ayah' => 'max:255',
@@ -239,7 +248,6 @@ class tb_m_siswaController extends Controller
             'alamat_no_telepon_ayah' => 'max:255',
          
             'nama_ibu' => 'max:255',
-            'ttl_ibu' => 'max:255',
             'agama_ibu' => 'max:255',
             'kewarganegaraan_ibu' => '',
             'pendidikan_ibu' => 'max:255',
@@ -248,7 +256,6 @@ class tb_m_siswaController extends Controller
             'alamat_no_telepon_ibu' => 'max:255',
   
             'nama_wali' => 'max:255',
-            'ttl_wali' => 'max:255',
             'agama_wali' => 'max:255',
             'kewarganegaraan_wali' => '',
             'pendidikan_wali' => 'max:255',
@@ -264,7 +271,8 @@ class tb_m_siswaController extends Controller
         $tb_m_siswa->nama_lengkap = $request->nama_lengkap;
         $tb_m_siswa->nama_panggilan = $request->nama_panggilan;
         $tb_m_siswa->jenis_kelamin = $request->jenis_kelamin;
-        $tb_m_siswa->ttl = $request->ttl;
+        $tb_m_siswa->tanggal_lahir = $request->tanggal_lahir;
+        $tb_m_siswa->tempat_lahir = $request->tempat_lahir;
         $tb_m_siswa->nik = $request->nik;
         $tb_m_siswa->nama_jalan = $request->nama_jalan;
         $tb_m_siswa->nama_desa = $request->nama_desa;
@@ -325,23 +333,28 @@ if ($request->hasFile('foto')) {
         
         
         $tb_m_ortu->nama_ayah = $request->nama_ayah;
-        $tb_m_ortu->ttl_ayah = $request->ttl_ayah;
+        $tb_m_ortu->tempat_lahir_ayah = $request->tempat_lahir_ayah;
+        $tb_m_ortu->tanggal_lahir_ayah = $request->tanggal_lahir_ayah;
         $tb_m_ortu->agama_ayah = $request->agama_ayah;
         $tb_m_ortu->kewarganegaraan_ayah = $request->kewarganegaraan_ayah;
         $tb_m_ortu->pendidikan_ayah = $request->pendidikan_ayah;
         $tb_m_ortu->pekerjaan_ayah = $request->pekerjaan_ayah;
         $tb_m_ortu->penghasilan_ayah = $request->penghasilan_ayah;
         $tb_m_ortu->alamat_no_telepon_ayah = $request->alamat_no_telepon_ayah;
+        
         $tb_m_ortu->nama_ibu = $request->nama_ibu;
-        $tb_m_ortu->ttl_ibu = $request->ttl_ibu;
+        $tb_m_ortu->tempat_lahir_ibu = $request->tempat_lahir_ibu;
+        $tb_m_ortu->tanggal_lahir_ibu = $request->tanggal_lahir_ibu;
         $tb_m_ortu->agama_ibu = $request->agama_ibu;
         $tb_m_ortu->kewarganegaraan_ibu = $request->kewarganegaraan_ibu;
         $tb_m_ortu->pendidikan_ibu = $request->pendidikan_ibu;
         $tb_m_ortu->pekerjaan_ibu = $request->pekerjaan_ibu;
         $tb_m_ortu->penghasilan_ibu = $request->penghasilan_ibu;
         $tb_m_ortu->alamat_no_telepon_ibu = $request->alamat_no_telepon_ibu;
+        
         $tb_m_ortu->nama_wali = $request->nama_wali;
-        $tb_m_ortu->ttl_wali = $request->ttl_wali;
+        $tb_m_ortu->tempat_lahir_wali = $request->tempat_lahir_wali;
+        $tb_m_ortu->tanggal_lahir_wali = $request->tanggal_lahir_wali;
         $tb_m_ortu->agama_wali = $request->agama_wali;
         $tb_m_ortu->kewarganegaraan_wali = $request->kewarganegaraan_wali;
         $tb_m_ortu->pendidikan_wali = $request->pendidikan_wali;

@@ -26,7 +26,7 @@ use Carbon\Carbon;
 Route::get('contact-us', 'tb_s_contact_usController@contactUS');
 Route::post('contact-us', ['as'=>'contactus.store','uses'=>'tb_s_contact_usController@contactUSPost']);
 Route::get('/contact-us', 'FrontendController@contact')->name('contact');
-
+// Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //index
 Route::get('/', 'frontendController@contactUS');
 Route::post('/', ['as'=>'daftar.store','uses'=>'frontendController@contactUSPost']);
@@ -86,9 +86,11 @@ Route::get('/delete-siswa/{id}', 'tb_m_siswaController@deleteSiswaRecord');
 Route::get('/delete-service/{id}', 'tb_m_serviceController@deleteServiceRecord');
 Route::get('/delete-buy-ticket/{id}', 'tb_m_buy_ticketController@deleteBuyTicketRecord');
 Route::get('/delete-ticket/{id}', 'tb_m_ticketController@deleteTicketRecord');
+Route::get('/delete-about/{id}', 'tb_m_aboutController@deleteAboutRecord');
 Route::get('/delete-user-ticket/{id}', 'userController@deleteUserTicketRecord');
 Route::get('/delete-user-pendapat-user/{id}', 'userController@deletePendapatUserRecord');
 Route::get('/delete-user-ticket/{id}', 'userController@deleteUserTicketRecord');
+Route::post("addmore","tb_m_aboutController@addMorePost");
 
 Route::group(['prefix'=>'admin' ,'middleware'=>['auth','role:admin']], 
 	function (){
@@ -122,9 +124,14 @@ Route::resource('service','tb_m_serviceController');
 Route::resource('pembeli_tiket','tb_m_buy_ticketController');
 Route::resource('pendapat','tb_m_pendapatController');
 Route::resource('pendapat_user','tb_m_pendapatUserController');
+Route::resource('about','tb_m_aboutController');
+Route::resource('widget','tb_s_widgetController');
+Route::resource('history_about_pencapaian','tb_m_history_about_pencapaianController');
 
 Route::post('/pendapat_user/{publish}', 'tb_m_pendapatUserController@Publish')->name('pendapat_user.publish');
+Route::post('/widget/{publish}', 'tb_s_widgetController@Publish')->name('widget.publish');
 
+Route::get('contact-us', 'tb_s_contact_usController@contactUsUser');
 
 // Search
 Route::get('tanggal_lahir','searchController@ttl')->name('tanggal_lahir');
@@ -169,7 +176,9 @@ Route::get('absensi', 'userController@absensi')->name('absensi');
 Route::get('profile', 'userController@profile')->name('profile');
 Route::get('tiket', 'userController@tiket')->name('tiket');
 Route::get('komentar-web', 'userController@pendapat_user')->name('komentar-web');
+Route::get('pendapat_user/{id}/edit', 'userController@edit')->name('edit_pendapat_user');
 Route::post('komentar-web.store', 'userController@store')->name('komentar-web.store');
+Route::resource('komentar-web-update', 'tb_m_pendapatUserController');
 
 
 // Route::resource('komentar-web','tb_m_pendapatUserController');

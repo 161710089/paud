@@ -1,13 +1,10 @@
+<!DOCTYPE html>
 @extends('layouts.user')
 @section('content')
-<link href="/frontend/css/bootstrap.css" rel="stylesheet">
-<link href="/frontend/css/style.css" rel="stylesheet">
-<link href="/frontend/css/responsive.css" rel="stylesheet">
 
-<link rel="shortcut icon" href="/frontend/images/favicon.png" type="image/x-icon">
-<link rel="icon" href="/frontend/images/favicon.png" type="image/x-icon">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+@foreach($tb_s_sekolah as $data)
+        <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | About-Us </title>
+    @endforeach
 
 
     <section class="call-to-action">
@@ -27,7 +24,7 @@
 
                 <div class="btn-column">
                     <div class="btn-box">
-                        <a href="contact.html" class="theme-btn btn-style-one">Contact Us</a>
+                        <a href="{{ Route('contact') }}" class="theme-btn btn-style-one">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +34,7 @@
         <div class="auto-container">
             <h1>About Us</h1>
             <ul class="page-breadcrumb">
-                <li><a href="/">Home</a></li>
+                <li><a href="{{ route('Home') }}">Home</a></li>
                 <li>About Us</li>
             </ul>
         </div>
@@ -54,10 +51,9 @@
                             <h2><span>About</span> {{ $data->nama_sekolah }}</h2>
                         </div>
                         @endforeach
+                        @foreach($tb_m_about as $data)
                         <div class="text">
-                            <p><strong>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically</strong></p>
-                            <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</p>
-                            <p>markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</p>
+                            {!! $data->about !!}
                         </div>
                     </div>
                 </div>
@@ -66,10 +62,11 @@
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="image-box wow fadeInRight">
-                            <figure class="image-1"><img src="/frontend/images/resource/image-1.png" alt=""></figure>
+                            <figure class="image-1"><img src="{{ asset('img/Fotoabout/'.$data->foto) }}" alt=""></figure>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -80,24 +77,26 @@
         <div class="auto-container">
             <div class="row clearfix">
                 <!-- History Column -->
+                @foreach($tb_m_about as $data)
                 <div class="histroy-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <h2>Our <span>History</span></h2>
-                        <div class="text">Deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</div>
+                        <div class="text">{!! $data->tb_m_history_about->history !!}</div>
                         <ul class="list-style-two">
-                            <li>Learning program with after-school</li>
-                            <li>Positive learning environment</li>
-                            <li>Learning through play</li>
+                            @foreach($tb_m_history_about_pencapaian as $data)
+                            <li>{{ $data->pencapaian }}</li>
+                            @endforeach
                         </ul>
                         <div class="image-box wow fadeInLeft">
-                            <figure><img src="/frontend/images/resource/image-3.jpg" alt=""></figure>
+                            <figure><img src="{{ asset('img/Fotoabout/'.$data->tb_m_history_about->fotohistory) }}" style="min-height:250px; min-width:500px;   max-height:250px; max-width:500px; margin-top:7px; alt=""></figure>
                         </div>
                     </div>
                 </div>
-
+                @endforeach
                 <!-- History Column -->
-                <div class="accordion-column col-lg-6 col-md-12 col-sm-12">
+                {{-- <div class="accordion-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
+                        @foreach($tb_m_about as $data)
                         <h3>Hello. Our school has been present for over 20 years in the market. We make the most of all our students.</h3>
                         <!--Accordian Box-->
                         <ul class="accordion-box">
@@ -144,15 +143,16 @@
                                 </div>
                             </li>
                         </ul>
+                        @endforeach
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
     <!-- End History Section -->
 
     <!-- Fun Fact -->
-    <section class="fun-facts-section" style="background-image:url(/frontend/images/background/2.jpg);">
+    <section class="fun-facts-section" style="background-image:url({{ asset('frontend/images/background/2.jpg') }});">
         <div class="auto-container">
             
             <div class="row clearfix">
@@ -162,7 +162,7 @@
                         <div class="content">
                             <div class="icon-box"><span class="flaticon-abc-squares"></span></div>
                            <div class="count-outer count-box">
-                                <span class="count-text" data-speed="2000" 
+                                <span class="count-text" data-speed="2500" 
                                 data-stop="{{ App\tb_m_siswa::all()->count() }}">0 </span>
                             </div>
                            <div class="counter-title">Jumlah Siswa</div>
@@ -178,7 +178,7 @@
                         <div class="content">
                             <div class="icon-box"><span class="flaticon-stop"></span></div>
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="2000" 
+                                <span class="count-text" data-speed="2500" 
                                 data-stop="300">0 </span>
                             </div>
                             <div class="counter-title">Best Awards Won</div>
@@ -195,7 +195,7 @@
                         <div class="content">
                             <div class="icon-box"><span class="flaticon-smiling-girl"></span></div>
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="2000" data-stop="{{App\tb_m_pengajar::all()->count() }}">0 </span>
+                                <span class="count-text" data-speed="2500" data-stop="{{App\tb_m_pengajar::all()->count() }}">0 </span>
                             </div>
                             <div class="counter-title">Jumlah Guru</div>
                         </div>
@@ -208,10 +208,10 @@
                         <div class="content">
                             <div class="icon-box"><span class="flaticon-edit-2"></span></div>
                             <div class="count-outer count-box">
-                                <span class="count-text" data-speed="3000" 
-                                data-stop="300">0 </span>
+                                <span class="count-text" data-speed="2500" 
+                                data-stop="{{ App\tb_m_event::all()->count() }}">0 </span>
                             </div>
-                            <div class="counter-title">Pencils Wood</div>
+                            <div class="counter-title">Jumlah Event</div>
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
     </section><!-- End Fun Fact -->
 
     <!-- Subscribe Section -->
-    <section class="subscribe-section">
+    {{-- <section class="subscribe-section">
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="title-column col-lg-6 col-md-12 col-sm-12">
@@ -243,7 +243,7 @@
             </div>
         </div>
     </section>
-    <!-- End Subscribe Section -->
+     --}}<!-- End Subscribe Section -->
 
     <!-- Event Section -->
     @php
@@ -256,7 +256,7 @@ Date::setLocale('id');
 <br>
     <!-- Event Section -->
             @if(count($tb_m_event)>0)
-    <section class="event-section" style="background-image: url(/frontend/images/background/pattern-1.png);">
+    <section class="event-section" style="background-image: url({{ asset('frontend/images/background/pattern-1.png') }});">
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Don't Miss Our <span>Events</span></h2>
@@ -301,7 +301,7 @@ Date::setLocale('id');
 
 
             <div class="link-box text-center">
-                <a href="moreEvent" class="theme-btn btn-style-one">More Event</a>
+                <a href="{{ route('moreEvent') }}" class="theme-btn btn-style-one">More Event</a>
             </div>
         </div>
     </section>
@@ -313,18 +313,11 @@ Date::setLocale('id');
           
             @endif
 
-@endsection
-<!--Scroll to top-->
+
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
-<script src="/frontend/js/jquery.js"></script> 
-<script src="/frontend/js/popper.min.js"></script>
-<script src="/frontend/js/bootstrap.min.js"></script>
-<script src="/frontend/js/jquery.fancybox.js"></script>
-<script src="/frontend/js/owl.js"></script>
-<script src="/frontend/js/wow.js"></script>
-<script src="/frontend/js/countdown.js"></script>
-<script src="/frontend/js/isotope.js"></script>
-<script src="/frontend/js/appear.js"></script>
-<script src="/frontend/js/script.js"></script>
-</body>
-</html>
+@endsection
+
+<!--Scroll to top-->
+
+
+    

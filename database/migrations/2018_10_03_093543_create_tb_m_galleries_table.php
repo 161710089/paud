@@ -15,7 +15,7 @@ class CreateTbMGalleriesTable extends Migration
     {
         Schema::create('tb_m_galleries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('judul');
+            $table->string('judul')->nullable();
             $table->string('foto');
             $table->unsignedInteger('id_kategori_gallery');
             $table->foreign('id_kategori_gallery')->references('id')->on('tb_m_kategori_galleries')->onDelete('CASCADE');

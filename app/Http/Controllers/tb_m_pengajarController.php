@@ -53,14 +53,15 @@ class tb_m_pengajarController extends Controller
 
         $request->validate([
             
-            'nama' => 'required|max:255',
-            'jenis_kelamin' => 'required|max:255',
-            'ttl' => 'required|max:255',
-            'agama' => 'required|max:255',
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'agama' => 'required',
             'kewarganegaraan' => 'required',
-            'pendidikan' => 'required|max:255',
-            'alamat_no_telepon' => 'required|max:255',
-            'foto' => 'required',
+            'pendidikan' => 'required',
+            'alamat_no_telepon' => 'required',
+            'foto' => 'required|max:20048',
                   
       
         ]);
@@ -68,7 +69,8 @@ class tb_m_pengajarController extends Controller
         $tb_m_pengajar = new tb_m_pengajar;
         $tb_m_pengajar->nama = $request->nama;
         $tb_m_pengajar->jenis_kelamin = $request->jenis_kelamin;
-        $tb_m_pengajar->ttl = $request->ttl;
+        $tb_m_pengajar->tempat_lahir = $request->tempat_lahir;
+        $tb_m_pengajar->tanggal_lahir = $request->tanggal_lahir;
         $tb_m_pengajar->agama = $request->agama;
         $tb_m_pengajar->kewarganegaraan = $request->kewarganegaraan;
         $tb_m_pengajar->pendidikan = $request->pendidikan;
@@ -140,12 +142,13 @@ class tb_m_pengajarController extends Controller
         
             'nama' => 'required|max:255',
             'jenis_kelamin' => 'required|max:255',
-            'ttl' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
             'agama' => 'required|max:255',
             'kewarganegaraan' => 'required|max:11',
             'pendidikan' => 'max:255',
             'alamat_no_telepon' => 'max:255',
-            'foto' => 'required',
+            'foto|max:20048' => 'required',
             'id_mapel' => 'required|max:255',
 
         ]);
@@ -156,8 +159,8 @@ class tb_m_pengajarController extends Controller
         $tb_m_pengajar->nama = $request->nama;
         $tb_m_pengajar->jenis_kelamin = $request->jenis_kelamin;
         $tb_m_pengajar->agama = $request->agama;
-        $tb_m_pengajar->ttl = $request->ttl;
-        
+        $tb_m_pengajar->tempat_lahir = $request->tempat_lahir;
+        $tb_m_pengajar->tanggal_lahir = $request->tanggal_lahir;        
         $tb_m_pengajar->kewarganegaraan = $request->kewarganegaraan;
         $tb_m_pengajar->pendidikan = $request->pendidikan;
         $tb_m_pengajar->alamat_no_telepon = $request->alamat_no_telepon;

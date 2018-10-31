@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Ticket | Show </title>
+    @endforeach
+
     <h3 class="page-title">@lang('tb_m_tickets.title')</h3>
+
+
 
     <div class="panel panel-default">
         <div class="panel-heading">

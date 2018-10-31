@@ -1,11 +1,17 @@
 @extends('layouts.admin')
 @section('content')
 
-    <link rel="stylesheet" type="text/css" href="/assets/libs/select2/dist/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/libs/jquery-minicolors/jquery.minicolors.css">
-    <link rel="stylesheet" type="text/css" href="/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/libs/quill/dist/quill.snow.css">
-    <link href="/dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/jquery-minicolors/jquery.minicolors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/quill/dist/quill.snow.css') }}">
+    <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
+
+    @foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Gallery | Edit</title>
+    @endforeach
+
+
 <style type="text/css">
         .container{
     margin-top:20px;
@@ -35,7 +41,7 @@
       </style>
 
     
-<link href="/cesese/test.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{ asset('cesese/test.css') }}" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 {{-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
 <!------ Include the above in your HEAD tag ---------->

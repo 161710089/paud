@@ -49,7 +49,14 @@ class tb_m_galleryController extends Controller
     public function store(Request $request)
     {   
             
+          $request->validate([
+            
+        'judul' => 'required|unique:tb_m_galleries',
+        'id_kategori_gallery' => 'required',
+        'foto' => 'required|max:20048',
+                
 
+           ]);
          $tb_m_gallery = new tb_m_gallery;
         $tb_m_gallery->judul = $request->judul;
         $tb_m_gallery->id_kategori_gallery = $request->id_kategori_gallery;
@@ -120,7 +127,10 @@ class tb_m_galleryController extends Controller
 
         $request->validate([
             
-            'judul' => 'required|max:255',
+            'judul' => 'required',
+            'id_kategori_gallery' => 'required',
+            'foto' => 'required|max:20048',
+
            ]);
         $tb_m_gallery = tb_m_gallery::findOrFail($id);
         $tb_m_gallery->judul = $request->judul;

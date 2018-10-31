@@ -57,9 +57,9 @@ class tb_m_artikelController extends Controller
          $request->validate([
             
         'judul' => 'required|max:255|unique:tb_m_artikels',
-        'foto' => 'required',
+        'foto' => 'required|image|max:20048',
         'deskripsi' => 'required',
-        'id_user' => 'required|max:255',
+        'id_user' => 'required',
         
 
            ]);
@@ -119,7 +119,7 @@ class tb_m_artikelController extends Controller
         $sekolahs =  tb_s_sekolah::all();
         $tb_m_artikel = tb_m_artikel::findOrFail($id);
          $tb_m_kategori_artikel=tb_m_kategori_artikel::all();
-         
+
        
         return view('artikel.edit',compact('tb_m_artikel','sekolahs','tb_m_kategori_artikel'));  
 
@@ -138,10 +138,10 @@ class tb_m_artikelController extends Controller
 
         $request->validate([
             
-        'judul' => 'required|max:255',
-        'foto' => 'required',
+        'judul' => 'required',
+        'foto' => 'required|image|max:20048',
         'deskripsi' => 'required',
-        'id_user' => 'required|max:255',
+        'id_user' => 'required',
           
 
            ]);

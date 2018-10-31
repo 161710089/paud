@@ -4,6 +4,11 @@
 	<div class="row">
 		<div class="container">
 
+ 	@foreach($sekolahs as $data)
+      <title>{{ $data->nama_sekolah }} - Taman kanak-kanak | Event | Show </title>
+    @endforeach
+
+
 <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">

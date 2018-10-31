@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 @extends('layouts.artikel')
 @section('content')
 <body>
@@ -15,9 +16,9 @@ Date::setLocale('id');
 
     <!-- Sidebar Page Container -->
                 <!--Content Side-->
-                @if(count($tb_m_artikel)>0)
                 <div class="content-side col-lg-8 col-md-12 col-sm-12">
                     <div class="blog-standard">
+                        @if(count($tb_m_artikel)>0)
                         @foreach($tb_m_artikel as $data)
                         <div class="news-block-two wow fadeIn">
                             <div class="inner-box">
@@ -27,19 +28,24 @@ Date::setLocale('id');
                                     <li><span class="fa fa-heart"></span> 128 Likes</li>
                                     <li><span class="fa fa-comment"></span> 32 Comments</li>
                                 </ul>
-                                <h3><a href="/moreartikel/show-artikel/{{ $data->slug }}">{{ $data->judul }}</a></h3>
+                                <h3><a href="moreartikel/show-artikel/{{ $data->slug }}">{{ $data->judul }}</a></h3>
                                 <div class="image-box">
-                                    <div class="image"><a href="/moreartikel/show-artikel/{{ $data->slug }}">
+                                    <div class="image"><a href="moreartikel/show-artikel/{{ $data->slug }}">
                                         <img src="{{ asset('img/Fotoartikel/'.$data->foto) }}" 
                                              style="max-height:400px; max-width: 750px; min-height:400px; min-width: 750px; margin-top:7px;" alt=""></a></div>
                                 </div>
                                 <div class="text"><h6>{!! str_limit($data->deskripsi , 350) !!}</h6></div>
                                 <div class="btn-box">
-                                    <a href="/moreartikel/show-artikel/{{ $data->slug }}" class="theme-btn btn-style-one">Read More</a>
+                                    <a href="moreartikel/show-artikel/{{ $data->slug }}" class="theme-btn btn-style-one">Read More</a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
+                        @else
+                        <center>    
+                        <h1>Belum Ada Artikel</h1>
+                        </center>
+                        @endif
 
                         <!-- News Block Two -->
                       {{--   <div class="news-block-two wow fadeIn">
@@ -111,9 +117,8 @@ Date::setLocale('id');
     
                     </div>
                 </div>
-                @endif
                 <!-- Sidebar Side -->
              
     
-@endsection
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
+@endsection
